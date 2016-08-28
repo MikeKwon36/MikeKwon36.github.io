@@ -1,0 +1,61 @@
+.play-store-profile-badge {
+    display: block;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 190px;
+}
+
+.portfolio-modal .modal-content img.play-store-app-badge {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    width: 200px;
+}
+
+.github-profile-link {
+    background-color: #444444;
+    border: solid 1px #fff;
+    width: 180px;
+    margin-bottom: 15px;
+}
+
+.github-project-link {
+    background-color: #444444;
+    border: solid 2px #{{ site.color.secondary }};
+    width: 200px;
+}
+
+.linkedin-profile-link {
+    background-color: #007BB6;
+    border: solid 1px #fff;
+    width: 180px;
+    margin-bottom: 15px;
+}
+
+.ga-profile-link {
+    background-color: #000000;
+    border: solid 1px #fff;
+    width: 180px;
+    margin-bottom: 15px;
+}
+
+.ga-logo {
+    height: 25px;
+}
+
+.devpost-project-link {
+    background-color: #063C58;
+    border: solid 2px #{{ site.color.secondary }};
+    width: 200px;
+}
+
+.portfolio-modal .modal-content img.devpost-logo {
+  height: 25px;
+  margin-bottom: 0;
+}
+
+.center-links {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
