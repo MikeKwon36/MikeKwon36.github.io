@@ -2,7 +2,7 @@
 title: Vice City
 layout: default
 modal-id: 3
-date: 2016-02-22
+date: 2016-03-22
 img: vice.png
 alt: Vice Media News Aggregator
 tools: Vice Media API, Picasso, Ooyala Player, Facebook API, Java, XML, SQL, Android SDK, Android Studio, Material Design, Git
