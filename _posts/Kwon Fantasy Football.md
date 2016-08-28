@@ -2,7 +2,7 @@
 title: Kwon Fantasy Football
 layout: default
 modal-id: 5
-date: 
+date: 2016-01-22
 img: KFF.png
 alt: Kwon Fantasy Football
 
