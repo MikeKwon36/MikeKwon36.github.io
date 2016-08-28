@@ -1,10 +1,11 @@
 ---
 title: Kwon Fantasy Football
 layout: default
-modal-id: 1
+modal-id: 10
 date: 2016-01-22
 img: kwon-fantasy-football.png
 alt: Kwon Fantasy Football
+tools: Java, Android SDK
 
 ---
 
@@ -17,4 +18,4 @@ Mobile application that lets two players take turns to draft a roster of Footbal
     </a>
 </div>
 
-  * Visit GitHub repo for full description of functionality
+Visit GitHub repo for full description of functionality
