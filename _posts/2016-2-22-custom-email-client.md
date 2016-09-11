@@ -5,7 +5,7 @@ modal-id: 2
 date: 2016-02-22
 img: email.png
 alt: Kwon Email Client
-tools: Google Gmail API, Google Play Services API, Java, XML, Android SDK, Android Studio, Material Design, Git
+tools: Google Gmail API, Google Play Services API, REST, JSON, Java, XML, Android SDK, Android Studio, Material Design, Git
 
 ---
 
