@@ -5,7 +5,7 @@ modal-id: 3
 date: 2016-03-22
 img: vice.png
 alt: Vice Media News Aggregator
-tools: Vice Media API, Picasso, Ooyala Player, Facebook API, REST, JSON Java, XML, SQL, Android SDK, Android Studio, Material Design, Git
+tools: Vice Media API, Facebook API, Picasso, REST, JSON, Java, XML, SQL, Android SDK, Android Studio, Material Design, Git
 
 ---
 
