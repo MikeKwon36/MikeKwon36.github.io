@@ -9,7 +9,7 @@ tools: Google Analytics API, Google Play Services API, Java, XML, SQL, Android S
 
 ---
 
-Customizable Music Player available on the Google PlayStore. Visit GitHub repository below for full description of functionality.
+Customizable Music Player available on the Google PlayStore.
 
 <div class="center-links">
 	<div class="col-lg-2 col-lg-offset-2 col-md-3 col-sm-6">
