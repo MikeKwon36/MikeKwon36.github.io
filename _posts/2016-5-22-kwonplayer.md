@@ -12,7 +12,9 @@ tools: Google Analytics API, Google Play Services API, Java, XML, SQL, Android S
 Customizable Music Player available on the Google PlayStore. Visit GitHub repository below for full description of functionality.
 
 <div class="center-links">
-                    <a href='https://play.google.com/store/apps/developer?id=KwonDeveloper' target="_blank">
-                        <img class="play-store-profile-badge" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
-                    </a>
+	<div class="col-lg-2 col-lg-offset-2 col-md-3 col-sm-6">
+		<a href='https://play.google.com/store/apps/developer?id=KwonDeveloper' target="_blank">
+			<img class="play-store-profile-badge" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
+		</a>
+	</div>
 </div>
