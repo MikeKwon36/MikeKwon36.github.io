@@ -12,8 +12,7 @@ tools: Google Analytics API, Google Play Services API, Java, XML, SQL, Android S
 Customizable Music Player available on the Google PlayStore. Visit GitHub repository below for full description of functionality.
 
 <div class="center-links">
-    <a class="btn btn-md btn-outline github-project-link" href="https://github.com/MikeKwon36/KwonPlayer" target="_blank">
-        <i class="fa fa-github"></i>
-        <span class="small">View on GitHub</span>
-    </a>
+                    <a href='https://play.google.com/store/apps/developer?id=KwonDeveloper' target="_blank">
+                        <img class="play-store-profile-badge" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
+                    </a>
 </div>
