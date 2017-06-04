@@ -1,10 +1,10 @@
 # Site settings
-title: Michael Kwon
+title: Mike Kwon
 email: MikeKwon36@gmail.com
 url: https://mikekwon36.github.io/
-description: "Portfolio website for Michael Kwon"
+description: "Portfolio website for Mike Kwon"
 skills: "Digital & Mobile Strategy, Product Manager, Android Developer"
-meta_author: Michael Kwon
+meta_author: Mike Kwon
 
 # Google webmaster tools
 google_verify:
@@ -31,7 +31,7 @@ color:
 
 # Footer settings
 footer:
-  copyright: Michael Kwon
+  copyright: Mike Kwon
   location: Location
   social: Around the Web
   credits: Credits
