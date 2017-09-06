@@ -83,9 +83,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <span class="name">Testpage for Allstate</span>
+                        <span class="name">Branch Journeys Demo Page</span>
                         <hr class="star-light">
-                        <span class="skills">This is a Testpage displaying an Allstate Journeys Banner</span>
+                        <span class="skills">Testpage displaying a Journeys Banner</span>
                     </div>
                 </div>
             </div>
@@ -99,10 +99,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <div class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a></div>
-                        <div class="skills">The web <a href="https://github.com/BranchMetrics/web-branch-deep-linking">SDK</a> must be embedded in the page HTML</div>
-                        <div class="skills">The web SDK uses Allstate's Test API key of <strong>key_test_fgqE3DD75irY04BlT0ftWbmmzroiwsWf</strong></div>
-                        <div class="skills">Banner button clicks will always pass in the referring page's URL in the link data, under a key called "$canonical_url"</div>
+                        <div class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a><p></p></div>
+                        <div class="skills">The web <a href="https://github.com/BranchMetrics/web-branch-deep-linking">SDK</a> must be embedded in the page HTML<p></p></div>
+                        <div class="skills">The web SDK uses Allstate's Test API key of <strong>key_test_fgqE3DD75irY04BlT0ftWbmmzroiwsWf</strong><p></p></div>
+                        <div class="skills">To prevent the banner from overlapping with the page's fixed nav bar, a special Branch div is embedded as the first child element of the nav bar.  This div can be retrieved from the template editor of the banner<p></p></div>
+                        <div class="skills">Dismissing the banner will hide the banner from that user for a set timeframe (customizable in the dashboard)<p></p></div>
+                        <div class="skills">The banner's "Get|Open" button will recognize if the user has the app (app must have the same API key)<p></p></div>
+                        <div class="skills">Banner button clicks will always pass in the referring page's URL in the link data, under a key called "$canonical_url"<p></p></div>
                     </div>
                 </div>
             </div>
