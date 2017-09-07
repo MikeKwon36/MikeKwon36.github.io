@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Branch Demo Page</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Branch Demo Page">
+    <meta name="author" content="Mike Kwon">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+
+    <!-- Custom CSS & Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link rel="stylesheet" href="/style.css">    
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Branch Web SDK -->
+    <script type="text/javascript">
+
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
+
+    branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', function(err, data) {
+        console.log(JSON.parse(err.message));
+        console.log(data);
+        // callback to handle err or data
+    });
+    var listener = function(event, data) {
+        console.log(event);
+        console.log(data);
+        //Here is where you execute custom listener code
+    };
+    branch.addListener("didShowJourney", listener);
+    </script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+    <body id="page-top" class="index">
+       <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            
+            <!-- Branch div to prevent overlap between Branch banner and fixed nav bar -->
+            <div class="branch-journeys-top"></div>
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">Branch Demo</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Top Section</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">Middle Section</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Bottom Section</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+        <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">Branch Journeys Demo Page</span>
+                        <hr class="star-light">
+                        <span class="skills">Testpage displaying a Journeys Banner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <ul>
+                            <li class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a><p></p></li>
+                            <li class="skills">The web <a href="https://github.com/BranchMetrics/web-branch-deep-linking">SDK</a> must be embedded in the page HTML<p></p></li>
+                            <li class="skills">The web SDK uses a Test API key<p></p></li>
+                            <li class="skills">To prevent the banner from overlapping with the page's fixed nav bar, a special Branch div is embedded as the first child element of the nav bar.  This div can be retrieved from the template editor of the banner<p></p></li>
+                            <li class="skills">Dismissing the banner will hide the banner from that user for a set timeframe (customizable in the dashboard)<p></p></li>
+                            <li class="skills">The banner's "Get|Open" button will recognize if the user has the app (app must have the same API key)<p></p></li>
+                            <li class="skills">Banner button clicks will always pass in the referring page's URL in the link data, under a key called "$canonical_url"<p></p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+
+            <!-- Section Header -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Filler Text</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+
+            <!-- Description Text -->
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem </p>
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem </p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem </p>
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    
+    <!-- Contact Section -->
+<section id="contact">
+	<div class="container">
+		<!-- Section Header -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Filler Text</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+
+            <!-- Description Text -->
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem </p>
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem </p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem </p>
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem </p>
+                </div>
+            </div>
+	</div>
+</section>
+
+    
+
+        <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Branch Demo Page</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Contact mkwon@branch.io for questions
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+
+     <!-- jQuery Version 1.11.0 -->
+    <script src="/js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/classie.js"></script>
+    <script src="/js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    
+    <script src="/js/contact_me_static.js"></script>
+    
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/js/freelancer.js"></script>
+
+
+    </body>
+</html>
