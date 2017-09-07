@@ -25,7 +25,15 @@
     branch.init('key_test_fgqE3DD75irY04BlT0ftWbmmzroiwsWf', function(err, data) {
         console.log(JSON.parse(err.message));
         console.log(data);
-        // callback to handle err or data
+
+        var listener = function(event, data) {
+            console.log(“Listener executed after Journey displayed!”);
+            console.log(event, data);
+            console.log(data.banner_id);
+            console.log(JSON.parse(data));
+            //Here is where you execute custom listener code
+        }
+        branch.addListener(‘didShowJourney’, listener);
     });
     </script>
 
