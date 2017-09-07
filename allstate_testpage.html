@@ -27,9 +27,8 @@
         console.log(data);
     });
     var listener = function(event, data) {
-        console.log(event, data);
-        console.log(data.banner_id);
-        console.log(JSON.parse(data));
+        console.log(event);
+        console.log(data);
         //Here is where you execute custom listener code
     };
     branch.addListener("didShowJourney", listener);
