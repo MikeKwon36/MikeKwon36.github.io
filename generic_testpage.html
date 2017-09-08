@@ -27,7 +27,7 @@
         console.log(JSON.parse(err.message));
         console.log(data);
     });
-    branch.setBranchViewData({data:{'$journeys_icon_image_url':'http://williamsidell.com/wp-content/uploads/2013/10/skype.png'}});
+    branch.setBranchViewData({data:{'$journeys_icon_image_url':'http://williamsidell.com/wp-content/uploads/2013/10/skype.png','$journeys_title':'Dynamic Test banner title','$journeys_description':'Dynamic Test banner description'}});
     var listener = function(event, data) {
         console.log(event);
         console.log(data);
