@@ -26,6 +26,7 @@
         console.log(JSON.parse(err.message));
         console.log(data);
         // callback to handle err or data
+        branch.setBranchViewData({data:{'$journeys_icon_image_url':'http://williamsidell.com/wp-content/uploads/2013/10/skype.png'}});
     });
     var listener = function(event, data) {
         console.log(event);
