@@ -11,7 +11,9 @@
 
     <!-- Branch metatags for Hosted Deep Link Data -->
     <meta name="branch:deeplink:productId" content="1234" />
-    <meta name="branch:deeplink:$ios_deeplink_path" content="branch takes priority!" />
+    <meta name="branch:deeplink:productId" content="5678" />
+    <meta name="branch:deeplink:$ios_deeplink_path" content="branch tags do not take priority over others" />
+    <meta name="twitter:app:url:iphone" content="this is a Twitter tag that's used for $ios_deeplink_path. Since it's listed later than Branch's $ios_deeplink_path tag, this value is used by Branch's scraper">
     
 
     <!-- Custom CSS & Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
