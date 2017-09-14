@@ -37,8 +37,8 @@
         //console.log(data);
     //});
 
+    // Version of .init function that blocks the journey from loading
     branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'no_journeys': true}, function(err, data) {
-        // callback to handle err or data
         console.log(JSON.parse(err.message));
         console.log(data);
     });
