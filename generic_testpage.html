@@ -70,7 +70,14 @@
     branch.addListener("didCallJourneyClose", listener);
     
     // function for button to manually launch journey (will NOT work if template dismissal period activated)
+    var launchCount = 1;
     function launchBranchJourney(){
+        branch.setBranchViewData({
+            data:{
+                '$journeys_title':'Banner relaunched ' + launchCount + 'times',
+            }
+        });
+        launchCount++;
         branch.track('pageview');
     }
 
