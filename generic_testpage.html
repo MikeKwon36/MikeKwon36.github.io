@@ -28,6 +28,7 @@
     branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', function(err, data) {
         console.log(JSON.parse(err.message));
         console.log(data);
+        closeBranchJourney();
     });
 
     // Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
@@ -69,7 +70,7 @@
     branch.addListener("didCloseJourney", listener);
     branch.addListener("didCallJourneyClose", listener);
     
-    // function for button to manually launch journey (will NOT work if template dismissal period activated)
+    // function for button to manually relaunch journey and update banner link data each time (will NOT work if template dismissal period activated)
     var launchCount = 1;
     function launchBranchJourney(){
         branch.setBranchViewData({
@@ -78,10 +79,11 @@
             }
         });
         launchCount++;
+        //this function launches the journey
         branch.track('pageview');
     }
 
-    // function for button to close journey (will NOT activate template dismissal period)
+    // function for button to close journey (will NOT activate template's dismissal period)
     function closeBranchJourney(){
         branch.closeJourney(function(err) { console.log(err); });
     }
