@@ -32,24 +32,30 @@
     branch.init('key_test_fgqE3DD75irY04BlT0ftWbmmzroiwsWf', function(err, data) {
         console.log(JSON.parse(err.message));
         console.log(data);
-        //Here is where you execute custom Branch code
     });
+
+    // Branch listener object that retrieves banner link data and prints it to console
     var listener = function(event, data) {
         console.log(event);
         console.log(data);
-        //Here is where you execute custom listener code
     };
+
+    // Listener objects are activated in the Branch instance for specific events via .addListener
     branch.addListener("willShowJourney", listener);
-    // branch.addListener("didShowJourney", listener);
+    branch.addListener("didShowJourney", listener);
     branch.addListener("willNotShowJourney", listener);
+    branch.addListener("didClickJourneyCTA", listener);
     branch.addListener("didClickJourneyClose", listener);
+    branch.addListener("willCloseJourney", listener);
+    branch.addListener("didCloseJourney", listener);
+    branch.addListener("didCallJourneyClose", listener);
 
     // function for button to launch journey
     function launchBranchJourney(){
         branch.track('pageview');
     }
 
-    // function for button to close journey
+    // function for button to close journey (will NOT activate template dismissal period)
     function closeBranchJourney(){
         branch.closeJourney(function(err) { console.log(err); });
     }
