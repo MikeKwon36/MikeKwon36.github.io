@@ -30,11 +30,17 @@
 
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
 
-    // The .init function includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
-    branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'branch_view_id':"434441173516764162"}, function(err, data) {
+    // standard .init call to launch banner
+    branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', function(err, data) {
         console.log(JSON.parse(err.message));
         console.log(data);
     });
+
+    // Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
+    //branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'branch_view_id':"434441173516764162"}, function(err, data) {
+    //    console.log(JSON.parse(err.message));
+    //    console.log(data);
+    //});
 
     // Version of .init function that completely blocks the journey from loading (no link data will be retrieved from the listeners)
     /*
