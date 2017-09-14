@@ -28,7 +28,6 @@
     branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', function(err, data) {
         console.log(JSON.parse(err.message));
         console.log(data);
-        closeBranchJourney();
     });
 
     // Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
@@ -57,6 +56,12 @@
     var listener = function(event, data) {
         console.log(event);
         console.log(data);
+    };
+
+    var closeJourneyListener = function(event, data) {
+        console.log(event);
+        console.log(data);
+        closeBranchJourney();
     };
 
 
