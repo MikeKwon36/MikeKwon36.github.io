@@ -120,6 +120,8 @@
         // Note that this example is using the key in two places, here and below
         branch.init('key_live_feebgAAhbH9Tv85H5wLQhpdaefiZv5Dv', function(err, data) {
             document.getElementsByClassName('info')[0].innerHTML = JSON.stringify(data);
+            console.log(JSON.parse(err.message));
+            console.log(data);
         });
     </script>
     <script type="text/javascript">
