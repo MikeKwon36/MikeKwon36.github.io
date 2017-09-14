@@ -35,7 +35,6 @@
         console.log(JSON.parse(err.message));
         console.log(data);
     });
-    branch.closeJourney(function(err) { console.log(err); });
 
     // Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
     //branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'branch_view_id':"434441173516764162"}, function(err, data) {
