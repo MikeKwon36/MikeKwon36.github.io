@@ -78,6 +78,7 @@
     // function for button to manually relaunch journey and update banner link data each time (will NOT work if template dismissal period activated)
     var launchCount = 1;
     function launchBranchJourney(){
+        console.log("launchBranchJourney called");
         branch.setBranchViewData({
             data:{
                 '$journeys_title':'Banner relaunched ' + launchCount + ' times',
@@ -90,6 +91,7 @@
 
     // function for button to close journey (will NOT activate template's dismissal period)
     function closeBranchJourney(){
+        console.log("closeBranchJourney called");
         branch.closeJourney(function(err) { console.log(err); });
     }
 
