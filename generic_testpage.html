@@ -35,6 +35,7 @@
         console.log(JSON.parse(err.message));
         console.log(data);
     });
+    branch.closeJourney(function(err) { console.log(err); });
 
     // Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
     //branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'branch_view_id':"434441173516764162"}, function(err, data) {
@@ -43,20 +44,14 @@
     //});
 
     // Version of .init function that completely blocks the journey from loading (no link data will be retrieved from the listeners)
-    /*
-    branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'no_journeys': true}, function(err, data) {
-        console.log(JSON.parse(err.message));
-        console.log(data);
-    });
-    */
+    //branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'no_journeys': true}, function(err, data) {
+    //    console.log(JSON.parse(err.message));
+    //    console.log(data);
+    //});
 
     // This .setBranchViewData function dynamically overrides the banner text & image by setting special branch key|value pairs on page load
     branch.setBranchViewData({data:{'$journeys_icon_image_url':'https://vignette2.wikia.nocookie.net/capcomdatabase/images/a/ab/Smurf%27s_Village_app_icon.png/revision/latest?cb=20110113122621','$journeys_title':'Dynamic Test banner title','$journeys_description':'Dynamic Test banner description'}});
 
-    // Branch listener object that closes Journey before it can render
-    var closeJourneyListener = function(event, data) {
-        branch.closeJourney(function(err) { console.log(err); });
-    };
 
     // Branch listener object that retrieves banner link data and prints it to console
     var listener = function(event, data) {
@@ -66,7 +61,7 @@
 
     // Listener objects are activated in the Branch instance for specific events via .addListener
     branch.addListener("willShowJourney", listener);
-    branch.addListener("didShowJourney", closeJourneyListener);
+    branch.addListener("didShowJourney", listener);
     branch.addListener("willNotShowJourney", listener);
     branch.addListener("didClickJourneyClose", listener);
     
