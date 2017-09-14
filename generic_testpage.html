@@ -134,6 +134,8 @@
                 <div class="col-lg-12">
                     <div class="intro-text">
                         <ul>
+                            <li onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px;"><button>Click to Launch Banner</button></li>
+                            <li onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer;"><button>Click to Close Banner</button></li>
                             <li class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a><p></p></li>
                             <li class="skills">The web <a href="https://github.com/BranchMetrics/web-branch-deep-linking">SDK</a> must be embedded in the page HTML<p></p></li>
                             <li class="skills">The web SDK uses a Test API key<p></p></li>
@@ -141,8 +143,6 @@
                             <li class="skills">Dismissing the banner will hide the banner from that user for a set timeframe (customizable in the dashboard)<p></p></li>
                             <li class="skills">The banner's "Get|Open" button will recognize if the user has the app (app must have the same API key)<p></p></li>
                             <li class="skills">Banner button clicks will always pass in the referring page's URL in the link data, under a key called "$canonical_url"<p></p></li>
-                            <li class="skills" onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer;"><button>Click to Launch Banner</button></li>
-                            <li class="skills" onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer;"><button>Click to Close Banner</button></li>
                         </ul>
                     </div>
                 </div>
