@@ -59,8 +59,8 @@
     };
 
     // Listener objects are activated in the Branch instance for specific events via .addListener
-    branch.addListener("willShowJourney", closeJourneyListener);
-    // branch.addListener("didShowJourney", listener);
+    branch.addListener("willShowJourney", listener);
+    branch.addListener("didShowJourney", closeJourneyListener);
     branch.addListener("willNotShowJourney", listener);
     branch.addListener("didClickJourneyClose", listener);
     
