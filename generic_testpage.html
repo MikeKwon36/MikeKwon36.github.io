@@ -8,22 +8,16 @@
     <meta name="description" content="Branch Demo Page">
     <meta name="author" content="Mike Kwon">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
-
+    <link rel="stylesheet" href="/style.css">    
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Branch metatags for Hosted Deep Link Data, for overlapping tags, the latest tag's value is used -->
     <meta name="branch:deeplink:productId" content="1234" />
     <meta name="branch:deeplink:productId" content="5678" />
     <meta name="branch:deeplink:$ios_deeplink_path" content="branch tags do not take priority over others" />
     <meta name="twitter:app:url:iphone" content="this is a Twitter tag that's used for $ios_deeplink_path. Since it's listed later than Branch's $ios_deeplink_path tag, this value is used by Branch's scraper">
-
-
-    <!-- Custom CSS & Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-    <link rel="stylesheet" href="/style.css">    
-
-    <!-- Custom Fonts -->
-    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
-    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Branch Web SDK -->
     <script type="text/javascript">
@@ -49,7 +43,11 @@
     //});
 
     // This .setBranchViewData function dynamically overrides the banner text & image by setting special branch key|value pairs on page load
-    branch.setBranchViewData({data:{'$journeys_icon_image_url':'https://vignette2.wikia.nocookie.net/capcomdatabase/images/a/ab/Smurf%27s_Village_app_icon.png/revision/latest?cb=20110113122621','$journeys_title':'Dynamic Test banner title','$journeys_description':'Dynamic Test banner description'}});
+    branch.setBranchViewData({data:{
+        '$journeys_icon_image_url':'https://mikekwon36.github.io/img/test_logo.png',
+        '$journeys_title':'Dynamic Test banner title',
+        '$journeys_description':'Dynamic Test banner description'}
+    });
 
 
     // Branch listener object that retrieves banner link data and prints it to console
@@ -57,7 +55,7 @@
         console.log(event);
         console.log(data);
     };
-    
+
 
     // Listener objects are activated in the Branch instance for specific events via .addListener
     branch.addListener("willShowJourney", listener);
@@ -69,7 +67,7 @@
     branch.addListener("didCloseJourney", listener);
     branch.addListener("didCallJourneyClose", listener);
     
-    // function for button to manually launch journey
+    // function for button to manually launch journey (will NOT work if template dismissal period activated)
     function launchBranchJourney(){
         branch.track('pageview');
     }
@@ -97,7 +95,6 @@
             <!-- Branch div to prevent overlap between Branch banner and fixed nav bar -->
             <div class="branch-journeys-top"></div>
 
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -108,7 +105,6 @@
                 <a class="navbar-brand" href="#page-top">Branch Demo</a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden">
@@ -125,9 +121,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
     </nav>
         <!-- Header -->
     <header>
@@ -250,26 +244,14 @@
     </div>
 
 
-     <!-- jQuery Version 1.11.0 -->
     <script src="/js/jquery-1.11.0.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
-
-    <!-- Plugin JavaScript -->
     <script src="/js/jquery.easing.min.js"></script>
     <script src="/js/classie.js"></script>
     <script src="/js/cbpAnimatedHeader.js"></script>
-
-    <!-- Contact Form JavaScript -->
     <script src="/js/jqBootstrapValidation.js"></script>
-    
     <script src="/js/contact_me_static.js"></script>
-    
-
-    <!-- Custom Theme JavaScript -->
     <script src="/js/freelancer.js"></script>
-
 
     </body>
 </html>
