@@ -44,7 +44,7 @@
     });
     */
 
-    // This .setBranchViewData function dynamically updates the banner text & image by setting special branch key|value pairs on page load
+    // This .setBranchViewData function dynamically overrides the banner text & image by setting special branch key|value pairs on page load
     branch.setBranchViewData({data:{'$journeys_icon_image_url':'https://vignette2.wikia.nocookie.net/capcomdatabase/images/a/ab/Smurf%27s_Village_app_icon.png/revision/latest?cb=20110113122621','$journeys_title':'Dynamic Test banner title','$journeys_description':'Dynamic Test banner description'}});
 
     // Branch listener object that closes Journey before it can render
@@ -58,17 +58,18 @@
         console.log(data);
     };
 
+    // Listener objects are activated in the Branch instance for specific events via .addListener
     branch.addListener("willShowJourney", closeJourneyListener);
     // branch.addListener("didShowJourney", listener);
     branch.addListener("willNotShowJourney", listener);
     branch.addListener("didClickJourneyClose", listener);
     
-    // function for button to launch journey
+    // function for button to manually launch journey
     function launchBranchJourney(){
         branch.track('pageview');
     }
 
-    // function for button to close journey
+    // function for button to manually close journey
     function closeBranchJourney(){
         branch.closeJourney(function(err) { console.log(err); });
     }
