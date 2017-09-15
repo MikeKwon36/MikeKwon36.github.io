@@ -122,13 +122,13 @@
         var dataObject
         branch.init('key_live_feebgAAhbH9Tv85H5wLQhpdaefiZv5Dv', function(err, data) {
             document.getElementsByClassName('info')[0].innerHTML = "test kwon";
-            errorObject = err.message;
-            dataObject = data;
-            console.log(JSON.parse(err.message));
-            console.log(JSON.stringify(data));
+            errorObject = JSON.parse(err.message);
+            dataObject = JSON.stringify(data);
+            console.log(errorObject);
+            console.log(dataObject);
         });
-        console.log(JSON.parse(errorObject));
-        console.log(JSON.stringify(dataObject));
+        console.log(errorObject);
+        console.log(dataObject);
 
     </script>
     <script type="text/javascript">
