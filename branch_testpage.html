@@ -121,14 +121,16 @@
         var errorObject;
         var dataObject
         branch.init('key_live_feebgAAhbH9Tv85H5wLQhpdaefiZv5Dv', function(err, data) {
-            document.getElementsByClassName('info')[0].innerHTML = "test kwon";
+            document.getElementsByClassName('info')[0].innerHTML = JSON.stringify(data);
             errorObject = JSON.parse(err.message);
             dataObject = JSON.stringify(data);
+            printLogs();
+        });
+
+        function printLogs(){
             console.log(errorObject);
             console.log(dataObject);
-        });
-        console.log(errorObject);
-        console.log(dataObject);
+        }
 
     </script>
     <script type="text/javascript">
