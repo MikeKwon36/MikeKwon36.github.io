@@ -16,6 +16,7 @@
     <!-- Branch metatags for Hosted Deep Link Data, for overlapping tags, the latest tag's value is used -->
     <meta name="branch:deeplink:productId" content="1234" />
     <meta name="branch:deeplink:productId" content="5678" />
+    <meta name="branch:deeplink:$canonical_url" content="https://www.thisLinkFromMetaTag.com/" />
     <meta name="branch:deeplink:$ios_deeplink_path" content="branch tags do not take priority over others" />
     <meta name="twitter:app:url:iphone" content="this is a Twitter tag that's used for $ios_deeplink_path. Since it's listed later than Branch's $ios_deeplink_path tag, this value is used by Branch's scraper">
 
@@ -47,6 +48,7 @@
         data:{
             '$journeys_icon_image_url':'https://mikekwon36.github.io/img/test_logo.png',
             '$journeys_title':'Title was set via javascript',
+            '$canonical_url':'https://www.thisLinkFromSBVD.com/',
             '$journeys_description':'Description set by .setBranchViewData'
         }
     });
