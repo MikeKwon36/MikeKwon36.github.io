@@ -43,12 +43,12 @@
     //    console.log(JSON.stringify(data));
     //});
 
-    // This .setBranchViewData function dynamically overrides the banner text & image by setting special branch key|value pairs on page load
+    // .setBranchViewData overrides banner text & image by setting special branch key|value pairs on page load
+    // This will override embedded Branch meta tags (including $canonical_url, which will be overwritten by SBVD)
     branch.setBranchViewData({
         data:{
             '$journeys_icon_image_url':'https://mikekwon36.github.io/img/test_logo.png',
             '$journeys_title':'Title was set via javascript',
-            '$canonical_url':'https://www.thisLinkFromSBVD.com/',
             '$journeys_description':'Description set by .setBranchViewData'
         }
     });
@@ -76,7 +76,7 @@
     function launchBranchJourney(){
         console.log("launchBranchJourney called");
 
-        //this updates the banner link data & analytics tags before it's launched
+        //this changes the banner link data & analytics tags before it's launched
         branch.setBranchViewData({
             tags: [launchCount,'edit & relaunch banner'],
             data:{
