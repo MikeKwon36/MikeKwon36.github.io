@@ -32,16 +32,20 @@
     });
 
     // Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
-    //branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'branch_view_id':"434441173516764162"}, function(err, data) {
-    //    console.log(JSON.parse(err.message));
-    //    console.log(JSON.stringify(data));
-    //});
+    //branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'branch_view_id':"434441173516764162"}, function(err, data) {});
+
 
     // Version of .init function that completely blocks the journey from loading (no link data will be retrieved from the listeners)
-    //branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'no_journeys': true}, function(err, data) {
-    //    console.log(JSON.parse(err.message));
-    //    console.log(JSON.stringify(data));
-    //});
+    //branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'no_journeys': true}, function(err, data) {});
+
+
+    // Version of .init function that auto-opens the app via URI if user has installed
+    //branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'open_app': true}, function(err, data) {});
+
+
+    // Version of .init function that inserts the referring Branch link that opened the page, into the banner
+    //branch.init('key_test_bdEzHjHBsEkb1CloWemJlpcdCrdBTDrf', {'make_new_link': true}, function(err, data) {});
+
 
     // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
     branch.setBranchViewData({
@@ -70,29 +74,54 @@
     branch.addListener("didCloseJourney", listener);
     branch.addListener("didCallJourneyClose", listener);
     
-    // function for button to manually relaunch journey and update banner link data each time (will NOT work if template dismissal period activated)
+
+    // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
     var launchCount = 1;
     function launchBranchJourney(){
         console.log("launchBranchJourney called");
 
-        //this changes the banner link data & analytics tags before it's launched
-        branch.setBranchViewData({
+        //this changes the banner link data & analytics tags
+        var linkData = {
+            campaign: 'Reset Banner Example - campaign',
+            channel: 'Reset Banner Example - channel',
+            feature: 'Reset Banner Example - feature',
+            stage: 'Reset Banner Example - stage',
             tags: [launchCount,'edit & relaunch banner'],
-            data:{
+            data: {
+                'custom_bool': true,
+                'custom_int': Date.now(),
+                'custom_string': 'hello',
                 '$journeys_icon_image_url':'https://mikekwon36.github.io/img/test_logo.png',
                 '$journeys_title':'Banner relaunched ' + launchCount + ' times',
-                '$journeys_description':'Description set by .setBranchViewData'    
+                '$journeys_description':'Description set by .setBranchViewData'
             }
-        });
-        launchCount++;
+        };
+        branch.setBranchViewData(linkData);
 
-        //this launches the journey
-        branch.track('pageview');
+        //track custom "launchedJourney_test" event on Branch dashboard
+        branch.track('launchedJourney_test', {custom: 'launchTag'}, function (err, data) {
+            console.log(err, data);
+        });
+
+
+        //this is the actual call that launches the journey, with flags that disable the banner animations
+        branch.track('pageview',{},{
+            ‘disable_entry_animation’ : true,
+            ‘disable_exit_animation’ : true
+        });
+
+        launchCount++;
     }
 
     // function for button to close journey (will NOT activate template's dismissal period)
     function closeBranchJourney(){
         console.log("closeBranchJourney called");
+
+        //track custom "closedJourney_test" event on Branch dashboard
+        branch.track('closedJourney_test', {custom: 'closeTag'}, function (err, data) {
+            console.log(err, data);
+        });
+
         branch.closeJourney(function(err) { console.log(err); });
     }
 
