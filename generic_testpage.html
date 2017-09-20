@@ -105,10 +105,7 @@
 
 
         //this is the actual call that launches the journey, with flags that disable the banner animations
-        branch.track('pageview',{},{
-            ‘disable_entry_animation’ : 'true',
-            ‘disable_exit_animation’ : 'true'
-        });
+        branch.track('pageview');
 
         launchCount++;
     }
