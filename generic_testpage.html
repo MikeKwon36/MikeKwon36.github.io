@@ -79,14 +79,14 @@
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
     var launchCount = 1;
     function launchBranchJourney(){
-        console.log("launchBranchJourney called");
+        //console.log("launchBranchJourney called");
 
         //this changes the banner link data & analytics tags
         var linkData = {
             campaign: 'This analytics tag cannot be overridded in Journeys',
             channel: 'This analytics tag cannot be overridded in Journeys',
             feature: 'This analytics tag cannot be overridded in Journeys',
-            stage: 'Reset Banner Example - stage',
+            stage: 'This banner data was reset via the page\'s javascript',
             tags: [launchCount,'edit & relaunch banner'],
             data: {
                 'custom_bool': true,
@@ -137,10 +137,9 @@
     <body id="page-top" class="index">
        <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
+        <!-- Branch div to prevent overlap between Branch banner and fixed nav bar -->
+        <div class="branch-journeys-top"></div>
         <div class="container">
-            
-            <!-- Branch div to prevent overlap between Branch banner and fixed nav bar -->
-            <div class="branch-journeys-top"></div>
 
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
