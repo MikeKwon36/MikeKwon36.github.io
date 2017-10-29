@@ -47,7 +47,7 @@
     branch.addListener("didShowJourney", listener);
     
     function orderNoodles(){
-        branch.closeJourney(function(err) { console.log(err); });
+        branch.closeJourney(function(err) {});
         branch.setBranchViewData({
             data: {
                 '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',
@@ -61,7 +61,7 @@
     }
 
     function orderBurgers(){
-        branch.closeJourney(function(err) { console.log(err); });
+        branch.closeJourney(function(err) {});
         branch.setBranchViewData({
             data: {
                 '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',

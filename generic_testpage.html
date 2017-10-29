@@ -31,7 +31,7 @@
         // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
         branch.setBranchViewData({
             data:{
-                '$journeys_icon_image':'http://www.roamchicago.com/roam/grubhub.jpg',
+                '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',
                 '$journeys_title':'Title was reset on load via JS',
                 '$journeys_description':'Description reset on load via JS'
             }
@@ -274,9 +274,7 @@
         branch.setBranchViewData(linkData);
 
         //track custom "launchedJourney_test" event on Branch dashboard
-        //branch.track('launchedJourney_test', {custom: 'launchTag'}, function (err, data) {
-        //    console.log(err, data);
-        //});
+        //branch.track('launchedJourney_test', {custom: 'launchTag'}, function (err, data) {});
 
 
         //this is the actual call that launches the journey, with flags that disable the banner animations
@@ -291,11 +289,9 @@
         console.log("closeBranchJourney called");
 
         //track custom "closedJourney_test" event on Branch dashboard
-        //branch.track('closedJourney_test', {custom: 'closeTag'}, function (err, data) {
-        //    console.log(err, data);
-        //});
+        //branch.track('closedJourney_test', {custom: 'closeTag'}, function (err, data) {});
 
-        branch.closeJourney(function(err) { console.log(err); });
+        branch.closeJourney(function(err) {});
     }
 
     </script>

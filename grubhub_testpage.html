@@ -208,7 +208,7 @@
     var templateID = '453238497136757764';
     var foodID = 'Food!'
     function orderNoodles(){
-        branch.closeJourney(function(err) { console.log(err); });
+        branch.closeJourney(function(err) {});
         foodID = 'Noodles!'
         branch.setBranchViewData({
             data: {
@@ -223,7 +223,7 @@
     }
 
     function orderBurgers(){
-        branch.closeJourney(function(err) { console.log(err); });
+        branch.closeJourney(function(err) {});
         foodID = 'Burgers!'
         branch.setBranchViewData({
             data: {
@@ -238,7 +238,7 @@
     }
 
     function swapTemplate(){
-        branch.closeJourney(function(err) { console.log(err); });
+        branch.closeJourney(function(err) {});
         if (templateID=='453238497136757764') {
             templateID='453238701065589764';
         } else if (templateID=='453238701065589764') {
