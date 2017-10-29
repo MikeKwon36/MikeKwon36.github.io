@@ -21,14 +21,14 @@
 
         branch.setBranchViewData({
             data:{
-                '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',
+                '$journeys_icon_image':'http://www.roamchicago.com/roam/grubhub.jpg',
                 '$journeys_title':'Title was reset on load via JS',
                 '$journeys_description':'Description reset on load via JS'
             }
         });
 
         console.log(data);
-        console.log(err.message);
+        console.log(JSON.parse(err.message));
     });
 
     </script>
