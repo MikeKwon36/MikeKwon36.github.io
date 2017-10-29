@@ -184,6 +184,20 @@
         }
     });
 
+    // Branch listener object that retrieves banner link data and prints it to console
+    var listener = function(event, data) {
+        console.log(event);
+        console.log(data);
+    };
+    branch.addListener("willShowJourney", listener);
+    branch.addListener("didShowJourney", listener);
+    branch.addListener("willNotShowJourney", listener);
+    branch.addListener("didClickJourneyCTA", listener);
+    branch.addListener("didClickJourneyClose", listener);
+    branch.addListener("willCloseJourney", listener);
+    branch.addListener("didCloseJourney", listener);
+    branch.addListener("didCallJourneyClose", listener);
+
     
     var templateID = '453238497136757764';
     var foodID = 'Food!'
@@ -216,7 +230,7 @@
         });
         branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true});
     }
-    
+
     function swapTemplate(){
         branch.closeJourney(function(err) { console.log(err); });
         if (templateID=='453238497136757764') {
