@@ -82,8 +82,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <button onclick="noodles()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Order Noodles</button>
-                        <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Click to Close Banner</button>
+                        <button onclick="orderNoodles()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Order Noodles</button>
+                        <button onclick="orderBurgers()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Order Burgers</button>
+                        <button onclick="swapTemplate()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Swap template</button>
                         <p></p>
                     </div>
                 </div>
@@ -202,7 +203,8 @@
     
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
     var launchCount = 1;
-    function noodles(){
+    var templateID = 453227799329043487;
+    function orderNoodles(){
         branch.closeJourney(function(err) { console.log(err); });
         launchCount++;
         branch.setBranchViewData({
@@ -210,11 +212,47 @@
                 '$journeys_icon_image_url':'https://image.flaticon.com/icons/png/512/168/168564.png',
                 '$journeys_button_get_no_app':'changed!',
                 '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Banner relaunched ' + launchCount + ' times',
-                '$journeys_description':'Description reset by button click'
+                '$journeys_title':'Hungry for Noodles?',
+                '$journeys_description':'Order noodles in the app!'
             }
         });
         branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'branch_view_id':'453227799329043487','make_new_link': true});
+    }
+    function orderBurgers(){
+        branch.closeJourney(function(err) { console.log(err); });
+        launchCount++;
+        branch.setBranchViewData({
+            data: {
+                '$journeys_icon_image_url':'https://cdn1.iconfinder.com/data/icons/jellycons-2-100-ios-8-app-icons/1024/Burger.png',
+                '$journeys_button_get_no_app':'changed!',
+                '$journeys_button_get_has_app':'changed!',
+                '$journeys_title':'Craving Burgers?',
+                '$journeys_description':'Order burgers in the app!'
+            }
+        });
+        branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'branch_view_id':'453227799329043487','make_new_link': true});
+    }
+    function swapTemplate(){
+        branch.closeJourney(function(err) { console.log(err); });
+
+        launchCount++;
+
+        if (templateID==453227799329043487) {
+            templateID=453232514700299267;
+        } else if (templateID==453232514700299267) {
+            templateID=453227799329043487;
+        };
+
+        branch.setBranchViewData({
+            data: {
+                '$journeys_icon_image_url':'https://cdn1.iconfinder.com/data/icons/jellycons-2-100-ios-8-app-icons/1024/Burger.png',
+                '$journeys_button_get_no_app':'changed!',
+                '$journeys_button_get_has_app':'changed!',
+                '$journeys_title':'Craving Burgers?',
+                '$journeys_description':'Order burgers in the app!'
+            }
+        });
+        branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'branch_view_id':templateID,'make_new_link': true});
     }
 
     
