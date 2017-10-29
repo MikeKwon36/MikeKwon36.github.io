@@ -32,6 +32,15 @@
         console.log(JSON.stringify(data));
     });
 
+    // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
+    branch.setBranchViewData({
+        data:{
+            '$journeys_icon_image_url':'https://mikekwon36.github.io/img/test_logo.png',
+            '$journeys_title':'Title was set via javascript',
+            '$journeys_description':'Description set by .setBranchViewData'
+        }
+    });
+
     //Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
     //branch.init('key_live_doqtOBUu6KDEfsC8E33P8mbiCAhem9tU', {'branch_view_id':"422865304512181251",'make_new_link': true}, function(err, data) {});
 
@@ -46,15 +55,6 @@
 
     // Version of .init function that inserts the referring Branch link that opened the page, into the banner
     //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'make_new_link': true}, function(err, data) {});
-
-    // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
-    branch.setBranchViewData({
-        data:{
-            '$journeys_icon_image_url':'https://mikekwon36.github.io/img/test_logo.png',
-            '$journeys_title':'Title was set via javascript',
-            '$journeys_description':'Description set by .setBranchViewData'
-        }
-    });
 
     </script>
 
