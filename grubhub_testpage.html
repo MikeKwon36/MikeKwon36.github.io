@@ -183,75 +183,47 @@
             '$journeys_description':'Description reset on load via JS'
         }
     });
-    
-    // Branch listener object that retrieves banner link data and prints it to console
-    var listener = function(event, data) {
-        console.log(event);
-        console.log(data);
-    };
 
-
-    // Listener objects are activated in the Branch instance for specific events via .addListener
-    branch.addListener("willShowJourney", listener);
-    branch.addListener("didShowJourney", listener);
-    branch.addListener("willNotShowJourney", listener);
-    branch.addListener("didClickJourneyCTA", listener);
-    branch.addListener("didClickJourneyClose", listener);
-    branch.addListener("willCloseJourney", listener);
-    branch.addListener("didCloseJourney", listener);
-    branch.addListener("didCallJourneyClose", listener);
     
-    // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
-    var launchCount = 1;
     var templateID = '453238497136757764';
+    var foodID = 'Food!'
     function orderNoodles(){
         branch.closeJourney(function(err) { console.log(err); });
-        launchCount++;
+        foodID = 'Noodles!'
         branch.setBranchViewData({
             data: {
                 '$journeys_icon_image_url':'https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fpng%2F512%2F168%2F168564.png',
-                '$journeys_button_get_no_app':'changed!',
-                '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Hungry for Noodles?',
-                '$journeys_description':'Order noodles in the app!'
+                '$journeys_button_get_no_app':foodID,
+                '$journeys_button_get_has_app':foodID,
+                '$journeys_title':'Hungry for ' + foodID,
+                '$journeys_description':'Order ' + foodID + ' in the app!'
             }
         });
         branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true});
     }
+
     function orderBurgers(){
         branch.closeJourney(function(err) { console.log(err); });
-        launchCount++;
+        foodID = 'Burgers!'
         branch.setBranchViewData({
             data: {
                 '$journeys_icon_image_url':'https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fjellycons-2-100-ios-8-app-icons%2F1024%2FBurger.png',
-                '$journeys_button_get_no_app':'changed!',
-                '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Craving Burgers?',
-                '$journeys_description':'Order burgers in the app!'
+                '$journeys_button_get_no_app':foodID,
+                '$journeys_button_get_has_app':foodID,
+                '$journeys_title':'Hungry for ' + foodID,
+                '$journeys_description':'Order ' + foodID + ' in the app!'
             }
         });
         branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true});
     }
+    
     function swapTemplate(){
         branch.closeJourney(function(err) { console.log(err); });
-
-        launchCount++;
-
         if (templateID=='453238497136757764') {
             templateID='453238701065589764';
         } else if (templateID=='453238701065589764') {
             templateID='453238497136757764';
         };
-
-        branch.setBranchViewData({
-            data: {
-                '$journeys_icon_image_url':'https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fjellycons-2-100-ios-8-app-icons%2F1024%2FBurger.png',
-                '$journeys_button_get_no_app':'changed!',
-                '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Craving Burgers?',
-                '$journeys_description':'Order burgers in the app!'
-            }
-        });
         branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true});
     }
 
