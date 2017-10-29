@@ -27,20 +27,19 @@
 
     // .init call to launch banner
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
-        console.log(JSON.parse(err.message));
-        console.log(err);
+        branch.setBranchViewData({
+            data:{
+                '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',
+                '$journeys_title':'Title was reset on load via JS',
+                '$journeys_description':'Description reset on load via JS'
+            }
+        });
         console.log(JSON.stringify(data));
-        console.log(data);
+        console.log(JSON.parse(err.message));
     });
 
     // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
-    branch.setBranchViewData({
-        data:{
-            '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',
-            '$journeys_title':'Title was reset on load via JS',
-            '$journeys_description':'Description reset on load via JS'
-        }
-    });
+
 
     //Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
     //branch.init('key_live_doqtOBUu6KDEfsC8E33P8mbiCAhem9tU', {'branch_view_id':"422865304512181251",'make_new_link': true}, function(err, data) {});
