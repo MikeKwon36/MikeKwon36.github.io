@@ -19,13 +19,7 @@
 
     branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', function(err, data) {
 
-        branch.setBranchViewData({
-            data:{
-                '$journeys_icon':'http://www.roamchicago.com/roam/grubhub.jpg',
-                '$journeys_title':'Title was reset on load via JS',
-                '$journeys_description':'Description reset on load via JS'
-            }
-        });
+
 
         console.log(data);
         console.log(JSON.parse(err.message));
