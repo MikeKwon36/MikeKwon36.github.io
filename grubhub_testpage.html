@@ -205,7 +205,7 @@
     function launchBranchJourney(){
         branch.closeJourney(function(err) { console.log(err); });
         launchCount++;
-        branch.setBranchViewData(
+        branch.setBranchViewData({
             data: {
                 '$journeys_icon_image_url':'https://image.flaticon.com/icons/png/512/168/168564.png',
                 '$journeys_button_get_no_app':'changed!',
@@ -213,7 +213,7 @@
                 '$journeys_title':'Banner relaunched ' + launchCount + ' times',
                 '$journeys_description':'Description reset by button click'
             }
-        );
+        });
         branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'branch_view_id':'453227799329043487','make_new_link': true});
     }
 
