@@ -3,7 +3,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Branch Demo Page</title>
+    <title>Grubhub Demo Page</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Branch Demo Page">
     <meta name="author" content="Mike Kwon">
@@ -66,9 +66,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <span class="name">Branch Journeys Demo</span>
+                        <span class="name">Grubhub Journeys Demo</span>
                         <hr class="star-light">
-                        <span class="skills">Testpage displaying a Journeys Banner</span>
+                        <span class="skills">Client-side banner controls</span>
                     </div>
                 </div>
             </div>
@@ -203,29 +203,21 @@
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
     var launchCount = 1;
     function launchBranchJourney(){
-        var linkData = {
+        branch.closeJourney(function(err) { console.log(err); });
+        launchCount++;
+        branch.setBranchViewData(
             data: {
-                'custom_bool': true,
-                'custom_int (today\s date)': Date.now(),
-                'custom_string (url)': window.location.href,
-                '$journeys_icon_image_url':'https://www.valorebooks.com/campus-life/wp-content/uploads/icon_340.png',
+                '$journeys_icon_image_url':'https://image.flaticon.com/icons/png/512/168/168564.png',
                 '$journeys_button_get_no_app':'changed!',
                 '$journeys_button_get_has_app':'changed!',
                 '$journeys_title':'Banner relaunched ' + launchCount + ' times',
                 '$journeys_description':'Description reset by button click'
             }
-        };
-        branch.setBranchViewData(linkData);
-
-        branch.track('pageview');
-
-        launchCount++;
+        );
+        branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'branch_view_id':'453227799329043487','make_new_link': true});
     }
 
-    // function for button to close journey (will NOT activate template's dismissal period)
-    function closeBranchJourney(){
-        branch.closeJourney(function(err) { console.log(err); });
-    }
+    
 
     </script>
 
