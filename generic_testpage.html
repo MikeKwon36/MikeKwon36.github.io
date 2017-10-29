@@ -29,15 +29,17 @@
     // .init call to launch banner
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
         console.log(JSON.parse(err.message));
+        console.log(err);
         console.log(JSON.stringify(data));
+        console.log(data);
     });
 
     // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
     branch.setBranchViewData({
         data:{
             '$journeys_icon_image_url':'https://mikekwon36.github.io/img/test_logo.png',
-            '$journeys_title':'Title was set via javascript',
-            '$journeys_description':'Description set by .setBranchViewData'
+            '$journeys_title':'Title was reset on load via JS',
+            '$journeys_description':'Description reset on load via JS'
         }
     });
 
@@ -256,7 +258,7 @@
             campaign: 'This analytics tag cannot be overridded in Journeys',
             channel: 'This analytics tag cannot be overridded in Journeys',
             feature: 'This analytics tag cannot be overridded in Journeys',
-            stage: 'This banner data was reset via the page\'s javascript',
+            stage: 'This banner data was reset via button click',
             tags: [launchCount,'edit & relaunch banner'],
             data: {
                 'custom_bool': true,
@@ -264,7 +266,7 @@
                 'custom_string': 'hello',
                 '$journeys_icon_image_url':'https://mikekwon36.github.io/img/test_logo.png',
                 '$journeys_title':'Banner relaunched ' + launchCount + ' times',
-                '$journeys_description':'Description set by .setBranchViewData'
+                '$journeys_description':'Description reset by button click'
             }
         };
         branch.setBranchViewData(linkData);
