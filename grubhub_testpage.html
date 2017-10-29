@@ -178,7 +178,7 @@
 
     branch.setBranchViewData({
         data:{
-            '$journeys_icon_image_url':'http%3A%2F%2Fwww.roamchicago.com%2Froam%2Fgrubhub.jpg',
+            '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',
             '$journeys_title':'Title was reset on load via JS',
             '$journeys_description':'Description reset on load via JS'
         }
@@ -206,14 +206,14 @@
         foodID = 'Noodles!'
         branch.setBranchViewData({
             data: {
-                '$journeys_icon_image_url':'https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fpng%2F512%2F168%2F168564.png',
+                '$journeys_icon_image_url':'https://image.flaticon.com/icons/png/512/168/168564.png',
                 '$journeys_button_get_no_app':foodID,
                 '$journeys_button_get_has_app':foodID,
                 '$journeys_title':'Hungry for ' + foodID,
                 '$journeys_description':'Order ' + foodID + ' in the app!'
             }
         });
-        branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true});
+        branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true,'disable_entry_animation':true,'disable_exit_animation':true});
     }
 
     function orderBurgers(){
@@ -221,14 +221,14 @@
         foodID = 'Burgers!'
         branch.setBranchViewData({
             data: {
-                '$journeys_icon_image_url':'https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fjellycons-2-100-ios-8-app-icons%2F1024%2FBurger.png',
+                '$journeys_icon_image_url':'https://cdn1.iconfinder.com/data/icons/jellycons-2-100-ios-8-app-icons/1024/Burger.png',
                 '$journeys_button_get_no_app':foodID,
                 '$journeys_button_get_has_app':foodID,
                 '$journeys_title':'Hungry for ' + foodID,
                 '$journeys_description':'Order ' + foodID + ' in the app!'
             }
         });
-        branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true});
+        branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true,'disable_entry_animation':true,'disable_exit_animation':true});
     }
 
     function swapTemplate(){
@@ -238,12 +238,18 @@
         } else if (templateID=='453238701065589764') {
             templateID='453238497136757764';
         };
-        branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true});
+        branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true,'disable_entry_animation':true,'disable_exit_animation':true});
     }
-
-    
-
     </script>
+
+    <script src="/js/jquery-1.11.0.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/classie.js"></script>
+    <script src="/js/cbpAnimatedHeader.js"></script>
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me_static.js"></script>
+    <script src="/js/freelancer.js"></script>
 
     </body>
 </html>
