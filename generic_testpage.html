@@ -27,6 +27,8 @@
 
     // .init call to launch banner
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
+    
+        // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
         branch.setBranchViewData({
             data:{
                 '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',
@@ -34,11 +36,11 @@
                 '$journeys_description':'Description reset on load via JS'
             }
         });
-        console.log(JSON.stringify(data));
+    
+        console.log(data);
         console.log(JSON.parse(err.message));
     });
 
-    // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
 
 
     //Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
