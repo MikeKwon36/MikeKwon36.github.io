@@ -27,15 +27,17 @@
 
     // .init call to launch banner
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
-    
-        // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
-        branch.setBranchViewData({
-            data:{
-                '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',
-                '$journeys_title':'Title was reset on load via JS',
-                '$journeys_description':'Description reset on load via JS'
-            }
-        });
+
+        if(data.referring_link == null){
+        // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)    
+            branch.setBranchViewData({
+                data:{
+                    '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',
+                    '$journeys_title':'Title was reset on load via JS',
+                    '$journeys_description':'Description reset on load via JS'
+                }
+            });
+        }
     
         console.log(data);
         console.log(data.referring_link);
