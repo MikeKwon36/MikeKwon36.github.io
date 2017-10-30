@@ -29,7 +29,7 @@
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
 
         console.log(data.referring_link);
-        if(!data.referring_link){
+        if(data.referring_link !== null){
         // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)    
             branch.setBranchViewData({
                 data:{
