@@ -22,7 +22,7 @@
         console.log(data.referring_link);
 
         //check if page session came from a referring link.  If yes, use referring link's data, if not, set banner data dynamically
-        if(data.referring_link !== null){
+        if(data.referring_link == null){
             branch.setBranchViewData({
                 data:{
                     '$journeys_icon_image_url':'http://www.roamchicago.com/roam/grubhub.jpg',
