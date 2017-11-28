@@ -6,9 +6,6 @@ description: "Portfolio website for Mike Kwon"
 skills: "Digital & Mobile Strategy, Product Manager, Android Developer"
 meta_author: Mike Kwon
 
-gems:
-  - jekyll-redirect-from
-
 # Google webmaster tools
 google_verify:
 
