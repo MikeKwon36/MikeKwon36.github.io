@@ -13,11 +13,15 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Branch metatags... when metatags overlap, the latest tag's value is used -->
-    <meta name="branch:deeplink:productId" content="For duplicate tags, the tag listed first will be overwritten" />
-    <meta name="branch:deeplink:productId" content="For duplicate tags, the tag listed later takes precedence" />
-    <meta name="branch:deeplink:$ios_deeplink_path" content="branch tags do not take priority over others" />
-    <meta name="twitter:app:url:iphone" content="this is a Twitter tag that's used for $ios_deeplink_path. Since it's listed later than Branch's $ios_deeplink_path tag, this value is used by Branch's scraper">
+    <!-- Branch metatags -->
+    <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed first will be overwritten" />
+    <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed later takes precedence" />
+    <meta name="branch:deeplink:$ios_deeplink_path" content="branch metatag scraped for $ios_deeplink_path" />
+    <meta name="branch:deeplink:$android_deeplink_path" content="branch metatag scraped for $android_deeplink_path" />
+    <meta name="twitter:app:url:iphone" content="Twitter metatag scraped for $ios_deeplink_path">
+    <meta name="al:ios:url" content="Facebook applinks metatag scraped for $ios_deeplink_path">
+    <meta name="twitter:app:url:googleplay" content="Twitter metatag scraped for $android_deeplink_path">
+    <meta name="al:android:url" content="Facebook applinks metatag scraped for $android_deeplink_path">
     <!-- <meta name="branch:deeplink:$canonical_url" content="Branch metatags can overwrite $canonical_url" /> -->
 
     <!-- Branch Web SDK -->
