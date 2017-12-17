@@ -35,8 +35,9 @@
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
 
         console.log(data.referring_link);
+        // Code checks if a Branch link opened the page (if yes, banner uses referring link's data by default)
         if(!data.referring_link){
-        // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)    
+        // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
             branch.setBranchViewData({
                 data:{
                     '$journeys_icon_image_url':'http://android4fun.net/wp-content/uploads/2017/05/Voltron-Stickers.png',
