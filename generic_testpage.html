@@ -16,15 +16,15 @@
     <!-- Branch metatags -->
     <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed first will be overwritten" />
     <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed later takes precedence" />
+    <!-- <meta name="branch:deeplink:$canonical_url" content="Branch metatag can overwrite $canonical_url" /> -->
 
-    <!-- <meta name="branch:deeplink:$ios_deeplink_path" content="branch metatag scraped for $ios_deeplink_path" /> -->
-    <!-- <meta name="branch:deeplink:$android_deeplink_path" content="branch metatag scraped for $android_deeplink_path" /> -->
-
-    <!-- <meta name="al:ios:url" content="Facebook applinks metatag scraped for $ios_deeplink_path"> -->
+    <!-- Re: which deeplink_path is scrape, Web SDK will prioritize Branch > Facebook AppLinks > Twitter tags -->
+    <meta name="branch:deeplink:$ios_deeplink_path" content="branch metatag scraped for $ios_deeplink_path" />
+    <meta name="branch:deeplink:$android_deeplink_path" content="branch metatag scraped for $android_deeplink_path" />
+    <meta name="al:ios:url" content="Facebook applinks metatag scraped for $ios_deeplink_path">
+    <meta name="al:android:url" content="Facebook applinks metatag scraped for $android_deeplink_path">
     <meta name="twitter:app:url:iphone" content="Twitter metatag scraped for $ios_deeplink_path">
     <meta name="twitter:app:url:googleplay" content="Twitter metatag scraped for $android_deeplink_path">
-    <!-- <meta name="al:android:url" content="Facebook applinks metatag scraped for $android_deeplink_path"> -->
-    <!-- <meta name="branch:deeplink:$canonical_url" content="Branch metatag can overwrite $canonical_url" /> -->
 
     <!-- Branch Web SDK -->
     <script type="text/javascript">
