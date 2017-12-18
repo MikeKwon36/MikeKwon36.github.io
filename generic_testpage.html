@@ -32,9 +32,24 @@
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
 
     // .init call to launch banner
-    
+    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
 
-branch.init("key_test_ddzzCUvmiEt9NNOmLuo2CecpCBcLTjEn");
+        console.log(data.referring_link);
+        // Code checks if a Branch link opened the page (if yes, banner uses referring link's data by default)
+        if(!data.referring_link){
+        // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
+            branch.setBranchViewData({
+                data:{
+                    '$journeys_icon_image_url':'http://android4fun.net/wp-content/uploads/2017/05/Voltron-Stickers.png',
+                    '$journeys_title':'Title was reset on load',
+                    '$journeys_description':'Description reset on load via JS'
+                }
+            });
+        }
+    
+        console.log(data);
+        console.log(JSON.parse(err.message));
+    });
 
 
 
