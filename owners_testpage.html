@@ -95,8 +95,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Change $canonical_url</button>
-                        <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Change $canonical_url again</button>
+                        <button onclick="changeCanonical()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Change $canonical_url</button>
+                        <button onclick="changeCanonical2()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Change $canonical_url again</button>
                         <p></p>
                         <ul>
                             <li class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a><p></p></li>
@@ -216,7 +216,7 @@
     
 
     // function #1 to change banner data
-    function launchBranchJourney(){
+    function changeCanonical(){
         branch.closeJourney();
         var linkData = {
             data: {
@@ -233,7 +233,7 @@
     }
 
     // function #2 to change banner data
-    function closeBranchJourney(){
+    function changeCanonical2(){
         branch.closeJourney();        
         var linkData = {
             data: {
