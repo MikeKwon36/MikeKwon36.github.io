@@ -217,22 +217,26 @@
 
     // function #1 to change banner data
     function launchBranchJourney(){
+        branch.closeJourney();
         var linkData = {
             data: {
                 '$canonical_url': 'function 1'
             }
         };
         branch.setBranchViewData(linkData);
+        branch.track('pageview');
     }
 
     // function #2 to change banner data
     function closeBranchJourney(){
+        branch.closeJourney();        
         var linkData = {
             data: {
                 '$canonical_url': 'function 2'
             }
         };
         branch.setBranchViewData(linkData);
+        branch.track('pageview');
     }
 
     </script>
