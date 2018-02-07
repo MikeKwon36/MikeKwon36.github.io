@@ -224,7 +224,12 @@
             }
         };
         branch.setBranchViewData(linkData);
-        branch.track('pageview');
+        branch.track('pageview',
+            {},
+            {
+                ‘disable_entry_animation’ : true,
+                ‘disable_exit_animation’ : true
+            });
     }
 
     // function #2 to change banner data
@@ -236,7 +241,12 @@
             }
         };
         branch.setBranchViewData(linkData);
-        branch.track('pageview');
+        branch.track('pageview',
+            {},
+            {
+                ‘disable_entry_animation’ : true,
+                ‘disable_exit_animation’ : true
+            });
     }
 
     </script>
