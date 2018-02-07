@@ -20,7 +20,7 @@
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
 
     // .init call to launch banner
-    branch.init('key_live_alyfPjONy1aBe5501WF8JgajBAoKdbYr', {'open_app':true}, function(err, data) {
+    branch.init('key_live_alyfPjONy1aBe5501WF8JgajBAoKdbYr', function(err, data) {
         console.log(data);
         console.log(JSON.parse(err.message));
     });
@@ -215,50 +215,24 @@
     branch.addListener("didCallJourneyClose", listener);
     
 
-    // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
-    var launchCount = 1;
+    // function #1 to change banner data
     function launchBranchJourney(){
-        //console.log("launchBranchJourney called");
-
-        //this changes the banner link data & analytics tags
         var linkData = {
-            campaign: 'This analytics tag cannot be overridded in Journeys',
-            channel: 'The banner\s channel tag was reset via button click',
-            feature: 'This analytics tag cannot be overridded in Journeys',
-            stage: 'The banner\s stage tag was reset via button click',
-            tags: [launchCount,'edit & relaunch banner'],
             data: {
-                'custom_bool': true,
-                'custom_int (today\s date)': Date.now(),
-                'custom_string (url)': window.location.href,
-                '$journeys_icon_image_url':'https://www.valorebooks.com/campus-life/wp-content/uploads/icon_340.png',
-                '$journeys_button_get_no_app':'changed!',
-                '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Banner relaunched ' + launchCount + ' times',
-                '$journeys_description':'Description reset by button click'
+                '$canonical_url': 'function 1'
             }
         };
         branch.setBranchViewData(linkData);
-
-        //track custom "launchedJourney_test" event on Branch dashboard
-        //branch.track('launchedJourney_test', {custom: 'launchTag'}, function (err, data) {});
-
-
-        //this is the actual call that launches the journey, with flags that disable the banner animations
-        branch.track('pageview');
-        //branch.init('key_live_doqtOBUu6KDEfsC8E33P8mbiCAhem9tU', {'branch_view_id':"422865304512181251"}, function(err, data) {});
-
-        launchCount++;
     }
 
-    // function for button to close journey (will NOT activate template's dismissal period)
+    // function #2 to change banner data
     function closeBranchJourney(){
-        console.log("closeBranchJourney called");
-
-        //track custom "closedJourney_test" event on Branch dashboard
-        //branch.track('closedJourney_test', {custom: 'closeTag'}, function (err, data) {});
-
-        branch.closeJourney(function(err) {});
+        var linkData = {
+            data: {
+                '$canonical_url': 'function 2'
+            }
+        };
+        branch.setBranchViewData(linkData);
     }
 
     </script>
