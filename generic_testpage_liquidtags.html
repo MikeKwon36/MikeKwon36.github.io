@@ -30,18 +30,10 @@
     // .init call to launch banner, dynamically retrieve meta tag value, and relay as meta data to Branch
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
 
-        var metas = document.getElementsByTagName('random');
-        var tagdata;
-
-        for (var i=0; i<metas.length; i++) {
-            if (metas[i].getAttribute("name") == "random") {
-                tagdata = metas[i].getAttribute("content");
-            }
-        } 
-
+        var meta = document.querySelector("meta[name='random']").getAttribute("content");
         branch.setBranchViewData({
             data:{
-                'text2':tagdata
+                'text2':meta
             }
         });
         console.log(data);
