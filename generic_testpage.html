@@ -16,9 +16,10 @@
     <!-- Branch metatags -->
     <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed first will be overwritten" />
     <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed later takes precedence" />
+    <meta name="branch:deeplink:text" content="text set by metatag" />
     <!-- <meta name="branch:deeplink:$canonical_url" content="Branch metatag can overwrite $canonical_url" /> -->
 
-    <!-- Re: which deeplink_path is scrape, Web SDK will prioritize Branch > Facebook AppLinks > Twitter tags -->
+    <!-- Web SDK will prioritize Branch tags > Facebook AppLinks > Twitter tags -->
     <meta name="branch:deeplink:$ios_deeplink_path" content="branch metatag scraped for $ios_deeplink_path" />
     <meta name="branch:deeplink:$android_deeplink_path" content="branch metatag scraped for $android_deeplink_path" />
     <meta name="al:ios:url" content="Facebook applinks metatag scraped for $ios_deeplink_path">
@@ -40,6 +41,7 @@
         // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
             branch.setBranchViewData({
                 data:{
+                    'text2':'text set by SBVD',
                     '$journeys_icon_image_url':'http://android4fun.net/wp-content/uploads/2017/05/Voltron-Stickers.png',
                     '$journeys_title':'Title was reset on load',
                     '$journeys_description':'Description reset on load via JS'
@@ -53,19 +55,15 @@
 
 
 
-    //Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (will overwrite the campaign tag to "_test")
-    //branch.init('key_live_doqtOBUu6KDEfsC8E33P8mbiCAhem9tU', {'branch_view_id':"422865304512181251",'make_new_link': true}, function(err, data) {});
+    //.init that includes a 'branch_view_id' option to manually override journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (overwrites ~campaign to "_test")
+    //branch.init('key_live_doqtOBUu6KDEfsC8E33P8mbiCAhem9tU', {'branch_view_id':"422865304512181251"}, function(err, data) {});
 
 
-    // Version of .init function that completely blocks the journey from loading (no link data will be retrieved from the listeners)
+    //.init that blocks journey from loading (no link data will be retrieved from the listeners), but track('pageview') can still launch it later in the session
     //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'no_journeys': true}, function(err, data) {});
 
 
-    // Version of .init function that auto-opens the app via URI if user has installed
-    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'open_app': true}, function(err, data) {});
-
-
-    // Version of .init function that inserts the referring Branch link that opened the page, into the banner
+    //.init that ignores referring Branch link that opened the page
     //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'make_new_link': true}, function(err, data) {});
 
     </script>
