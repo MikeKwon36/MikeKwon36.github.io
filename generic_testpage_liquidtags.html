@@ -13,24 +13,35 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- When duplicate metatags present, the latter tag is always used -->
+    <!-- When duplicate Branch metatags present, the latter tag is always used -->
     <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed first will be overwritten" />
     <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed later takes precedence" />
     <meta name="branch:deeplink:text" content="earlier metatag" />
     <meta name="branch:deeplink:text" content="later metatag" />
 
+    <!-- Random meta tag value retrieved for Branch liquid tag -->
+    <meta name="random" content="non-Branch metatag" />
 
     <!-- Branch Web SDK -->
     <script type="text/javascript">
 
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
 
-    // .init call to launch banner
+    // .init call to launch banner, dynamically retrieve meta tag value, and relay as meta data to Branch
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
+
+        var metas = document.getElementsByTagName('random');
+        var tagdata;
+
+        for (var i=0; i<metas.length; i++) {
+            if (metas[i].getAttribute("name") == "random") {
+                tagdata = metas[i].getAttribute("content");
+            }
+        } 
 
         branch.setBranchViewData({
             data:{
-                'text2':'SBVD'
+                'text2':tagdata
             }
         });
         console.log(data);
