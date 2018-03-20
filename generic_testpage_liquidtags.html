@@ -31,6 +31,7 @@
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
 
         var meta = document.querySelector("meta[name='random']").getAttribute("content");
+        console.log(meta);
         branch.setBranchViewData({
             data:{
                 'text2':meta
