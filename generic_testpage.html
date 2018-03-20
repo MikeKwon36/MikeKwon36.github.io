@@ -35,10 +35,11 @@
     // .init call to launch banner
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
 
-        // Code checks if a Branch link opened the page (if yes, banner uses referring link's data by default)
+        // Check if a Branch link opened the page (if yes, banner uses referring link's data)
         if(!data.referring_link){
             console.log(data.referring_link);
-        // .setBranchViewData overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
+            // SBVD overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
+            // $journeys_title and $journeys_description will always take precendence over liquid tags
             branch.setBranchViewData({
                 data:{
                     'text2':'text set by SBVD',
