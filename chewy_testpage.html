@@ -16,8 +16,6 @@
     <!-- Branch metatags -->
     <meta name="branch:deeplink:kwon" content="target" />
     <meta name="branch:deeplink:text" content="value from Branch metatag" />
-    <!-- Meta tag used to populate liquid tag value for background image in interstitials via CSS background-image: url(); attribute -->    
-    <meta name="branch:deeplink:background" content="https://mikekwon36.github.io/img/portrait.jpg" />
 
     <!-- Random meta tag value retrieved for Branch liquid tag -->
     <meta name="random" content="value from non-Branch metatag" />
@@ -232,26 +230,15 @@
     
 
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
-    var launchCount = 1;
     function launchBranchJourney(){
         console.log("launchBranchJourney called");
 
         //new link & analytics data for banner
         var linkData = {
-            campaign: 'campaign cannot be changed',
-            feature: 'feature cannot be changed',
-            channel: 'channel was changed by javascript',
-            stage: 'stage was changed by javascript',
-            tags: [launchCount,'tag was changed by javascript'],
+            tags: ['tag was changed by javascript'],
             data: {
-                'custom_bool': true,
-                'custom_int (today\s date)': Date.now(),
-                'custom_string (url)': window.location.href,
-                '$journeys_icon_image_url':'https://www.valorebooks.com/campus-life/wp-content/uploads/icon_340.png',
-                '$journeys_button_get_no_app':'changed!',
-                '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Banner relaunched ' + launchCount + ' times',
-                '$journeys_description':'Description reset by button click'
+                'text2':'value set by javascript',
+                'background':'orange'
             }
         };
         branch.setBranchViewData(linkData);
