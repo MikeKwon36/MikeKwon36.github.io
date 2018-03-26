@@ -13,14 +13,30 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
+    <!-- Branch metatags -->
+    <meta name="branch:deeplink:kwon" content="target" />
+    <meta name="branch:deeplink:text" content="value from Branch metatag" />
+    <!-- Meta tag used to populate liquid tag value for background image in interstitials via CSS background-image: url(); attribute -->    
+    <meta name="branch:deeplink:background" content="https://mikekwon36.github.io/img/portrait.jpg" />
+
+    <!-- Random meta tag value retrieved for Branch liquid tag -->
+    <meta name="random" content="value from non-Branch metatag" />
 
     <!-- Branch Web SDK -->
     <script type="text/javascript">
 
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
 
-    // .init call to launch banner
-    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {    
+    // .init call to launch banner, then within callback, retrieve non-branch meta tag's value and pass it to Branch banner for use in liquid tag
+    branch.init('key_test_gfzznQYerV8fSJZIZ8dlybikBznnTXHX', function(err, data) {
+
+        var meta = document.querySelector("meta[name='random']").getAttribute("content");
+        console.log(meta);
+        branch.setBranchViewData({
+            data:{
+                'text2':meta
+            }
+        });
         console.log(data);
         console.log(JSON.parse(err.message));
     });
@@ -79,7 +95,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <span class="name">Branch Journeys Demo</span>
+                        <span class="name">Chewy Demo</span>
                         <hr class="star-light">
                         <span class="skills">Testpage displaying a Journeys Banner</span>
                     </div>
@@ -95,8 +111,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Click to Launch Banner</button>
-                        <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Click to Close Banner</button>
+                        <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
+                        <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
                         <p></p>
                         <ul>
                             <li class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a><p></p></li>
@@ -141,8 +157,8 @@
     
     <!-- Contact Section -->
 <section id="contact">
-	<div class="container">
-		<!-- Section Header -->
+    <div class="container">
+        <!-- Section Header -->
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Filler Text</h2>
@@ -159,7 +175,7 @@
                     <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
                 </div>
             </div>
-	</div>
+    </div>
 </section>
 
     
@@ -218,15 +234,15 @@
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
     var launchCount = 1;
     function launchBranchJourney(){
-        //console.log("launchBranchJourney called");
+        console.log("launchBranchJourney called");
 
-        //this changes the banner link data & analytics tags
+        //new link & analytics data for banner
         var linkData = {
-            campaign: 'This analytics tag cannot be overridded in Journeys',
-            channel: 'The banner\s channel tag was reset via button click',
-            feature: 'This analytics tag cannot be overridded in Journeys',
-            stage: 'The banner\s stage tag was reset via button click',
-            tags: [launchCount,'edit & relaunch banner'],
+            campaign: 'campaign cannot be changed',
+            feature: 'feature cannot be changed',
+            channel: 'channel was changed by javascript',
+            stage: 'stage was changed by javascript',
+            tags: [launchCount,'tag was changed by javascript'],
             data: {
                 'custom_bool': true,
                 'custom_int (today\s date)': Date.now(),
@@ -239,14 +255,9 @@
             }
         };
         branch.setBranchViewData(linkData);
-
-        //track custom "launchedJourney_test" event on Branch dashboard
-        //branch.track('launchedJourney_test', {custom: 'launchTag'}, function (err, data) {});
-
-
-        //this is the actual call that launches the journey, with flags that disable the banner animations
-        branch.track('pageview');
-        //branch.init('key_live_doqtOBUu6KDEfsC8E33P8mbiCAhem9tU', {'branch_view_id':"422865304512181251"}, function(err, data) {});
+        
+        //function to launch journey with flags to disable banner animations
+        branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
 
         launchCount++;
     }
@@ -254,10 +265,8 @@
     // function for button to close journey (will NOT activate template's dismissal period)
     function closeBranchJourney(){
         console.log("closeBranchJourney called");
-
-        //track custom "closedJourney_test" event on Branch dashboard
-        //branch.track('closedJourney_test', {custom: 'closeTag'}, function (err, data) {});
-
+        
+        //this is the call that closes the journey, with flags that disable the banner animations
         branch.closeJourney(function(err) {});
     }
 
