@@ -113,13 +113,11 @@
                         <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
                         <p></p>
                         <ul>
-                            <li class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a><p></p></li>
-                            <li class="skills">The web <a href="https://github.com/BranchMetrics/web-branch-deep-linking">SDK</a> must be embedded in the page HTML<p></p></li>
-                            <li class="skills">The web SDK uses a Test API key<p></p></li>
-                            <li class="skills">To prevent the banner from overlapping with the page's fixed nav bar, a special Branch div is embedded as the first child element of the nav bar.  This div can be retrieved from the dashboard template editor<p></p></li>
-                            <li class="skills">Dismissing the banner will hide the banner from that user for a set timeframe (customizable in the dashboard)<p></p></li>
-                            <li class="skills">The banner's "Get|Open" button will recognize if the user has the app (app must have the same API key)<p></p></li>
-                            <li class="skills">Banner button clicks will always pass in the referring page's URL in the link data, under a key called "$canonical_url"<p></p></li>
+                            <li class="name">Banner targets any page with a Branch meta tag key of "kwon" with the value "target"<p></p></li>
+                            <li class="skills">Banner's title text uses a liquid tag that sources its value from any Branch meta tag with the key "text".  If no key is found, it defaults the text to "Default Title"<p></p></li>
+                            <li class="skills">Banner's description text uses a liquid tag that sources its value from Branch meta data with the key "text2".  This is set on page load via javascript, by sourcing its value from a generic non-Branch meta tag already on the page<p></p></li>
+                            <li class="skills">Click "Close Banner" and then "Launch Banner", to update the meta data values for the banner's description and background color CSS, using javascript<p></p></li>
+                            <li class="name">Banner has a liquid tag inserted in its CSS, which allows it to alter any CSS property based on the Branch meta data supplied by the page<p></p></li>
                         </ul>
                     </div>
                 </div>
