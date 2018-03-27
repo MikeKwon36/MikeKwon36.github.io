@@ -17,6 +17,9 @@
     <meta name="branch:deeplink:productId" content="1234" />
     <meta name="branch:deeplink:desc" content="shoes" />
 
+    <!-- Random meta tag value retrieved for Branch liquid tag -->
+    <meta name="random" content="dryers" />
+
     <!-- Branch Web SDK -->
     <script type="text/javascript">
 
@@ -219,37 +222,26 @@
     
 
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
-    var launchCount = 1;
     function launchBranchJourney(){
-        //console.log("launchBranchJourney called");
+
+        //this grabs a meta tag value and stores it in a variable
+        var meta = document.querySelector("meta[name='random']").getAttribute("content");
 
         //this changes the banner link data & analytics tags
         var linkData = {
-            campaign: 'This analytics tag cannot be overridded in Journeys',
-            channel: 'The banner\s channel tag was reset via button click',
-            feature: 'This analytics tag cannot be overridded in Journeys',
-            stage: 'The banner\s stage tag was reset via button click',
-            tags: [launchCount,'edit & relaunch banner'],
             data: {
-                'custom_bool': true,
-                'custom_int (today\s date)': Date.now(),
-                'custom_string (url)': window.location.href,
                 '$journeys_icon_image_url':'https://pbs.twimg.com/profile_images/669630329804582912/VRsMi8H__400x400.png',
                 'title':'Hi Jordan!',
-                'desc':'dryers',
+                'desc':meta,
                 'bknd-color':'black'
             }
         };
         branch.setBranchViewData(linkData);
-
         branch.track('pageview');
-
-        launchCount++;
     }
 
     // function for button to close journey (will NOT activate template's dismissal period)
     function closeBranchJourney(){
-        console.log("closeBranchJourney called");
         branch.closeJourney(function(err) {});
     }
 
