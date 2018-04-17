@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Branch Demo Page</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Branch Demo Page">
+    <meta name="author" content="Mike Kwon">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+    <link rel="stylesheet" href="/style.css">    
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Branch metatags -->
+    <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed first will be overwritten" />
+    <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed later takes precedence" />
+    <meta name="branch:deeplink:text" content="text set by metatag" />
+
+    <!-- Analytics can't be changed by meta tags -->
+    <meta name="branch:deeplink:campaign" content="can't be overwritten by metatag" />
+    <meta name="branch:deeplink:feature" content="can't be overwritten by metatag" />
+    <meta name="branch:deeplink:channel" content="can't be overwritten by metatag" />
+    <meta name="branch:deeplink:tags" content="can't be overwritten by metatag" />
+    <meta name="branch:deeplink:stage" content="can't be overwritten by metatag" />
+    
+    <!-- <meta name="branch:deeplink:$canonical_url" content="Branch metatag can overwrite $canonical_url" /> -->
+
+    <!-- Web SDK will prioritize Branch tags > Facebook AppLinks > Twitter tags -->
+    <meta name="branch:deeplink:$ios_deeplink_path" content="branch metatag scraped for $ios_deeplink_path" />
+    <meta name="branch:deeplink:$android_deeplink_path" content="branch metatag scraped for $android_deeplink_path" />
+    <meta name="al:ios:url" content="Facebook applinks metatag scraped for $ios_deeplink_path">
+    <meta name="al:android:url" content="Facebook applinks metatag scraped for $android_deeplink_path">
+    <meta name="twitter:app:url:iphone" content="Twitter metatag scraped for $ios_deeplink_path">
+    <meta name="twitter:app:url:googleplay" content="Twitter metatag scraped for $android_deeplink_path">
+
+    <!-- Branch Web SDK -->
+    <script type="text/javascript">
+
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
+
+    // .init call to launch banner
+    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
+
+        // Check if a Branch link opened the page (if yes, banner uses referring link's data)
+        if(!data.referring_link){
+            console.log(data.referring_link);
+            // SBVD overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
+            // $journeys_title and $journeys_description will always take precendence over liquid tags
+            branch.setBranchViewData({
+                data:{
+                    'text2':'text set by SBVD',
+                    '$journeys_icon_image_url':'http://android4fun.net/wp-content/uploads/2017/05/Voltron-Stickers.png',
+                    '$journeys_title':'Title was reset on load',
+                    '$journeys_description':'Description reset on load via JS'
+                }
+            });
+        }
+    
+        console.log(data);
+        console.log(JSON.parse(err.message));
+    });
+
+
+
+    //.init that includes a 'branch_view_id' option to manually override journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (overwrites ~campaign to "_test")
+    //branch.init('key_live_doqtOBUu6KDEfsC8E33P8mbiCAhem9tU', {'branch_view_id':"422865304512181251"}, function(err, data) {});
+
+
+    //.init that blocks journey from loading (no link data will be retrieved from the listeners), but track('pageview') can still launch it later in the session
+    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'no_journeys': true}, function(err, data) {});
+
+
+    //.init that ignores referring Branch link that opened the page
+    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'make_new_link': true}, function(err, data) {});
+
+    </script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="page-top" class="index">
+       <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+
+        <!-- Branch <div> that prevents banner from overlapping with a fixed|absolute positioned nav element, but adding a top-margin  -->
+        <div class="branch-journeys-top" style="display:none;"></div>
+
+        <div class="container">
+
+            <div class="navbar-header page-scroll">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">Branch Demo</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Top Section</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">Middle Section</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Bottom Section</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+        <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">Journeys Demo</span>
+                        <hr class="star-light">
+                        <span class="skills">Testpage displaying a Journeys Banner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
+                        <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
+                        <button onclick="logCommerceEvent()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Log Commerce event</button>
+
+                        <p></p>
+                        <ul>
+                            <li class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a><p></p></li>
+                            <li class="skills">The web <a href="https://github.com/BranchMetrics/web-branch-deep-linking">SDK</a> must be embedded in the page HTML<p></p></li>
+                            <li class="skills">The web SDK uses a Test API key<p></p></li>
+                            <li class="skills">To prevent the banner from overlapping with the page's fixed nav bar, a special Branch div is embedded as the first child element of the nav bar.  This div can be retrieved from the dashboard template editor<p></p></li>
+                            <li class="skills">Dismissing the banner will hide the banner from that user for a set timeframe (customizable in the dashboard)<p></p></li>
+                            <li class="skills">The banner's "Get|Open" button will recognize if the user has the app (app must have the same API key)<p></p></li>
+                            <li class="skills">Banner button clicks will always pass in the referring page's URL in the link data, under a key called "$canonical_url"<p></p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+
+            <!-- Section Header -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Filler Text</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+
+            <!-- Description Text -->
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    
+    <!-- Contact Section -->
+<section id="contact">
+	<div class="container">
+		<!-- Section Header -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Filler Text</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+
+            <!-- Description Text -->
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+            </div>
+	</div>
+</section>
+
+    
+
+        <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Branch Demo Page</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Contact mkwon@branch.io for questions
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+
+    <!-- Branch javascript -->
+    <script>
+    
+    // Branch listener object that retrieves banner link data and prints it to console
+    var listener = function(event, data) {
+        console.log(event);
+        console.log(data);
+
+        //track custom V1 event on Branch dashboard
+        branch.track(event, function (err, data) {
+            console.log(data);
+            console.log(err);
+        });
+
+    };
+
+
+    // Listener objects are activated in the Branch instance for specific events via .addListener
+    branch.addListener("willShowJourney", listener);
+    branch.addListener("didShowJourney", listener);
+    branch.addListener("willNotShowJourney", listener);
+    branch.addListener("didClickJourneyCTA", listener);
+    branch.addListener("didClickJourneyClose", listener);
+    branch.addListener("willCloseJourney", listener);
+    branch.addListener("didCloseJourney", listener);
+    branch.addListener("didCallJourneyClose", listener);
+    
+
+    // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
+    var launchCount = 1;
+    function launchBranchJourney(){
+        console.log("launchBranchJourney called");
+
+        //new link & analytics data for banner
+        var linkData = {
+            campaign: 'campaign cannot be changed',
+            feature: 'feature cannot be changed',
+            channel: 'channel was changed by javascript',
+            stage: 'stage was changed by javascript',
+            tags: [launchCount,'tag was changed by javascript'],
+            data: {
+                'custom_bool': true,
+                'custom_int (today\s date)': Date.now(),
+                'custom_string (url)': window.location.href,
+                '$journeys_icon_image_url':'https://www.valorebooks.com/campus-life/wp-content/uploads/icon_340.png',
+                '$journeys_button_get_no_app':'changed!',
+                '$journeys_button_get_has_app':'changed!',
+                '$journeys_title':'Banner relaunched ' + launchCount + ' times',
+                '$journeys_description':'Description reset by button click'
+            }
+        };
+        branch.setBranchViewData(linkData);
+        
+        //track custom V1 event on Branch dashboard
+        branch.track('launchedJourney_test', function (err, data) {
+            console.log(data);
+            console.log(err);
+        });
+
+        //function to launch journey with flags to disable banner animations
+        branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
+
+        launchCount++;
+    }
+
+    // function for button to close journey (will NOT activate template's dismissal period)
+    function closeBranchJourney(){
+        console.log("closeBranchJourney called");
+
+        //track custom V1 event on Branch dashboard
+        branch.track('closedJourney_test', function (err, data) {
+            console.log(data);
+            console.log(err);
+        });
+        
+        //this is the call that closes the journey, with flags that disable the banner animations
+        branch.closeJourney(function(err) {});
+    }
+
+    // function to log a new V2 event
+    function logCommerceEvent(){
+        var event_and_custom_data = {
+            "transaction_id": "kwon_id_3",
+            "currency": "USD",
+            "revenue": 101.2,
+            "shipping": 1.5,
+            "tax": 2.5,
+            "coupon": "promo-1234",
+            "affiliation": "high_fi",
+            "description": "Preferred purchase",
+            "purchase_loc": "New York",
+            "store_pickup": "unavailable"
+        };
+
+        var content_items = [
+            {
+            "$content_schema": "COMMERCE_PRODUCT",
+            "$og_title": "Nike Shoe",
+            "$og_description": "Start loving your steps",
+            "$og_image_url": "http://example.com/img1.jpg",
+            "$canonical_identifier": "nike/1234",
+            "$publicly_indexable": false,
+            "$price": 101.2,
+            "$locally_indexable": true,
+            "$quantity": 1,
+            "$sku": "1101123445",
+            "$product_name": "Runner",
+            "$product_brand": "Nike",
+            "$product_category": "Sporting Goods",
+            "$product_variant": "XL",
+            "$rating_average": 4.2,
+            "$rating_count": 5,
+            "$rating_max": 2.2,
+            "$creation_timestamp": 1499892854966,
+            "$exp_date": 1499892854966,
+            "$keywords": [ "sneakers", "shoes" ],
+            "$address_street": "230 South LaSalle Street",
+            "$address_city": "Chicago",
+            "$address_region": "IL",
+            "$address_country": "US",
+            "$address_postal_code": "60604",
+            "$latitude": 12.07,
+            "$longitude": -97.5,
+            "$image_captions": [ "my_img_caption1", "my_img_caption_2" ],
+            "$condition": "NEW",
+            "$custom_fields": {"foo1":"bar1","foo2":"bar2"}
+            },
+            {
+            "$og_title": "Nike Woolen Sox",
+            "$canonical_identifier": "nike/5324",
+            "$og_description": "Fine combed woolen sox for those who love your foot",
+            "$publicly_indexable": false,
+            "$price": 80.2,
+            "$locally_indexable": true,
+            "$quantity": 5,
+            "$sku": "110112467",
+            "$product_name": "Woolen Sox",
+            "$product_brand": "Nike",
+            "$product_category": "Apparel & Accessories",
+            "$product_variant": "Xl",
+            "$rating_average": 3.3,
+            "$rating_count": 5,
+            "$rating_max": 2.8,
+            "$creation_timestamp": 1499892854966
+            }];
+
+        branch.logEvent(
+            "PURCHASE",
+            event_and_custom_data,
+            content_items,
+            function(err) { console.log(err); }
+        );
+        console.log('V2 commerce event called');
+        console.log(event_and_custom_data);
+        console.log(content_items);
+    }
+
+    </script>
+
+    <script src="/js/jquery-1.11.0.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/classie.js"></script>
+    <script src="/js/cbpAnimatedHeader.js"></script>
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me_static.js"></script>
+    <script src="/js/freelancer.js"></script>
+
+    </body>
+</html>
