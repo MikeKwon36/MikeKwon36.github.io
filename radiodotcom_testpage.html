@@ -10,6 +10,7 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
 
     <!-- Branch metatags for Hosted Deep Link Data -->
+    <meta name="branch:deeplink:freq_site_genre" content="megan" />
     <meta name="branch:deeplink:banner" content="yes" />
     <meta name="branch:deeplink:stationID" content="1234" />
     <meta name="branch:deeplink:liquidtag" content="kwon" />
@@ -22,12 +23,20 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
+    <!-- Custom style to prevent banner interstitial gap -->
+    <style type="text/css">
+        .branch-banner-no-scroll{
+            position: fixed;
+            overflow: hidden;
+        }
+    </style>
+
     <!-- Branch Web SDK -->
     <script type="text/javascript">
 
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
 
-    branch.init('key_test_ddzzCUvmiEt9NNOmLuo2CecpCBcLTjEn', function(err, data) {
+    branch.init('key_live_boErzJxoeEvYVUKoPscTOhlivAaPPik7', function(err, data) {
         console.log(data);
         console.log(JSON.parse(err.message));
     });
