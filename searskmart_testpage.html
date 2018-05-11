@@ -28,6 +28,8 @@
     // .init call to launch banner
     branch.init('key_live_nbvh7zlPRmD3A0PRXj7wEhmhtrm9tlLA', function(err, data) {
         branch.setBranchViewData({
+            channel: 'custom value for channel analytics',
+            tags: ['custom tag 1','custom tag 2'],
             data:{
                 'title':'Download the app',
                 'bknd-color':'grey'
