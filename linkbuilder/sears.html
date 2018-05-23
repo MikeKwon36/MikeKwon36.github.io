@@ -91,22 +91,14 @@
             }
             if (desktop_url) {
                 if (params == '') {
-                    output = 'https://m.sears.com/';
+                    output = get3PLink(original_url);
                 } else {
-                    output = 'https://m.sears.com/' + '?' + params.slice(0, params.length - 1) + '&$desktop_url=' + original_url;
+                    output = get3PLink(original_url) + '&' + params.slice(0, params.length - 1);
                 }
-            } else {
-                if (params == '') {
-                    output = original_url;
-                } else {
-                    output = original_url + '?' + params.slice(0, params.length - 1);
-                }
-                output = output + '&~channel=email';
+                output = output + '&utm_channel=email';
             }
 
-
-
-            window.document.getElementById("generated3PLink").value = 'href=' + '"' + output + '" ' + 'universal="true"';
+            window.document.getElementById("generated3PLink").value = output;
         }
 
         // Returns current number of query parameter rows
@@ -242,8 +234,8 @@
         <table id="query_params" class="toggle">
             <tr id="row-1">
                 <td><label style="margin-right: 10px">Query Param 1</label></td>
-                <td><input class="form-control" style="width:500px" id="query-key-1" type="text" value="i.e., $desktop_url"/></td>
-                <td><input class="form-control" style="width:500px" id="query-value-1" type="text" value="i.e., https://www.sears.com"/></td>
+                <td><input class="form-control" style="width:500px" id="query-key-1" type="text" placeholder="i.e., $desktop_url"/></td>
+                <td><input class="form-control" style="width:500px" id="query-value-1" type="text" placeholder="i.e., https://www.sears.com"/></td>
             </tr>
         </table>
 
