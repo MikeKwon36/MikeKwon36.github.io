@@ -189,9 +189,9 @@
     <!-- Description for one-off link creation -->
     <section class="container toggle" id="description_oneoff">
         <p><ol>
-            <li>"Original URL" --> add the web url you want to convert to a deep link (this also sets the default web redirect for desktop and mobile users without the app)</li>
-            <li>"Add Query Parameters" --> add any key-value pairs to the link (i.e., $desktop_url=https://www.sears.com, product=704, etc)</li>
-            <li>"Add Analytics Tags" --> add optional analytics tags to segment data in Branch's dashboard</li>
+            <li>"Original URL" --> Add a web url to convert into Branch (this becomes the default web redirect for desktop, and mobile users without the app)</li>
+            <li>"Add Query Parameters" --> Add key-value pairs to the link (i.e., $desktop_url=https://www.sears.com, cid=704, etc)</li>
+            <li>"Add Analytics Tags" --> add analytics tags to attribute app sessions to email</li>
             <li>"Create Email Link" --> click to create a Branch link you can paste into your email</li>
         </ol></p>
         <br />
@@ -244,12 +244,12 @@
             <tr id="analytic-1">
                 <td><label style="margin-right: 10px">utm_campaign</label></td>
                 <td><input class="form-control" style="width:500px" id="analytic-key-1" type="text" value="utm_campaign" disabled="true"/></td>
-                <td><input class="form-control" style="width:500px" id="analytic-value-1" type="text" placeholder="black_friday_sale"/></td>
+                <td><input class="form-control" style="width:500px" id="analytic-value-1" type="text" placeholder="i.e., black_friday_sale"/></td>
             </tr>
             <tr id="analytic-3">
                 <td><label style="margin-right: 10px">~tags</label></td>
                 <td><input class="form-control" style="width:500px" id="analytic-key-3" type="text" value="~tags" disabled="true"/></td>
-                <td><input class="form-control" style="width:500px" id="analytic-value-3" type="text" placeholder="testEmail1,20percentoff                                    Note: tags cannot contain spaces"/></td>
+                <td><input class="form-control" style="width:500px" id="analytic-value-3" type="text" placeholder="i.e., testEmail1,20percentoff                                    Note: tags cannot contain spaces"/></td>
             </tr>
         </table>
 
