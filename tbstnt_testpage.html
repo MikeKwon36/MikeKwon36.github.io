@@ -23,7 +23,6 @@
 
     // .init call to launch banner with TBS test API Key
     branch.init('key_test_fasQyeZ5AvEBzaqiu1WAtjkmwqcgWwro', function(err, data) {
-        if (document.querySelectorAll("meta[name='branch:deeplink:$deeplink_path']").length > 0) {
             var meta = document.querySelector("meta[name='branch:deeplink:$deeplink_path']").getAttribute("content");
             console.log(meta);
             branch.setBranchViewData({
@@ -31,7 +30,7 @@
                     '$deeplink_path':meta + "&source=web&campaign=journeys-popup"
                 }
             });
-        }
+        
         console.log(data);
         console.log('Branch SDK finished initializing');
     });
