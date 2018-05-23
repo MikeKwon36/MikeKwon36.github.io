@@ -14,7 +14,8 @@
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Branch metatags -->
-    <meta name="branch:deeplink:$deeplink_path" content="play?section=video&amp;series=2066250&amp;title=2066251&amp;source=kwon&amp;campaign=kwon&amp;auth=false" />
+    <meta name="branch:deeplink:$deeplink_path" content="play?section=video&amp;series=2066250&amp;title=2066251" />
+    <meta name="branch:deeplink:mike" content="kwon" />
 
     <!-- Branch Web SDK -->
     <script type="text/javascript">
@@ -23,6 +24,13 @@
 
     // .init call to launch banner with TBS Live API Key
     branch.init('key_live_ojvSAi0WBAruBeynv7UAqojcxupk2rk2', function(err, data) {
+        var meta = document.querySelector("meta[name='branch:deeplink:$deeplink_path']").getAttribute("content");
+        console.log(meta);
+        branch.setBranchViewData({
+            data:{
+                '$deeplink_path':meta + "&source=web&campaign=journeys-popup"
+            }
+        });
         console.log(data);
         console.log(JSON.parse(err.message));
     });
