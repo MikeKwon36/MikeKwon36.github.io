@@ -52,7 +52,7 @@
                 var firstKey = table1.rows[0].cells[1].children[0].value
                 var firstValue = table1.rows[0].cells[2].children[0].value
                 if (key && value) {
-                    params += (key + '=' + value + '&');
+                    params += (key + '=' + encodeURIComponent(value) + '&');
                 }
             }
 
