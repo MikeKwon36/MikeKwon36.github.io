@@ -95,7 +95,7 @@
                 } else {
                     output = get3PLink(original_url) + '&' + params.slice(0, params.length - 1);
                 }
-                output = output + '&utm_channel=email';
+                output = output + '&utm_source=email';
             }
 
             window.document.getElementById("generated3PLink").value = output;
