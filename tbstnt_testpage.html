@@ -32,6 +32,12 @@
                     '$deeplink_path':meta + "&source=web&campaign=journeys-popup"
                 }
             });
+        } else {
+            branch.setBranchViewData({
+                data:{
+                    '$deeplink_path':"&source=web&campaign=journeys-popup"
+                }
+            });
         }
         console.log(data);
         console.log('Branch SDK finished initializing');
