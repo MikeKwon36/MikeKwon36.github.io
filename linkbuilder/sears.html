@@ -190,6 +190,7 @@
     <!-- Description for one-off link creation -->
     <section class="container toggle" id="description_oneoff">
         <p><ol>
+            <li>"Original URL" - add a web url you want to convert to a deep link</li>
             <li>"Add Query Parameters" - add any key-value pairs you'd like to add (i.e., target=song, product=704, etc)</li>
             <li>"Add Analytics Tags" - add optional branch analytics to segment data in Branch's dashboard</li>
             <li>"Create Email Link" - click this to build a Branch link that you can paste into your email</li>
@@ -226,15 +227,13 @@
         <h5>NOTE: This will be the default redirect that Desktop users, and mobile users without the app, are sent to</h5>
         <br>
         <h3 class="toggle">Add Query Parameters</h3>
-        <h5>(add key-value pairs to be included on the web redirect, and sent in app)</h5>
-        <br>
 
         <!-- Deep linking parameters table -->
         <table id="query_params" class="toggle">
             <tr id="row-1">
                 <td><label style="margin-right: 10px">Query Param 1</label></td>
                 <td><input class="form-control" style="width:500px" id="query-key-1" type="text" placeholder="i.e., $desktop_url, $ios_url, etc"/></td>
-                <td><input class="form-control" style="width:500px" id="query-value-1" type="text" placeholder="i.e., https://www.sears.com"/></td>
+                <td><input class="form-control" style="width:500px" id="query-value-1" type="text" placeholder="i.e., https://www.sears.com, valueABC"/></td>
             </tr>
         </table>
 
@@ -244,9 +243,6 @@
         <br>
 
         <h3 class="toggle">Add Analytics Tags</h3>
-        <h5>(add analytics tags for tracking in Branch dashboard)</h5>
-        <br>
-
         <table id="analytic_params" class="toggle">
             <tr id="analytic-1">
                 <td><label style="margin-right: 10px">utm_campaign</label></td>
