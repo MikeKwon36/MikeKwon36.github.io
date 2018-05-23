@@ -184,16 +184,15 @@
         </br>
         <h1 style="display:inline; vertical-align:middle">Create deep links for Sears</h1>
     </div>
-    <br />
     <button class="form-control toggle" style="float:none; background-color:#d3d3d3; display:none;" onclick="toggleView()">I want to generate one-off links</button>
 
     <!-- Description for one-off link creation -->
     <section class="container toggle" id="description_oneoff">
         <p><ol>
-            <li>"Original URL" - add a web url you want to convert to a deep link</li>
-            <li>"Add Query Parameters" - add any key-value pairs you'd like to add (i.e., target=song, product=704, etc)</li>
-            <li>"Add Analytics Tags" - add optional branch analytics to segment data in Branch's dashboard</li>
-            <li>"Create Email Link" - click this to build a Branch link that you can paste into your email</li>
+            <li>"Original URL" --> add the web url you want to convert to a deep link (this also sets the default web redirect for desktop and mobile users without the app)</li>
+            <li>"Add Query Parameters" --> add any key-value pairs to the link (i.e., $desktop_url=https://www.sears.com, product=704, etc)</li>
+            <li>"Add Analytics Tags" --> add optional analytics tags to segment data in Branch's dashboard</li>
+            <li>"Create Email Link" --> click to create a Branch link you can paste into your email</li>
         </ol></p>
         <br />
     </section>
@@ -223,7 +222,6 @@
                 </tr>
             </tbody>
         </table>
-        <h5>NOTE: This will be the default redirect that Desktop users, and mobile users without the app, are sent to</h5>
 
         <h3 class="toggle">Add Query Parameters</h3>
 
