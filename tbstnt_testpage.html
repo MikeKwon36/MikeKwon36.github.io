@@ -36,8 +36,8 @@
                 data:{
                     '$deeplink_path':meta + "&source=web&campaign=journeys-popup"
                 }
-            console.log('$deeplink_path = ' + meta + '&source=web&campaign=journeys-popup');
             });
+            console.log('$deeplink_path = ' + meta + '&source=web&campaign=journeys-popup');
         } else {
 
             //If no Branch meta tag containing $deeplink_path is present, populate $deeplink_path in banner with generic "open" path
@@ -45,8 +45,8 @@
                 data:{
                     '$deeplink_path':"open?source=web&campaign=journeys-popup"
                 }
-            console.log('$deeplink_path = open?source=web&campaign=journeys-popup');
             });
+            console.log('$deeplink_path = open?source=web&campaign=journeys-popup');
         }
         console.log(data);
         console.log('Branch SDK finished initializing');
