@@ -27,8 +27,8 @@
 
     // .init call to launch banner
     branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', function(err, data) {
-        console.log(JSON.parse(err.message));
-        console.log(JSON.stringify(data));
+        console.log(data);
+        console.log('Branch SDK finished initializing');
     });
 
     //Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
