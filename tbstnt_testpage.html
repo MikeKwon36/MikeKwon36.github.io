@@ -24,19 +24,28 @@
 
     // .init call to launch banner with TBS test API Key
     branch.init('key_test_fasQyeZ5AvEBzaqiu1WAtjkmwqcgWwro', function(err, data) {
+
+        //Check if Branch meta tag containing $deeplink_path is present
         if (document.querySelectorAll("meta[name='branch:deeplink:$deeplink_path']").length > 0) {
+
+            //Retrieve value for $deeplink_path from meta tag
             var meta = document.querySelector("meta[name='branch:deeplink:$deeplink_path']").getAttribute("content");
-            console.log(meta);
+
+            //Append Adobe tagging to $deeplink_path value and reinsert into banner button
             branch.setBranchViewData({
                 data:{
                     '$deeplink_path':meta + "&source=web&campaign=journeys-popup"
                 }
+            console.log('$deeplink_path = ' + meta + '&source=web&campaign=journeys-popup');
             });
         } else {
+
+            //If no Branch meta tag containing $deeplink_path is present, populate $deeplink_path in banner with generic "open" path
             branch.setBranchViewData({
                 data:{
                     '$deeplink_path':"open?source=web&campaign=journeys-popup"
                 }
+            console.log('$deeplink_path = open?source=web&campaign=journeys-popup');
             });
         }
         console.log(data);
