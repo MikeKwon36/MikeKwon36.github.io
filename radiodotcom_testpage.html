@@ -60,7 +60,7 @@
 
         // Branch listener object that retrieves banner link data and prints it to console
         var listener = function(event, data) {
-            console.log(event);
+            console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
             console.log(data);
         };
 
