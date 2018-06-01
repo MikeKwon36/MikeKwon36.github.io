@@ -26,9 +26,10 @@
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
 
     // .init call to launch banner
+    console.log('Branch Init called at ' + Math.floor(Date.now() / 1000));
     branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', function(err, data) {
         console.log(data);
-        console.log('Branch SDK finished initializing');
+        console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
     });
 
     //Version of .init function that includes a 'branch_view_id' param which manually overrides the journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (the banner does NOT have to be active in the dashboard)
@@ -59,7 +60,7 @@
 
     // Branch listener object that retrieves banner link data and prints it to console
     var listener = function(event, data) {
-        console.log(event);
+        console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
         console.log(data);
     };
 

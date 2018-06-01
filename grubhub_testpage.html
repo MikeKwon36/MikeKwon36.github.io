@@ -19,6 +19,7 @@
 
     var templateID = '453238497136757764';
     
+    console.log('Branch Init called at ' + Math.floor(Date.now() / 1000));
     branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID}, function(err, data) {
 
         console.log(data.referring_link);
@@ -34,7 +35,7 @@
             });
         }
         console.log(data);
-        console.log('Branch SDK finished initializing');
+        console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
     });
 
     </script>
@@ -198,7 +199,7 @@
 
     // Branch listener object that retrieves banner link data and prints it to console
     var listener = function(event, data) {
-        console.log(event);
+        console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
         console.log(data);
     };
     branch.addListener("willShowJourney", listener);
