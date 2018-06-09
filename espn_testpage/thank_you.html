@@ -36,7 +36,7 @@
             //Retrieve value for $deeplink_path from meta tag
             var meta = document.querySelector("meta[name='apple-itunes-app']").getAttribute("content");
             var charindex = meta.search("app-argument=");
-            meta = meta.substr(charindex+13);
+            meta = meta.slice(charindex+13);
             branch.setBranchViewData({
                 data:{
                     'setDescription':'Worldwide Leader in Sports',
