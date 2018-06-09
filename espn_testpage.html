@@ -34,37 +34,17 @@
     // .init call to launch banner from ESPN Test Environment
     console.log('Branch Init called at ' + Math.floor(Date.now() / 1000));
     branch.init('key_test_ggcXwe8AV1hZh93T4Kbj2nomByoTsIl1', function(err, data) {
-
-        // Check if a Branch link opened the page (if yes, banner uses referring link's data)
-        if(!data.referring_link){
-            console.log(data.referring_link);
-            // SBVD overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
-            // $journeys_title and $journeys_description will always take precendence over liquid tags
-            branch.setBranchViewData({
-                data:{
-                    'text2':'text set by SBVD',
-                    '$journeys_icon_image_url':'http://android4fun.net/wp-content/uploads/2017/05/Voltron-Stickers.png',
-                    '$journeys_title':'Title was reset on load',
-                    '$journeys_description':'Description reset on load via JS'
-                }
-            });
-        }
+        branch.setBranchViewData({
+            data:{
+                'text2':'text set by SBVD',
+                '$journeys_icon_image_url':'http://android4fun.net/wp-content/uploads/2017/05/Voltron-Stickers.png',
+                '$journeys_title':'Title was reset on load',
+                '$journeys_description':'Description reset on load via JS'
+            }
+        });
         console.log(data);
         console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
     });
-
-
-
-    //.init that includes a 'branch_view_id' option to manually override journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (overwrites ~campaign to "_test")
-    //branch.init('key_live_doqtOBUu6KDEfsC8E33P8mbiCAhem9tU', {'branch_view_id':"422865304512181251"}, function(err, data) {});
-
-
-    //.init that blocks journey from loading (no link data will be retrieved from the listeners), but track('pageview') can still launch it later in the session
-    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'no_journeys': true}, function(err, data) {});
-
-
-    //.init that ignores referring Branch link that opened the page
-    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'make_new_link': true}, function(err, data) {});
 
     </script>
 
@@ -139,17 +119,6 @@
                         <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
                         <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
                         <button onclick="logCommerceEvent()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Log Commerce event</button>
-
-                        <p></p>
-                        <ul>
-                            <li class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a><p></p></li>
-                            <li class="skills">The web <a href="https://github.com/BranchMetrics/web-branch-deep-linking">SDK</a> must be embedded in the page HTML<p></p></li>
-                            <li class="skills">The web SDK uses a Test API key<p></p></li>
-                            <li class="skills">To prevent the banner from overlapping with the page's fixed nav bar, a special Branch div is embedded as the first child element of the nav bar.  This div can be retrieved from the dashboard template editor<p></p></li>
-                            <li class="skills">Dismissing the banner will hide the banner from that user for a set timeframe (customizable in the dashboard)<p></p></li>
-                            <li class="skills">The banner's "Get|Open" button will recognize if the user has the app (app must have the same API key)<p></p></li>
-                            <li class="skills">Banner button clicks will always pass in the referring page's URL in the link data, under a key called "$canonical_url"<p></p></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -266,17 +235,15 @@
     
 
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
-    var launchCount = 1;
     function launchBranchJourney(){
         console.log("launchBranchJourney called");
 
-        //new link & analytics data for banner
         var linkData = {
-            campaign: 'campaign cannot be changed',
-            feature: 'feature cannot be changed',
-            channel: 'channel was changed by javascript',
-            stage: 'stage was changed by javascript',
-            tags: [launchCount,'tag was changed by javascript'],
+            campaign: 'campaign cannot be changed by javascript',
+            feature: 'feature cannot be changed by javascript',
+            channel: 'channel changed by javascript',
+            stage: 'stage changed by javascript',
+            tags: ['tag changed by javascript'],
             data: {
                 'custom_bool': true,
                 'custom_int (today\s date)': Date.now(),
@@ -298,8 +265,6 @@
 
         //function to launch journey with flags to disable banner animations
         branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
-
-        launchCount++;
     }
 
     // function for button to close journey (will NOT activate template's dismissal period)
