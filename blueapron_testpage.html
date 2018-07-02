@@ -15,16 +15,8 @@
 
     <!-- Branch metatags -->
     <meta name="branch:deeplink:demo" content="true" />
-    <meta name="branch:deeplink:text" content="text set by metatag" />
-
-    <!-- Web SDK will prioritize Branch tags > Facebook AppLinks > Twitter tags -->
-    <meta name="branch:deeplink:$ios_deeplink_path" content="branch metatag scraped for $ios_deeplink_path" />
-    <meta name="branch:deeplink:$android_deeplink_path" content="branch metatag scraped for $android_deeplink_path" />
-    <meta name="al:ios:url" content="Facebook applinks metatag scraped for $ios_deeplink_path">
-    <meta name="al:android:url" content="Facebook applinks metatag scraped for $android_deeplink_path">
-    <meta name="twitter:app:url:iphone" content="Twitter metatag scraped for $ios_deeplink_path">
-    <meta name="twitter:app:url:googleplay" content="Twitter metatag scraped for $android_deeplink_path">
-
+    <meta name="branch:deeplink:recipe_id" content="1377" />
+    <meta name="branch:deeplink:$canonical_url" content="https://www.blueapron.com/recipes/honey-chipotle-glazed-chicken-with-poblano-lime-rice" />
 
     <!-- Branch Web SDK -->
     <script type="text/javascript">
@@ -110,7 +102,6 @@
                     <div class="intro-text">
                         <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
                         <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
-                        <button onclick="logCommerceEvent()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Log Commerce event</button>
                     </div>
                 </div>
             </div>
@@ -205,13 +196,6 @@
     var listener = function(event, data) {
         console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
         console.log(data);
-
-        //track custom V1 event on Branch dashboard
-        branch.track(event, function (err, data) {
-            console.log(data);
-            console.log(err);
-        });
-
     };
 
 
@@ -227,7 +211,6 @@
     
 
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
-    var launchCount = 1;
     function launchBranchJourney(){
         console.log("launchBranchJourney called");
 
@@ -239,120 +222,21 @@
             stage: 'stage was changed by javascript',
             tags: [launchCount,'tag was changed by javascript'],
             data: {
-                'custom_bool': true,
-                'custom_int (today\s date)': Date.now(),
-                'custom_string (url)': window.location.href,
                 '$journeys_icon_image_url':'https://www.valorebooks.com/campus-life/wp-content/uploads/icon_340.png',
                 '$journeys_button_get_no_app':'changed!',
                 '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Banner relaunched ' + launchCount + ' times',
-                '$journeys_description':'Description reset by button click'
+                '$journeys_title':'Banner reset',
+                '$journeys_description':'Description reset'
             }
         };
         branch.setBranchViewData(linkData);
-        
-        //track custom V1 event on Branch dashboard
-        branch.track('launchedJourney_test', function (err, data) {
-            console.log(data);
-            console.log(err);
-        });
-
-        //function to launch journey with flags to disable banner animations
         branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
-
-        launchCount++;
     }
 
     // function for button to close journey (will NOT activate template's dismissal period)
     function closeBranchJourney(){
         console.log("closeBranchJourney called");
-
-        //track custom V1 event on Branch dashboard
-        branch.track('closedJourney_test', function (err, data) {
-            console.log(data);
-            console.log(err);
-        });
-        
-        //this is the call that closes the journey, with flags that disable the banner animations
         branch.closeJourney(function(err) {});
-    }
-
-    // function to log a new V2 event
-    function logCommerceEvent(){
-        var event_and_custom_data = {
-            "transaction_id": "kwon_id_3",
-            "currency": "USD",
-            "revenue": 101.2,
-            "shipping": 1.5,
-            "tax": 2.5,
-            "coupon": "promo-1234",
-            "affiliation": "high_fi",
-            "description": "Preferred purchase",
-            "purchase_loc": "New York",
-            "store_pickup": "unavailable"
-        };
-
-        var content_items = [
-            {
-            "$content_schema": "COMMERCE_PRODUCT",
-            "$og_title": "Nike Shoe",
-            "$og_description": "Start loving your steps",
-            "$og_image_url": "http://example.com/img1.jpg",
-            "$canonical_identifier": "nike/1234",
-            "$publicly_indexable": false,
-            "$price": 101.2,
-            "$locally_indexable": true,
-            "$quantity": 1,
-            "$sku": "1101123445",
-            "$product_name": "Runner",
-            "$product_brand": "Nike",
-            "$product_category": "Sporting Goods",
-            "$product_variant": "XL",
-            "$rating_average": 4.2,
-            "$rating_count": 5,
-            "$rating_max": 2.2,
-            "$creation_timestamp": 1499892854966,
-            "$exp_date": 1499892854966,
-            "$keywords": [ "sneakers", "shoes" ],
-            "$address_street": "230 South LaSalle Street",
-            "$address_city": "Chicago",
-            "$address_region": "IL",
-            "$address_country": "US",
-            "$address_postal_code": "60604",
-            "$latitude": 12.07,
-            "$longitude": -97.5,
-            "$image_captions": [ "my_img_caption1", "my_img_caption_2" ],
-            "$condition": "NEW",
-            "$custom_fields": {"foo1":"bar1","foo2":"bar2"}
-            },
-            {
-            "$og_title": "Nike Woolen Sox",
-            "$canonical_identifier": "nike/5324",
-            "$og_description": "Fine combed woolen sox for those who love your foot",
-            "$publicly_indexable": false,
-            "$price": 80.2,
-            "$locally_indexable": true,
-            "$quantity": 5,
-            "$sku": "110112467",
-            "$product_name": "Woolen Sox",
-            "$product_brand": "Nike",
-            "$product_category": "Apparel & Accessories",
-            "$product_variant": "Xl",
-            "$rating_average": 3.3,
-            "$rating_count": 5,
-            "$rating_max": 2.8,
-            "$creation_timestamp": 1499892854966
-            }];
-
-        branch.logEvent(
-            "PURCHASE",
-            event_and_custom_data,
-            content_items,
-            function(err) { console.log(err); }
-        );
-        console.log('V2 commerce event called');
-        console.log(event_and_custom_data);
-        console.log(content_items);
     }
 
     </script>
