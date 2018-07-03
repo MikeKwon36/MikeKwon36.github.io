@@ -148,9 +148,9 @@
     <section class="container toggle" id="description_oneoff">
         <p><ol>
             <li>"Fallback URL" --> Add a web url to redirect users users without the app to</li>
-            <li>"Add Query Parameters" --> Add key-value pairs to the link (i.e., $desktop_url=https://www.kmart.com, sid=704, etc)</li>
-            <li>"Add Analytics Tags" --> Attribute app sessions to email (you can set one 'campaign' value, and multiple 'tags' values)</li>
-            <li>"Create Email Link" --> Create a Branch link with the parameters you set</li>
+            <li>"Add Query Parameters" --> Add key-value pairs (i.e., $deeplink_path=sportscenter://x-callback-url/showWatchStream, etc).  A $deeplink_path value is required to open specific content in ESPN</li>
+            <li>"Add Analytics Tags" --> Attribute app sessions back to your channel (you can set one 'utm_source' value, and multiple 'tags' values)</li>
+            <li>"Create Link" --> Create a Branch link with the parameters you set</li>
         </ol></p>
     </section>
 
@@ -217,7 +217,7 @@
     <section>
         <br>
         <br>
-        <div class="text-center"><button class="form-control toggle" style="float:none; background-color:#89cff0; color: white; font-weight: bold;" onclick="generate3PLink()">Create Deep Link</button></div>
+        <div class="text-center"><button class="form-control toggle" style="float:none; background-color:#89cff0; color: white; font-weight: bold;" onclick="generate3PLink()">Create Link</button></div>
         <div class="text-center"><button class="form-control toggle" style="float:none; background-color:#d3d3d3; display:none;" onclick="parseFile()">Process CSV</button></div>
         <br>
         <br>
