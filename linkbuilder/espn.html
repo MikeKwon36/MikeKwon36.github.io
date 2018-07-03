@@ -48,7 +48,7 @@
                 var firstKey = table1.rows[0].cells[1].children[0].value
                 var firstValue = table1.rows[0].cells[2].children[0].value
                 if (key && value) {
-                    params += (key + '=' + encodeURIComponent(value) + '&');
+                    params += (encodeURIComponent(key) + '=' + encodeURIComponent(value) + '&');
                 }
             }
 
@@ -120,7 +120,7 @@
 
 
         function get3PLink(original_url) {
-            var branch_url = 'https://' + 'espn.app.link?' + encodeURIComponent('$fallback_url') + '=' + encodeURIComponent(original_url) + encodeURIComponent('$canonical_url') + '=' + encodeURIComponent(original_url) + encodeURIComponent('$canonical_identifier') + '=' + encodeURIComponent(original_url);
+            var branch_url = 'https://' + 'espn.app.link?' + encodeURIComponent('$fallback_url') + '=' + encodeURIComponent(original_url) + "&" + encodeURIComponent('$canonical_url') + '=' + encodeURIComponent(original_url) + "&" + encodeURIComponent('$canonical_identifier') + '=' + encodeURIComponent(original_url);
 
             return branch_url;
         }
