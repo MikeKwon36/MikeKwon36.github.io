@@ -78,9 +78,6 @@
                     } else {
                         params += (key + '=' + value + '&');
                     }
-                } else if (key == '~campaign' && !value) {
-                    window.document.getElementById("generated3PLink").value = "~campaign is required";
-                    return
                 }
             }
 
@@ -188,10 +185,10 @@
     <!-- Description for one-off link creation -->
     <section class="container toggle" id="description_oneoff">
         <p><ol>
-            <li>"Original URL" --> Add a web url to convert into Branch (this becomes the default web redirect for desktop users, and mobile users without the app)</li>
-            <li>"Add Query Parameters" --> Add key-value pairs to the link (i.e., $desktop_url=https://www.blueapron.com, deeplink=recipe, etc)</li>
-            <li>"Add Analytics Tags" --> Attribute app sessions to email (you can set one 'campaign' value, and multiple 'tags' values)</li>
-            <li>"Create Email Link" --> Create a Branch link with the parameters you set</li>
+            <li>Enter the <strong>Original URL</strong> to deep link users with the app, and redirect users without the app</li>
+            <li>Add additional <strong>Query Parameters</strong> as needed.  Every pair added will be accessible in app</li>
+            <li>Add <strong>Analytics Tags</strong> to attribute app sessions in app (you'll only be able to set one 'utm_source' value, but you can set multiple 'tags' values)</li>
+            <li>Click <strong>Create Link</strong> to build a Branch link with the parameters set</li>
         </ol></p>
     </section>
 
@@ -229,8 +226,8 @@
         <table id="query_params" class="toggle">
             <tr id="row-1">
                 <td><label style="margin-right: 10px">Query Param 1</label></td>
-                <td><input class="form-control" style="width:500px" id="query-key-1" type="text" placeholder="i.e., deeplink, $desktop_url, $ios_url, $android_url"/></td>
-                <td><input class="form-control" style="width:500px" id="query-value-1" type="text" placeholder="i.e., https://www.blueapron.com, linktofico"/></td>
+                <td><input class="form-control" style="width:300px" id="query-key-1" type="text" placeholder="i.e., $desktop_url, $ios_url, $android_url"/></td>
+                <td><input class="form-control" style="width:450px" id="query-value-1" type="text" placeholder="i.e., https://www.blueapron.com, linktofico"/></td>
             </tr>
         </table>
 
@@ -249,7 +246,7 @@
             <tr id="analytic-3">
                 <td><label style="margin-right: 10px">~tags</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-3" type="text" value="~tags" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="analytic-value-3" type="text" placeholder="Multiple entries (comma separated, no spaces).  i.e., Responsys,recipes"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-3" type="text" placeholder="Multiple entries must be comma separated without spaces (i.e., recipe,order,chicken)"/></td>
             </tr>
         </table>
 
