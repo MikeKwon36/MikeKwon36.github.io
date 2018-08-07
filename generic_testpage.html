@@ -47,7 +47,11 @@
 
     // .init call to launch banner
     console.log('Branch Init called at ' + Math.floor(Date.now() / 1000));
-    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
+    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK',{
+        metadata : {
+            'login_cookie' : 'dfsedskey'
+        }
+    }, function(err, data) {
 
         // Check if a Branch link opened the page (if yes, banner uses referring link's data)
         if(!data.referring_link){
