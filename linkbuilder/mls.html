@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create deep links for Blue Apron</title>
+    <link rel="icon" href="https://branch.io/img/press/kit/badge-black.png" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- jQuery Library via Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Import clipboard.js -->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+
+    <!-- Import Papa Parse -->
+    <script src="PapaParse-4.3.2/papaparse.min.js"></script>
+
+    <!-- Import FileSaver.js -->
+    <script src="FileSaver.js-master/FileSaver.min.js"></script>
+
+
+    <!-- Script to generate 3P link based on user inputs -->
+    <script>
+        function generate3PLink() {
+            //var domain = window.document.getElementById("branchDomain").value;
+            //var ESPProviderCode = window.document.getElementById("ESPProviderCode").value;
+            var desktop_url = false;
+            var original_url = window.document.getElementById("originalUrl").value;
+
+            if (!original_url) {
+                alert("Please enter a destination URL.");
+                window.document.getElementById("originalUrl").focus();
+                return
+            } else if (original_url) {
+                desktop_url = true;
+            }
+            var params = '';
+            var output = '';
+            // Get query parameters and add to params variable
+            var table1 = window.document.getElementById('query_params');
+            for (var i = 0, row; row = table1.rows[i]; i++) {
+                var key = table1.rows[i].cells[1].children[0].value
+                var value = table1.rows[i].cells[2].children[0].value
+                var firstKey = table1.rows[0].cells[1].children[0].value
+                var firstValue = table1.rows[0].cells[2].children[0].value
+                if (key && value) {
+                    params += (key + '=' + encodeURIComponent(value) + '&');
+                }
+            }
+
+            var table2 = window.document.getElementById('analytic_params');
+            for (var i = 0, row; row = table2.rows[i]; i++) {
+                var key = table2.rows[i].cells[1].children[0].value
+                var value = table2.rows[i].cells[2].children[0].value
+
+                if (key && value) {
+                    if (key == '~tags') {
+                        var tags = value.split(',');
+                        var validate = value.split(/[\s,]+/);
+                        var tagLength = tags.length;
+                        var validateLength = validate.length;
+                        if (tagLength != validateLength) {
+                            alert("For multiple tags, separate with commas and no spaces.");
+                            window.document.getElementById("analytic-value-3").focus();
+                            return
+                        }
+                        for (var n = 0; n < tagLength; n++) {
+                            params += (key + '=' + tags[n] + '&');
+                        }
+                    } else {
+                        params += (key + '=' + value + '&');
+                    }
+                }
+            }
+
+            
+            //var encodedURL = encodeURIComponent(original_url);
+            if (!/(http(s?))\:\/\//.test(original_url)) {
+                original_url = 'https://' + original_url;
+            }
+            if (desktop_url) {
+                if (params == '') {
+                    output = get3PLink(original_url);
+                } else {
+                    output = get3PLink(original_url) + '&' + params.slice(0, params.length - 1);
+                }
+            }
+
+            window.document.getElementById("generated3PLink").value = output;
+        }
+
+        // Returns current number of query parameter rows
+        function getRowCount() {
+            var rowCount = window.document.getElementById('query_params').rows.length;
+
+            return rowCount;
+        }
+
+        // Adds a new row for additional query parameters
+        function addQuerylinkParam() {
+            var newRowIndex = getRowCount() + 1;
+
+            var newRowHTML = `<tr id="row-${newRowIndex}"><td><label style="margin-right:10px">Query Param ${newRowIndex}</label></td><td><input class="form-control" style="width:300px" id="query-key-${newRowIndex}" type="text" placeholder="i.e., $desktop_url, $ios_url, $android_url"/></td><td><input class="form-control" style="width:450px" id="query-value-${newRowIndex}" type="text" placeholder="i.e., https://www.blueapron.com, recipe#34"/></td></tr>`;
+            $("#query_params").append(newRowHTML);
+        }
+
+        // Removes a query parameter row
+        function removeQuerylinkParam() {
+            rowCount = getRowCount();
+            if (rowCount > 1) {
+                current_row = getRowCount();
+                $(`#row-${current_row}`).remove();
+            }
+
+        }
+
+
+        function get3PLink(original_url) {
+            var branch_url = 'https://' + 'blueapron.app.link' + '/3p?' + encodeURIComponent('$3p') + '=' + 'e_rs' + '&' + encodeURIComponent('$original_url') + '=' + encodeURIComponent(original_url);
+
+            return branch_url;
+        }
+
+        function parseFile() {
+            var domain = window.document.getElementById("branchDomain").value;
+            var ESPProviderCode = window.document.getElementById("ESPProviderCode").value;
+            var selectedFile = document.getElementById('files').files[0];
+
+            var csv_array = 'destination,3p_link\n';
+
+            // Make sure we have everything
+            if (domain == '') {
+                alert("Add a Branch Domain");
+                return;
+            } else if (ESPProviderCode == 'np') {
+                alert("Please select an ESP");
+                return;
+            } else if (selectedFile == null) {
+                alert("Please upload a file");
+                return;
+            } else {
+                Papa.parse(selectedFile, {
+                    header: true,
+
+                    step: function(row) {
+                        original_url = row.data[0]["destination_url"];
+                        csv_array += (original_url + ',' + get3PLink(original_url) + '\n');
+                        console.log(row.data.length);
+                    },
+                    complete: function(results) {
+                        // var blob = new Blob([csv_array], {type: "text/csv;charset=utf-8"});
+                        // saveAs(blob, "BranchLinks.csv");
+                    }
+                });
+            }
+        }
+
+        function toggleView() {
+            $(".toggle").toggle();
+        }
+    </script>
+</head>
+
+<body class="container">
+    <!-- Initialize clipboard.js -->
+    <script>(function(){new Clipboard('#copy-button');})();</script>
+
+    <div>
+        </br>
+        <img src="https://branch.io/img/logo-dark.svg" style="width:100px;">
+        </br>
+        </br>
+        <h1 style="display:inline; vertical-align:middle">Create Blue Apron Responsys Deep Links</h1>
+    </div>
+    <button class="form-control toggle" style="float:none; background-color:#d3d3d3; display:none;" onclick="toggleView()">I want to generate one-off links</button>
+
+    <!-- Description for one-off link creation -->
+    <section class="container toggle" id="description_oneoff">
+        <p><ol>
+            <li><strong>[REQUIRED]</strong> Enter the web URL to convert into Branch (this is the default redirect for users without the app)</li>
+            <li>Add Query Parameters as needed (every pair will be accessible in app)</li>
+            <li>Add Analytics Tags to identify app sessions (you can only set one '~campaign' value, but you can set multiple '~tags' values)</li>
+            <li>Click <strong>Create Email Link</strong> and copy &amp; paste the Branch link into your email template</li>
+        </ol></p>
+    </section>
+
+    <!-- Description for CSV upload -->
+    <section class="container toggle" id="description_csv" style="display:none">
+        <h3>CSV Link Generator</h3>
+        <h3>How to use this tool</h3>
+        <p><ol>
+            <li>Upload a CSV file consisting of a column of the destination URLs you're looking to "Branch-ify."
+            <li>3P Link Generator will look for a header called "destination_url" and output a .csv file with columns "destination_url,3p_link"</li>
+        </ol></p>
+    </section>
+
+    <section class="container" id="link-creation">
+        <!-- Table for user input -->
+
+        <h3 class="toggle">Set Original URL</h3>
+
+        <table>
+            <tbody>
+                <tr class="toggle">
+                    <td><label style="margin-right: 10px">Enter a web URL</label></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., https://www.blueapron.com/recipes/soy-honey-chicken-rice-with-togarashi-peanuts"/></td>
+                </tr>
+                <tr class="toggle" style="display:none;">
+                    <td><label style="margin-right: 10px">File Upload</label></td>
+                    <td><input  type="file" id="files"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="toggle">Add Query Parameters</h3>
+
+        <!-- Deep linking parameters table -->
+        <table id="query_params" class="toggle">
+            <tr id="row-1">
+                <td><label style="margin-right: 10px">Query Param 1</label></td>
+                <td><input class="form-control" style="width:300px" id="query-key-1" type="text" placeholder="i.e., $desktop_url, $ios_url, $android_url"/></td>
+                <td><input class="form-control" style="width:450px" id="query-value-1" type="text" placeholder="i.e., https://www.blueapron.com, recipe#34"/></td>
+            </tr>
+        </table>
+
+        <br>
+        <button class="btn toggle" id="add-query-button" style="background-color:#d3d3d3; display:inline;" onclick="addQuerylinkParam()">Add Query Param</button>
+        <button class="btn toggle" id="remove-query-button" style="background-color:#d3d3d3; display:inline;"onclick="removeQuerylinkParam()">Remove Query Param</button>
+        <br>
+
+        <h3 class="toggle">Add Analytics Tags</h3>
+        <table id="analytic_params" class="toggle">
+            <tr id="analytic-1">
+                <td><label style="margin-right: 10px">~campaign</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-1" type="text" value="~campaign" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-1" type="text" placeholder="Only one value allowed, and must use url safe characters (i.e., aug2018recipes)"/></td>
+            </tr>
+            <tr id="analytic-3">
+                <td><label style="margin-right: 10px">~tags</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-3" type="text" value="~tags" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-3" type="text" placeholder="Separate multiple entries with commas, without spaces (i.e., recipe,chicken)"/></td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section>
+        <br>
+        <br>
+        <div class="text-center"><button class="form-control toggle" style="float:none; background-color:#89cff0; color: white; font-weight: bold;" onclick="generate3PLink()">Create Email Link</button></div>
+        <div class="text-center"><button class="form-control toggle" style="float:none; background-color:#d3d3d3; display:none;" onclick="parseFile()">Process CSV</button></div>
+        <br>
+    </section>
+
+    <section class="container toggle" id="linkOutput">
+        <h3>Generated Email Link
+        <button class="btn" id="copy-button" style="background-color:#d3d3d3; display:inline;" data-clipboard-target="#generated3PLink">Copy Link</button>
+        </h3>
+        <textarea class="form-control" style="height:100px; margin-bottom:5%;" id="generated3PLink" type="text"></textarea>
+    </section>
+</body>
+</html>
