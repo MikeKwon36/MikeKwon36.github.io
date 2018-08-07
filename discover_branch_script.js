@@ -1,8 +1,28 @@
 (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
 
-console.log('Branch Init called at ' + Math.floor(Date.now() / 1000));
+// validate external script can pull context from page 
 console.log('Page User Agent: ' + navigator.userAgent);
-branch.init('key_live_gevPwVGxd97F95YmLl3jThcjvxgKTSvI', function(err, data) {
+
+// function to retrieve cookie value that is dropped on the public site if a user had previously logged in to Discover.com,
+function getCookieValue(cookieName) {
+    if (document.cookie.length > 0) {
+        dcuser_start = document.cookie.indexOf(cookieName + "=");
+        if (dcuser_start != -1) {
+            dcuser_start = dcuser_start + cookieName.length + 1;
+            dcuser_end = document.cookie.indexOf(";", dcuser_start);
+            if (dcuser_end == -1) c_endV3 = document.cookie.length;
+            return unescape(document.cookie.substring(dcuser_start, dcuser_end));
+        }
+    }
+    return 'false';
+}
+
+// initialize Branch
+branch.init('key_live_gevPwVGxd97F95YmLl3jThcjvxgKTSvI', {
+        metadata : {
+            'login_cookie' : getCookieValue('dfsedskey')
+        }
+    }, function(err, data) {
     console.log(data);
     console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
 });
