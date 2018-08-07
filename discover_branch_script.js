@@ -18,7 +18,7 @@ function getCookieValue(cookieName) {
 }
 
 // initialize Branch
-branch.init('key_live_gevPwVGxd97F95YmLl3jThcjvxgKTSvI', {
+branch.init('key_test_nfzPCMNBa2WFWYXfOmWqLdmmyFfKNTt3', {
         metadata : {
             'login_cookie' : getCookieValue('dfsedskey')
         }
