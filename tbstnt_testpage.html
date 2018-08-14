@@ -239,29 +239,22 @@
     
 
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
-    var launchCount = 1;
     function launchBranchJourney(){
-        //this changes the banner link data & analytics tags
         var linkData = {
             campaign: 'This analytics tag cannot be overridded in Journeys',
-            channel: 'The banner\s channel tag was reset via button click',
             feature: 'This analytics tag cannot be overridded in Journeys',
+            channel: 'The banner\s channel tag was reset via button click',
             stage: 'The banner\s stage tag was reset via button click',
-            tags: [launchCount,'edit & relaunch banner'],
+            tags: ['edit & relaunch banner'],
             data: {
-                'custom_bool': true,
-                'custom_int (today\s date)': Date.now(),
-                'custom_string (url)': window.location.href,
                 '$journeys_icon_image_url':'https://www.valorebooks.com/campus-life/wp-content/uploads/icon_340.png',
                 '$journeys_button_get_no_app':'changed!',
                 '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Banner relaunched ' + launchCount + ' times',
-                '$journeys_description':'Description reset by button click'
+                '$journeys_title':'Banner relaunched',
+                '$journeys_description':'Description reset by click'
             }
         };
         branch.setBranchViewData(linkData);
-        branch.track('pageview');
-        launchCount++;
     }
 
     // function for button to close journey (will NOT activate template's dismissal period)
