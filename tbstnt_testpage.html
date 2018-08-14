@@ -129,6 +129,7 @@
                         </ul>
                         <p></p>
                         <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Click to Launch Banner</button>
+                        <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Click to Close Banner</button>
                     </div>
                 </div>
             </div>
@@ -258,6 +259,7 @@
                 });
                 console.log('$deeplink_path = open?source=web&campaign=journeys-interstitial-preview');
             }
+            console.log('.track(pageview) called at ' + Math.floor(Date.now() / 1000));
             branch.track('pageview', {
                 'interstitial': 'true'
             }, {
