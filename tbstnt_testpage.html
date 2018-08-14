@@ -238,7 +238,7 @@
     branch.addListener("didCallJourneyClose", listener);
     
 
-    // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
+    // function to launch journey and change link data (will NOT launch if banner's dismissal period active, so must set dismissal period to zero)
     function launchBranchJourney(){
         var linkData = {
             campaign: 'This analytics tag cannot be overridded in Journeys',
