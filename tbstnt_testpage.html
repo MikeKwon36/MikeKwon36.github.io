@@ -255,6 +255,7 @@
             }
         };
         branch.setBranchViewData(linkData);
+        branch.track('pageview',{'interstitial':'true'},{'disable_entry_animation':true,'disable_exit_animation':true});
     }
 
     // function for button to close journey (will NOT activate template's dismissal period)
