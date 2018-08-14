@@ -240,22 +240,30 @@
 
     // function to launch journey and change link data (will NOT launch if banner's dismissal period active, so must set dismissal period to zero)
     function launchBranchJourney(){
-        var linkData = {
-            campaign: 'This analytics tag cannot be overridded in Journeys',
-            feature: 'This analytics tag cannot be overridded in Journeys',
-            channel: 'The banner\s channel tag was reset via button click',
-            stage: 'The banner\s stage tag was reset via button click',
-            tags: ['edit & relaunch banner'],
-            data: {
-                '$journeys_icon_image_url':'https://www.valorebooks.com/campus-life/wp-content/uploads/icon_340.png',
-                '$journeys_button_get_no_app':'changed!',
-                '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Banner relaunched',
-                '$journeys_description':'Description reset by click'
+        branch.closeJourney(function(err) {
+            if (document.querySelectorAll("meta[name='branch:deeplink:$deeplink_path']").length > 0) {
+                var meta = document.querySelector("meta[name='branch:deeplink:$deeplink_path']").getAttribute("content");
+                branch.setBranchViewData({
+                    data: {
+                        '$deeplink_path': meta + "&source=web&campaign=journeys-interstitial-preview"
+                    }
+                });
+                console.log('$deeplink_path = ' + meta + '&source=web&campaign=journeys-interstitial-preview');
+            } else {
+                branch.setBranchViewData({
+                    data: {
+                        '$deeplink_path': "open?source=web&campaign=journeys-interstitial-preview"
+                    }
+                });
+                console.log('$deeplink_path = open?source=web&campaign=journeys-interstitial-preview');
             }
-        };
-        branch.setBranchViewData(linkData);
-        branch.track('pageview',{'interstitial':'true'},{'disable_entry_animation':true,'disable_exit_animation':true});
+            branch.track('pageview', {
+                'interstitial': 'true'
+            }, {
+                'disable_entry_animation': true,
+                'disable_exit_animation': true
+            });
+        });
     }
 
     // function for button to close journey (will NOT activate template's dismissal period)
