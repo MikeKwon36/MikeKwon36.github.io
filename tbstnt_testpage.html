@@ -248,17 +248,11 @@
         console.log('closeJourney called at ' + Math.floor(Date.now() / 1000));
         branch.closeJourney(function(err) {
             console.log('closeJourney callback called at ' + Math.floor(Date.now() / 1000));
-            var branch_title = (document.querySelectorAll("meta[property='og:title']").length > 0 ? document.querySelector("meta[property='og:title']").getAttribute("content") : "");
-            var branch_image = (document.querySelectorAll("meta[property='og:image']").length > 0 ? document.querySelector("meta[property='og:image']").getAttribute("content") : "");
-            var branch_desc = (document.querySelectorAll("meta[property='og:description']").length > 0 ? document.querySelector("meta[property='og:description']").getAttribute("content") : "");
 
             if (document.querySelectorAll("meta[name='branch:deeplink:$deeplink_path']").length > 0) {
                 var meta = document.querySelector("meta[name='branch:deeplink:$deeplink_path']").getAttribute("content");
                 branch.setBranchViewData({
                     data: {
-                        '$og_title': branch_title,
-                        '$og_image_url': branch_image,
-                        '$og_description': branch_desc,
                         '$deeplink_path': meta + "&source=web&campaign=journeys-interstitial-preview"
                     }
                 });
@@ -266,9 +260,6 @@
             } else {
                 branch.setBranchViewData({
                     data: {
-                        '$og_title': branch_title,
-                        '$og_image_url': branch_image,
-                        '$og_description': branch_desc,
                         '$deeplink_path': "open?source=web&campaign=journeys-interstitial-preview"
                     }
                 });
