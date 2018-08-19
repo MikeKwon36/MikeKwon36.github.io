@@ -250,22 +250,16 @@
         branch.closeJourney(function(err) {
             console.log('closeJourney callback called at ' + Math.floor(Date.now()));
 
-            if ((err !== undefined) && (err !== null)) {
-                console.log("Error received on launchBranchJourney.closeJourney: " + err);
-            }
+            if ((err !== undefined) && (err !== null)) {console.log("Error received on launchBranchJourney.closeJourney: " + err);}
 
             if (document.querySelectorAll("meta[name='branch:deeplink:$deeplink_path']").length > 0) {
                 var meta = document.querySelector("meta[name='branch:deeplink:$deeplink_path']").getAttribute("content");
                 branch.setBranchViewData({
-                    data: {
-                        '$deeplink_path': meta + "&source=web&campaign=journeys-interstitial-preview"
-                    }
+                    data: {'$deeplink_path': meta + "&source=web&campaign=journeys-interstitial-preview"}
                 });
             } else {
                 branch.setBranchViewData({
-                    data: {
-                        '$deeplink_path': "open?source=web&campaign=journeys-interstitial-preview"
-                    }
+                    data: {'$deeplink_path': "open?source=web&campaign=journeys-interstitial-preview"}
                 });
             }
 
