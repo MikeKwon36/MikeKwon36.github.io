@@ -249,7 +249,7 @@
         branch.closeJourney(function(err) {
             console.log('closeJourney callback: ' + Math.floor(Date.now()));
 
-            if ((err !== undefined) && (err !== null)) {console.log("Error received on launchBranchJourney.closeJourney: " + err);}
+            if ((err !== undefined) && (err !== null)) {console.log(".closeJourney error: " + err + " at " + Math.floor(Date.now()));}
 
             if (document.querySelectorAll("meta[name='branch:deeplink:$deeplink_path']").length > 0) {
                 var meta = document.querySelector("meta[name='branch:deeplink:$deeplink_path']").getAttribute("content");
@@ -271,7 +271,7 @@
                     function(err2) {
                         console.log('.track callback: ' + Math.floor(Date.now()));
                         if ((err2 !== undefined) && (err2 !== null)) {
-                            console.log("Error received on launchBranchJourney.track: " + err2);
+                            console.log(".track error: " + err2 + " at " + Math.floor(Date.now()));
                             console.log('launchBranchJourney recursive call');
                             launchBranchJourney();
                         }
