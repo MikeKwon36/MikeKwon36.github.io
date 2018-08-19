@@ -251,7 +251,10 @@
 
             if ((err !== undefined) && (err !== null)) {
                 console.log("Error received on launchBranchJourney: " + err);
-                launchBranchJourney();
+                var delayInMilliseconds = 1000; //1 second
+                setTimeout(function() {
+                    launchBranchJourney();
+                }, delayInMilliseconds);
             }
 
             if (document.querySelectorAll("meta[name='branch:deeplink:$deeplink_path']").length > 0) {
