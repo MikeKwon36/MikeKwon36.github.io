@@ -247,7 +247,7 @@
     function launchBranchJourney(){
         console.log('closeJourney called at ' + Math.floor(Date.now() / 1000));
         branch.closeJourney(function(err) {
-            if ((data !== undefined) && (data !== null)) {
+            if ((err !== undefined) && (err !== null)) {
                 console.log(err);                
             }
             console.log('closeJourney callback called at ' + Math.floor(Date.now() / 1000));
