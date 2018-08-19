@@ -249,12 +249,9 @@
         console.log('launchBranchJourney called at ' + Math.floor(Date.now()));
         branch.closeJourney(function(err) {
             console.log('closeJourney callback called at ' + Math.floor(Date.now()));
+
             if ((err !== undefined) && (err !== null)) {
-                console.log("Error received on launchBranchJourney: " + err);
-                setTimeout(function() {
-                    console.log('launchBranchJourney recursive call');
-                    launchBranchJourney();
-                }, delayInMilliseconds);
+                console.log("Error received on launchBranchJourney.closeJourney: " + err);
             }
 
             if (document.querySelectorAll("meta[name='branch:deeplink:$deeplink_path']").length > 0) {
@@ -273,13 +270,22 @@
                 });
                 console.log('$deeplink_path = open?source=web&campaign=journeys-interstitial-preview');
             }
+
+
             setTimeout(function() {
                 console.log('.track(pageview) called at ' + Math.floor(Date.now()));
                 branch.track('pageview', {
-                    'interstitial': 'true'
-                }, {
+                    'interstitial': 'true',
                     'disable_entry_animation': true,
                     'disable_exit_animation': true
+                }, function(err) {
+                    if ((err !== undefined) && (err !== null)) {
+                        console.log("Error received on launchBranchJourney.track: " + err);
+                        setTimeout(function() {
+                            console.log('launchBranchJourney recursive call');
+                            launchBranchJourney();
+                        }, delayInMilliseconds);
+                    }
                 });
             }, delayInMilliseconds);
         });
