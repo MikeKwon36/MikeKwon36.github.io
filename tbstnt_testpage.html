@@ -245,7 +245,6 @@
 
     // function to launch journey and change link data (will NOT launch if banner's dismissal period active, so must set dismissal period to zero)
     function launchBranchJourney() {
-        var delayInMilliseconds = 500; //.5 second
         console.log('launchBranchJourney called at ' + Math.floor(Date.now()));
         branch.closeJourney(function(err) {
             console.log('closeJourney callback called at ' + Math.floor(Date.now()));
@@ -275,7 +274,7 @@
                             setTimeout(function() {
                                 console.log('launchBranchJourney recursive call');
                                 launchBranchJourney();
-                            }, delayInMilliseconds);
+                            }, 400); // .4 second delay
                         }
                     });
             }, delayInMilliseconds);
