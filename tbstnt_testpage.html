@@ -244,15 +244,15 @@
     
 
     // function to launch journey and change link data (will NOT launch if banner's dismissal period active, so must set dismissal period to zero)
-    function launchBranchJourney(){
-        console.log('closeJourney called at ' + Math.floor(Date.now() / 1000));
+    function launchBranchJourney() {
+        var delayInMilliseconds = 500; //.5 second
+        console.log('launchBranchJourney called at ' + Math.floor(Date.now()));
         branch.closeJourney(function(err) {
-            console.log('closeJourney callback called at ' + Math.floor(Date.now() / 1000));
-
+            console.log('closeJourney callback called at ' + Math.floor(Date.now()));
             if ((err !== undefined) && (err !== null)) {
                 console.log("Error received on launchBranchJourney: " + err);
-                var delayInMilliseconds = 1000; //1 second
                 setTimeout(function() {
+                    console.log('launchBranchJourney recursive call');
                     launchBranchJourney();
                 }, delayInMilliseconds);
             }
@@ -273,13 +273,15 @@
                 });
                 console.log('$deeplink_path = open?source=web&campaign=journeys-interstitial-preview');
             }
-            console.log('.track(pageview) called at ' + Math.floor(Date.now() / 1000));
-            branch.track('pageview', {
-                'interstitial': 'true'
-            }, {
-                'disable_entry_animation': true,
-                'disable_exit_animation': true
-            });
+            setTimeout(function() {
+                console.log('.track(pageview) called at ' + Math.floor(Date.now()));
+                branch.track('pageview', {
+                    'interstitial': 'true'
+                }, {
+                    'disable_entry_animation': true,
+                    'disable_exit_animation': true
+                });
+            }, delayInMilliseconds);
         });
     }
 
