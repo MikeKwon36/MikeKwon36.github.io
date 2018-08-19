@@ -269,9 +269,9 @@
                     'pageview',
                     {'interstitial': 'true'},
                     {'disable_entry_animation': true, 'disable_exit_animation': true},
-                    function(err) {
-                        if ((err !== undefined) && (err !== null)) {
-                            console.log("Error received on launchBranchJourney.track: " + err);
+                    function(err2) {
+                        if ((err2 !== undefined) && (err2 !== null)) {
+                            console.log("Error received on launchBranchJourney.track: " + err2);
                             setTimeout(function() {
                                 console.log('launchBranchJourney recursive call');
                                 launchBranchJourney();
