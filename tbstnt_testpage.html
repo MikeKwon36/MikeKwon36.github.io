@@ -251,7 +251,10 @@
         branch.closeJourney(function(err) {
             console.log('closeJourney callback ' + counter + ' : ' + Math.floor(Date.now()));
 
-            if ((err !== undefined) && (err !== null)) {console.log('.closeJourney error ' + counter + ' : ' + err + ' at ' + Math.floor(Date.now()));}
+            if ((err !== undefined) && (err !== null)) {
+                console.log('.closeJourney error ' + counter + ' : ' + err + ' at ' + Math.floor(Date.now()));
+                counter++;
+            }
 
             if (document.querySelectorAll("meta[name='branch:deeplink:$deeplink_path']").length > 0) {
                 var meta = document.querySelector("meta[name='branch:deeplink:$deeplink_path']").getAttribute("content");
