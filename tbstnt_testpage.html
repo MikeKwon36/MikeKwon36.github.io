@@ -263,12 +263,13 @@
             }
 
             setTimeout(function() {
+                console.log('.track: ' + Math.floor(Date.now()));
                 branch.track(
                     'pageview',
                     {'interstitial': 'true'},
                     {'disable_entry_animation': true, 'disable_exit_animation': true},
                     function(err2) {
-                        console.log('.track(pageview) called at ' + Math.floor(Date.now()));
+                        console.log('.track callback: ' + Math.floor(Date.now()));
                         if ((err2 !== undefined) && (err2 !== null)) {
                             console.log("Error received on launchBranchJourney.track: " + err2);
                             console.log('launchBranchJourney recursive call');
