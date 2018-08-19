@@ -261,22 +261,19 @@
                         '$deeplink_path': meta + "&source=web&campaign=journeys-interstitial-preview"
                     }
                 });
-                console.log('$deeplink_path = ' + meta + '&source=web&campaign=journeys-interstitial-preview');
             } else {
                 branch.setBranchViewData({
                     data: {
                         '$deeplink_path': "open?source=web&campaign=journeys-interstitial-preview"
                     }
                 });
-                console.log('$deeplink_path = open?source=web&campaign=journeys-interstitial-preview');
             }
-
 
             setTimeout(function() {
                 console.log('.track(pageview) called at ' + Math.floor(Date.now()));
                 branch.track('pageview', {
-                    'interstitial': 'true',
-                    'disable_entry_animation': true,
+                    'interstitial': 'true'
+                }, {'disable_entry_animation': true,
                     'disable_exit_animation': true
                 }, function(err) {
                     if ((err !== undefined) && (err !== null)) {
