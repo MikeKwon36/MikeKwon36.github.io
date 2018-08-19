@@ -244,12 +244,14 @@
     
 
     // function to launch journey and change link data (will NOT launch if banner's dismissal period active, so must set dismissal period to zero)
+    var counter = 0;
     function launchBranchJourney() {
-        console.log('.closeJourney: ' + Math.floor(Date.now()));
+        counter++;
+        console.log('.closeJourney ' + counter + ' : ' + Math.floor(Date.now()));
         branch.closeJourney(function(err) {
-            console.log('closeJourney callback: ' + Math.floor(Date.now()));
+            console.log('closeJourney callback ' + counter + ' : ' + Math.floor(Date.now()));
 
-            if ((err !== undefined) && (err !== null)) {console.log(".closeJourney error: " + err + " at " + Math.floor(Date.now()));}
+            if ((err !== undefined) && (err !== null)) {console.log('.closeJourney error ' + counter + ' : ' + err + ' at ' + Math.floor(Date.now()));}
 
             if (document.querySelectorAll("meta[name='branch:deeplink:$deeplink_path']").length > 0) {
                 var meta = document.querySelector("meta[name='branch:deeplink:$deeplink_path']").getAttribute("content");
@@ -263,15 +265,15 @@
             }
 
             setTimeout(function() {
-                console.log('.track: ' + Math.floor(Date.now()));
+                console.log('.track ' + counter + ' : ' + Math.floor(Date.now()));
                 branch.track(
                     'pageview',
                     {'interstitial': 'true'},
                     {'disable_entry_animation': true, 'disable_exit_animation': true},
                     function(err2) {
-                        console.log('.track callback: ' + Math.floor(Date.now()));
+                        console.log('.track callback ' + counter + ' : ' + Math.floor(Date.now()));
                         if ((err2 !== undefined) && (err2 !== null)) {
-                            console.log(".track error: " + err2 + " at " + Math.floor(Date.now()));
+                            console.log('.track error ' + counter + ' : ' + err2 + ' at ' + Math.floor(Date.now()));
                             console.log('launchBranchJourney recursive call');
                             launchBranchJourney();
                         }
