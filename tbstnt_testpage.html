@@ -271,13 +271,11 @@
                         console.log('.track(pageview) called at ' + Math.floor(Date.now()));
                         if ((err2 !== undefined) && (err2 !== null)) {
                             console.log("Error received on launchBranchJourney.track: " + err2);
-                            setTimeout(function() {
-                                console.log('launchBranchJourney recursive call');
-                                launchBranchJourney();
-                            }, 400); // .4 second delay
+                            console.log('launchBranchJourney recursive call');
+                            launchBranchJourney();
                         }
                     });
-            }, delayInMilliseconds);
+            }, 400); // .4 second delay
         });
     }
 
