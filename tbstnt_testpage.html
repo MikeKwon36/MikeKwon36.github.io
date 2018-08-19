@@ -272,7 +272,6 @@
                 branch.track(
                     'pageview',
                     {'interstitial': 'true'},
-                    {'disable_entry_animation': true, 'disable_exit_animation': true},
                     function(err2) {
                         console.log('.track callback ' + counter + ' : ' + Math.floor(Date.now()));
                         if ((err2 !== undefined) && (err2 !== null)) {
