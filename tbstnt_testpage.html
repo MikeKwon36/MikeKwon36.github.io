@@ -265,19 +265,19 @@
 
             setTimeout(function() {
                 console.log('.track(pageview) called at ' + Math.floor(Date.now()));
-                branch.track('pageview', {
-                    'interstitial': 'true'
-                }, {'disable_entry_animation': true,
-                    'disable_exit_animation': true
-                }, function(err) {
-                    if ((err !== undefined) && (err !== null)) {
-                        console.log("Error received on launchBranchJourney.track: " + err);
-                        setTimeout(function() {
-                            console.log('launchBranchJourney recursive call');
-                            launchBranchJourney();
-                        }, delayInMilliseconds);
-                    }
-                });
+                branch.track(
+                    'pageview',
+                    {'interstitial': 'true'},
+                    {'disable_entry_animation': true, 'disable_exit_animation': true},
+                    function(err) {
+                        if ((err !== undefined) && (err !== null)) {
+                            console.log("Error received on launchBranchJourney.track: " + err);
+                            setTimeout(function() {
+                                console.log('launchBranchJourney recursive call');
+                                launchBranchJourney();
+                            }, delayInMilliseconds);
+                        }
+                    });
             }, delayInMilliseconds);
         });
     }
