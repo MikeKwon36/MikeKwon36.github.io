@@ -245,9 +245,9 @@
 
     // function to launch journey and change link data (will NOT launch if banner's dismissal period active, so must set dismissal period to zero)
     function launchBranchJourney() {
-        console.log('launchBranchJourney called at ' + Math.floor(Date.now()));
+        console.log('.closeJourney: ' + Math.floor(Date.now()));
         branch.closeJourney(function(err) {
-            console.log('closeJourney callback called at ' + Math.floor(Date.now()));
+            console.log('closeJourney callback: ' + Math.floor(Date.now()));
 
             if ((err !== undefined) && (err !== null)) {console.log("Error received on launchBranchJourney.closeJourney: " + err);}
 
