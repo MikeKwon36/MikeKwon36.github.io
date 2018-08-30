@@ -23,7 +23,7 @@
 
     branch.init('key_test_cbd1fTVGZkEs9CU9OZb6wlkpzxpQ4L3k', function(err, data) {
         console.log(data);
-        console.log('Branch SDK finished initializing at ' + Math.floor(Date.now()));
+        console.log('Branch SDK initialized at ' + Math.floor(Date.now()));
     });
 
     </script>
@@ -207,12 +207,9 @@
 
     // function to close & relaunch journey banner (will NOT launch if banner's dismissal period activated by user)
     function launchBranchJourney() {
-        console.log('.closeJourney: ' + Math.floor(Date.now()));
-
         // function to close journey (will NOT activate template's dismissal period)
         branch.closeJourney(function(err) {
             setTimeout(function() {
-
                 // function to relaunch journey (will NOT activate template's dismissal period)
                 branch.track('pageview');
             }, 150); // .15 second delay
