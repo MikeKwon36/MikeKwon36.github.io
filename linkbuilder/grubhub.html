@@ -157,13 +157,13 @@
     <section class="container" id="link-creation">
         <!-- Table for user input -->
 
-        <h3 class="toggle">Set Original URL</h3>
+        <h3 class="toggle">Set URL w/UTM tags</h3>
 
         <table>
             <tbody>
                 <tr class="toggle">
                     <td><label style="margin-right: 10px">Enter a web URL</label></td>
-                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="https://www.grubhub.com/?utm_medium=example"/></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="https://www.grubhub.com/?utm_medium=example&amp;utm_source=email"/></td>
                 </tr>
             </tbody>
         </table>
@@ -193,30 +193,6 @@
         <button class="btn toggle" id="add-query-button" style="background-color:#d3d3d3; display:inline;" onclick="addQuerylinkParam()">Add Query Param</button>
         <button class="btn toggle" id="remove-query-button" style="background-color:#d3d3d3; display:inline;"onclick="removeQuerylinkParam()">Remove Query Param</button>
         <br>
-
-        <h3 class="toggle">Add Analytics Tags</h3>
-        <table id="analytic_params" class="toggle">
-            <tr id="analytic-1">
-                <td><label style="margin-right: 10px">utm_medium</label></td>
-                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-1" type="text" value="utm_medium" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="analytic-value-1" type="text" placeholder="i.e., email"/></td>
-            </tr>
-            <tr id="analytic-2">
-                <td><label style="margin-right: 10px">utm_source</label></td>
-                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-2" type="text" value="utm_source" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="analytic-value-2" type="text" placeholder="i.e., appboy"/></td>
-            </tr>
-            <tr id="analytic-4">
-                <td><label style="margin-right: 10px">utm_campaign</label></td>
-                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-4" type="text" value="utm_campaign" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="analytic-value-4" type="text" placeholder="i.e., 2018_promo"/></td>
-            </tr>
-            <tr id="analytic-3">
-                <td><label style="margin-right: 10px">utm_content</label></td>
-                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-3" type="text" value="utm_content" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="analytic-value-3" type="text" placeholder="i.e., link_01"/></td>
-            </tr>
-        </table>
 
     </section>
 
