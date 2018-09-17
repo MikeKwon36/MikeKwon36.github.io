@@ -68,6 +68,7 @@
             }
             
             //var encodedURL = encodeURIComponent(original_url);
+            var queryLogic = '%3F';
             if (!/(http(s?))\:\/\//.test(original_url)) {
                 original_url = 'https://' + original_url;
             }
@@ -75,7 +76,10 @@
                 if (paramsA == '' && paramsB == '') {
                     output = get3PLink(original_url);
                 } else {
-                    output = get3PLink(original_url) + '%26' + paramsA.slice(0, paramsA.length - 1) + '&' + paramsB.slice(0, paramsB.length - 1);
+                    if(original_url.indexOf("?")>0){
+                        queryLogic = '%26';
+                    };
+                    output = get3PLink(original_url) + queryLogic + paramsA.slice(0, paramsA.length - 1) + '&' + paramsB.slice(0, paramsB.length - 1);
                 }
             }
 
