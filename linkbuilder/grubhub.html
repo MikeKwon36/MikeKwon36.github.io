@@ -42,7 +42,8 @@
             } else if (original_url) {
                 desktop_url = true;
             }
-            var params = '';
+            var paramsA = '';
+            var paramsB = '';
             var output = '';
 
             //Add analytics params as part of $original_url
@@ -50,9 +51,11 @@
             for (var i = 0, row; row = table2.rows[i]; i++) {
                 var key = table2.rows[i].cells[1].children[0].value
                 var value = table2.rows[i].cells[2].children[0].value
+                var firstKey = table2.rows[0].cells[1].children[0].value
+                var firstValue = table2.rows[0].cells[2].children[0].value
 
                 if (key && value) {
-                    params += (key + '%3D' + encodeURIComponent(value) + '%26');
+                    paramsA += (key + '%3D' + encodeURIComponent(value) + '%26');
                 }
             }
 
@@ -64,7 +67,7 @@
                 var firstKey = table1.rows[0].cells[1].children[0].value
                 var firstValue = table1.rows[0].cells[2].children[0].value
                 if (key && value) {
-                    params += (key + '=' + encodeURIComponent(value) + '&');
+                    paramsB += (key + '=' + encodeURIComponent(value) + '&');
                 }
             }
             
@@ -76,7 +79,7 @@
                 if (params == '') {
                     output = get3PLink(original_url);
                 } else {
-                    output = get3PLink(original_url) + '&' + params.slice(0, params.length - 1);
+                    output = get3PLink(original_url) + '%26' + paramsA.slice(0, paramsA.length - 1) + '&' + paramsB.slice(0, paramsB.length - 1);
                 }
             }
 
