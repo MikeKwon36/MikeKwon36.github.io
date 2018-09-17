@@ -50,8 +50,6 @@
             for (var i = 0, row; row = table2.rows[i]; i++) {
                 var key = table2.rows[i].cells[1].children[0].value
                 var value = table2.rows[i].cells[2].children[0].value
-                var firstKey = table2.rows[0].cells[1].children[0].value
-                var firstValue = table2.rows[0].cells[2].children[0].value
 
                 if (key && value) {
                     params += (key + '%3D' + encodeURIComponent(value) + '%26');
@@ -63,6 +61,8 @@
             for (var i = 0, row; row = table1.rows[i]; i++) {
                 var key = table1.rows[i].cells[1].children[0].value
                 var value = table1.rows[i].cells[2].children[0].value
+                var firstKey = table1.rows[0].cells[1].children[0].value
+                var firstValue = table1.rows[0].cells[2].children[0].value
                 if (key && value) {
                     params += (key + '=' + encodeURIComponent(value) + '&');
                 }
@@ -149,7 +149,7 @@
             <tbody>
                 <tr class="toggle">
                     <td><label style="margin-right: 10px">Enter a web URL</label></td>
-                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="http://www.grubhub.com/promo/code/OFFERCODE"/></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., http://www.grubhub.com/promo/code/OFFERCODE"/></td>
                 </tr>
             </tbody>
         </table>
