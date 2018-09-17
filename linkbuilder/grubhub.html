@@ -64,8 +64,6 @@
             for (var i = 0, row; row = table1.rows[i]; i++) {
                 var key = table1.rows[i].cells[1].children[0].value
                 var value = table1.rows[i].cells[2].children[0].value
-                var firstKey = table1.rows[0].cells[1].children[0].value
-                var firstValue = table1.rows[0].cells[2].children[0].value
                 if (key && value) {
                     paramsB += (key + '=' + encodeURIComponent(value) + '&');
                 }
