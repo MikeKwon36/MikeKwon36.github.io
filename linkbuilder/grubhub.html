@@ -44,43 +44,29 @@
             }
             var params = '';
             var output = '';
+
+            //Add analytics params as part of $original_url
+            var table2 = window.document.getElementById('analytic_params');
+            for (var i = 0, row; row = table2.rows[i]; i++) {
+                var key = table2.rows[i].cells[1].children[0].value
+                var value = table2.rows[i].cells[2].children[0].value
+                var firstKey = table2.rows[0].cells[1].children[0].value
+                var firstValue = table2.rows[0].cells[2].children[0].value
+
+                if (key && value) {
+                    params += (key + '%3D' + encodeURIComponent(value) + '%26');
+                }
+            }
+
             // Get query parameters and add to params variable
             var table1 = window.document.getElementById('query_params');
             for (var i = 0, row; row = table1.rows[i]; i++) {
                 var key = table1.rows[i].cells[1].children[0].value
                 var value = table1.rows[i].cells[2].children[0].value
-                var firstKey = table1.rows[0].cells[1].children[0].value
-                var firstValue = table1.rows[0].cells[2].children[0].value
                 if (key && value) {
                     params += (key + '=' + encodeURIComponent(value) + '&');
                 }
             }
-
-            var table2 = window.document.getElementById('analytic_params');
-            for (var i = 0, row; row = table2.rows[i]; i++) {
-                var key = table2.rows[i].cells[1].children[0].value
-                var value = table2.rows[i].cells[2].children[0].value
-
-                if (key && value) {
-                    if (key == 'utm_content') {
-                        var tags = value.split(',');
-                        var validate = value.split(/[\s,]+/);
-                        var tagLength = tags.length;
-                        var validateLength = validate.length;
-                        if (tagLength != validateLength) {
-                            alert("For multiple tags, separate with commas and no spaces.");
-                            window.document.getElementById("analytic-value-3").focus();
-                            return
-                        }
-                        for (var n = 0; n < tagLength; n++) {
-                            params += (key + '=' + tags[n] + '&');
-                        }
-                    } else {
-                        params += (key + '=' + value + '&');
-                    }
-                }
-            }
-
             
             //var encodedURL = encodeURIComponent(original_url);
             if (!/(http(s?))\:\/\//.test(original_url)) {
@@ -147,8 +133,9 @@
     <!-- Description for one-off link creation -->
     <section class="container toggle" id="description_oneoff">
         <p><ol>
-            <li><strong>[REQUIRED]</strong> Enter URL with UTM codes (sets default redirects, and deep link key)</li>
-            <li>Set custom redirects and query parameters as needed</li>
+            <li><strong>[REQUIRED]</strong> Enter the web URL redirect for users without the app (serves as deep link key)</li>
+            <li>Edit/Remove appstore redirects, if web redirect is needed</li>
+            <li>Add UTM Tags</li>
             <li>Click <strong>Create Email Link</strong>, then copy and paste the Branch link into your email template</li>
         </ol></p>
     </section>
@@ -156,7 +143,7 @@
     <section class="container" id="link-creation">
         <!-- Table for user input -->
 
-        <h3 class="toggle">Set URL with UTM tags</h3>
+        <h3 class="toggle">Set URL w/UTM tags</h3>
 
         <table>
             <tbody>
@@ -174,17 +161,12 @@
             <tr id="row-1">
                 <td><label style="margin-right: 10px">Query Param 1</label></td>
                 <td><input class="form-control" style="width:300px" id="query-key-1" type="text" value="$ios_url"/></td>
-                <td><input class="form-control" style="width:450px" id="query-value-1" type="text" placeholder="https://itunes.apple.com/us/app/grubhub-local-food-delivery/id302920553?mt=8"/></td>
+                <td><input class="form-control" style="width:450px" id="query-value-1" type="text" value="https://itunes.apple.com/us/app/grubhub-local-food-delivery/id302920553?mt=8"/></td>
             </tr>
             <tr id="row-2">
                 <td><label style="margin-right: 10px">Query Param 2</label></td>
                 <td><input class="form-control" style="width:300px" id="query-key-2" type="text" value="$android_url"/></td>
-                <td><input class="form-control" style="width:450px" id="query-value-2" type="text" placeholder="https://play.google.com/store/apps/details?id=com.grubhub.android&amp;hl=en_US"/></td>
-            </tr>
-            <tr id="row-3">
-                <td><label style="margin-right: 10px">Query Param 3</label></td>
-                <td><input class="form-control" style="width:300px" id="query-key-3" type="text" value="$desktop_url"/></td>
-                <td><input class="form-control" style="width:450px" id="query-value-3" type="text" placeholder="https://www.grubhub.com"/></td>
+                <td><input class="form-control" style="width:450px" id="query-value-2" type="text" value="https://play.google.com/store/apps/details?id=com.grubhub.android&amp;hl=en_US"/></td>
             </tr>
         </table>
 
@@ -192,6 +174,30 @@
         <button class="btn toggle" id="add-query-button" style="background-color:#d3d3d3; display:inline;" onclick="addQuerylinkParam()">Add Query Param</button>
         <button class="btn toggle" id="remove-query-button" style="background-color:#d3d3d3; display:inline;"onclick="removeQuerylinkParam()">Remove Query Param</button>
         <br>
+
+        <h3 class="toggle">Add Analytics Tags</h3>
+        <table id="analytic_params" class="toggle">
+            <tr id="analytic-1">
+                <td><label style="margin-right: 10px">utm_medium</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-1" type="text" value="utm_medium" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-1" type="text" placeholder="i.e., email"/></td>
+            </tr>
+            <tr id="analytic-2">
+                <td><label style="margin-right: 10px">utm_source</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-2" type="text" value="utm_source" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-2" type="text" placeholder="i.e., appboy"/></td>
+            </tr>
+            <tr id="analytic-4">
+                <td><label style="margin-right: 10px">utm_campaign</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-4" type="text" value="utm_campaign" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-4" type="text" placeholder="i.e., 2018_promo"/></td>
+            </tr>
+            <tr id="analytic-3">
+                <td><label style="margin-right: 10px">utm_content</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-3" type="text" value="utm_content" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-3" type="text" placeholder="i.e., link_01"/></td>
+            </tr>
+        </table>
 
     </section>
 
