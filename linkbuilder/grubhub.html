@@ -51,8 +51,6 @@
             for (var i = 0, row; row = table2.rows[i]; i++) {
                 var key = table2.rows[i].cells[1].children[0].value
                 var value = table2.rows[i].cells[2].children[0].value
-                var firstKey = table2.rows[0].cells[1].children[0].value
-                var firstValue = table2.rows[0].cells[2].children[0].value
 
                 if (key && value) {
                     paramsA += (key + '%3D' + encodeURIComponent(value) + '%26');
@@ -74,7 +72,7 @@
                 original_url = 'https://' + original_url;
             }
             if (desktop_url) {
-                if (params == '') {
+                if (paramsA == '' && paramsB == '') {
                     output = get3PLink(original_url);
                 } else {
                     output = get3PLink(original_url) + '%26' + paramsA.slice(0, paramsA.length - 1) + '&' + paramsB.slice(0, paramsB.length - 1);
