@@ -13,21 +13,21 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
+    <!-- itunes metatag (ESPN pages contain these) -->
+    <meta name="apple-itunes-app" content="app-id=317469184, app-argument=sportscenter://x-callback-url/showStory?uid=23745896">
+
     <!-- Branch metatags (web SDK prioritizes these over Facebook & Twitter) -->
     <meta name="branch:deeplink:page" content="article" />
     <meta name="branch:deeplink:setDescription" content="You're reading an article" />
-    <!-- <meta name="branch:deeplink:$deeplink_path" content="sportscenter://x-callback-url/showClubhouse?uid=content:watch&amp;section=watch-espnplus" /> -->
+    <!-- <meta name="branch:deeplink:$deeplink_path" content="This would superceded FB & TW" /> -->
 
-    <!-- Twitter tags -->
+    <!-- Twitter tags (ESPN pages contain these) -->
     <meta name="twitter:app:url:iphone" content="sportscenter://x-callback-url/showStory?uid=23745896">
     <meta name="twitter:app:url:googleplay" content="sportscenter://x-callback-url/showStory?uid=23745896">
 
-    <!-- Facebook tags -->
-    <meta name="al:ios:url" content="sportscenter://x-callback-url/showStory?uid=23745896">
-    <meta name="al:android:url" content="sportscenter://x-callback-url/showStory?uid=23745896">
-
-    <!-- itunes metatag -->
-    <meta name="apple-itunes-app" content="app-id=317469184, app-argument=sportscenter://x-callback-url/showStory?uid=23745896">
+    <!-- Facebook tags (ESPN pages do not contain these) -->
+    <!-- <meta name="al:ios:url" content="sportscenter://x-callback-url/showStory?uid=23745896"> -->
+    <!-- <meta name="al:android:url" content="sportscenter://x-callback-url/showStory?uid=23745896"> -->
 
     <!-- Branch Web SDK -->
     <script type="text/javascript">
@@ -61,15 +61,8 @@
 
     </script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body id="page-top" class="index">
-       <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
 
         <!-- Branch <div> that prevents banner from overlapping with a fixed|absolute positioned nav element, but adding a top-margin  -->
@@ -107,13 +100,12 @@
         </div>
     </nav>
 
-        <!-- Header -->
     <header>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <span class="name">Article Page</span>
+                        <span class="name">ESPN Demo</span>
                         <hr class="star-light">
                         <span class="skills">This is an article on ESPN's website</span>
                     </div>
@@ -123,7 +115,6 @@
     </header>
 
     
-    <!-- Portfolio Grid Section -->
     <section id="portfolio">
         <div class="container">
             <div class="row">
@@ -136,19 +127,14 @@
             </div>
         </div>
     </section>
-     <!-- About Section -->
     <section class="success" id="about">
         <div class="container">
-
-            <!-- Section Header -->
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Filler Text</h2>
                     <hr class="star-light">
                 </div>
             </div>
-
-            <!-- Description Text -->
             <div class="row">
                 <div class="col-lg-5 col-lg-offset-1 col-md-6">
                     <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
@@ -162,19 +148,14 @@
     </section>
 
 
-    
-    <!-- Contact Section -->
 <section id="contact">
 	<div class="container">
-		<!-- Section Header -->
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Filler Text</h2>
                     <hr class="star-light">
                 </div>
             </div>
-
-            <!-- Description Text -->
             <div class="row">
                 <div class="col-lg-5 col-lg-offset-1 col-md-6">
                     <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
@@ -186,9 +167,6 @@
 	</div>
 </section>
 
-    
-
-        <!-- Footer -->
     <footer class="text-center">
         <div class="footer-above">
             <div class="container">
@@ -210,7 +188,6 @@
         </div>
     </footer>
 
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
     <div class="scroll-top page-scroll visible-xs visible-sm">
         <a class="btn btn-primary" href="#page-top">
             <i class="fa fa-chevron-up"></i>
@@ -221,7 +198,7 @@
     <!-- Branch javascript -->
     <script>
     
-    // Branch listener object that retrieves banner link data and prints it to console
+    // Branch listener retrieves banner link data and prints it to console
     var listener = function(event, data) {
         console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
         console.log(data);
@@ -239,10 +216,7 @@
     branch.addListener("didCallJourneyClose", listener);
     
 
-    // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
     function launchBranchJourney(){
-        console.log("launchBranchJourney called");
-
         var linkData = {
             campaign: 'campaign cannot be changed by javascript',
             feature: 'feature cannot be changed by javascript',
@@ -256,16 +230,15 @@
                 '$deeplink_path':'this was changed dynamically by javascript'
             }
         };
+        // function to change banner link data before it launches
         branch.setBranchViewData(linkData);
         
-        //function to launch journey with flags to disable banner animations
+        //function to launch banner, without animations (will NOT launch if banner dismissal active)
         branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
     }
 
-    // function for button to close journey (will NOT activate template's dismissal period)
     function closeBranchJourney(){
-        console.log("closeBranchJourney called");
-        //this is the call that closes the journey, with flags that disable the banner animations
+        // function to close the banner
         branch.closeJourney(function(err) {});
     }
 
