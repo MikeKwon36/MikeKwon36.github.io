@@ -13,16 +13,20 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Branch metatags (will be scraped by web SDK, and takes priority over Facebook & Twitter) -->
+    <!-- Branch metatags (web SDK prioritizes these over Facebook & Twitter) -->
     <meta name="branch:deeplink:page" content="article" />
     <meta name="branch:deeplink:setDescription" content="You're reading an article" />
     <!-- <meta name="branch:deeplink:$deeplink_path" content="sportscenter://x-callback-url/showClubhouse?uid=content:watch&amp;section=watch-espnplus" /> -->
 
-    <!-- Web SDK will scrape Twitter tags for $deeplink_path value -->
+    <!-- Twitter tags -->
     <meta name="twitter:app:url:iphone" content="sportscenter://x-callback-url/showStory?uid=23745896">
     <meta name="twitter:app:url:googleplay" content="sportscenter://x-callback-url/showStory?uid=23745896">
 
-    <!-- ESPN itunes metatag contains required $deeplink_path... Branch .init call can be customized to scrape this -->
+    <!-- Facebook tags -->
+    <meta name="al:ios:url" content="sportscenter://x-callback-url/showStory?uid=23745896">
+    <meta name="al:android:url" content="sportscenter://x-callback-url/showStory?uid=23745896">
+
+    <!-- itunes metatag -->
     <meta name="apple-itunes-app" content="app-id=317469184, app-argument=sportscenter://x-callback-url/showStory?uid=23745896">
 
     <!-- Branch Web SDK -->
