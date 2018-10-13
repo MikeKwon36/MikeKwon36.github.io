@@ -32,16 +32,16 @@
     branch.init('key_test_ggcXwe8AV1hZh93T4Kbj2nomByoTsIl1', function(err, data) {
         console.log(data);
         // Grab deep link data from ESPN meta tags and add to banner button
+        var meta;
         if (document.querySelectorAll("meta[name='apple-itunes-app']").length > 0) {
-            var meta = document.querySelector("meta[name='apple-itunes-app']").getAttribute("content");
+            meta = document.querySelector("meta[name='apple-itunes-app']").getAttribute("content");
             var charindex = meta.search("app-argument=");
             meta = meta.slice(charindex+28);
-            branch.setBranchViewData({data:{'$deeplink_path':meta}});
         } else if (document.querySelectorAll("meta[name='twitter:app:url:iphone']").length > 0) {
-            var meta = document.querySelector("meta[name='twitter:app:url:iphone']").getAttribute("content");
+            meta = document.querySelector("meta[name='twitter:app:url:iphone']").getAttribute("content");
             meta = meta.slice(15);
-            branch.setBranchViewData({data:{'$deeplink_path':meta}});
         }
+        branch.setBranchViewData({data:{'$deeplink_path':meta}});
     });
 
     </script>
