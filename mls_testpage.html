@@ -35,7 +35,9 @@
 
     // .init call to launch banner
     branch.init('key_test_fpACPHqfiPCsmWwgF9Wg3dnexBm9S0Fw', function(err, data) {
-        var meta = document.querySelector("meta[property='og:type']").getAttribute("content");
+        if (document.querySelectorAll("meta[property='og:type']").length > 0) {
+            var meta = document.querySelector("meta[property='og:type']").getAttribute("content");
+        }
         branch.setBranchViewData({data:{'$og_type':meta}});
         console.log(data);
     });
