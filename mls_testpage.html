@@ -13,17 +13,20 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Branch metatags -->
-    <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed later takes precedence" />
-    <!-- <meta name="branch:deeplink:$canonical_url" content="Branch metatag can overwrite $canonical_url" /> -->
+    <!-- metatags -->
+    <meta name="branch:deeplink:post" content="370684">
+    <meta property="og:type" content="video">
+    <meta property="og:title" content="GOAL: Josh Sargent deftly directs in a set piece for the opener">
+    <meta property="og:description" content="Goal! Josh Sargent scores from the right side of the box. Assisted by Kellyn Acosta.">
+    <meta property="og:url" content="https://www.mlssoccer.com/post/2018/10/16/goal-josh-sargent-deftly-directs-set-piece-opener?utm_source=social_share&amp;utm_medium=share_button&amp;utm_campaign=social_share_button">
+    <meta property="og:site_name" content="MLSsoccer.com">
+    <meta property="og:updated_time" content="2018-10-16T21:35:38-04:00">
+    <meta property="og:image" content="https://www.mlssoccer.com/sites/all/themes/custom/mp7/images/mls-1200x630.jpg">
+    <meta name="twitter:card" content="player">
+    <meta name="twitter:url" content="https://www.mlssoccer.com/post/2018/10/16/goal-josh-sargent-deftly-directs-set-piece-opener">
+    <meta name="twitter:title" content="GOAL: Josh Sargent deftly directs in a set piece for the opener">
+    <meta name="twitter:description" content="Goal! Josh Sargent scores from the right side of the box. Assisted by Kellyn Acosta.">
 
-    <!-- Re: which deeplink_path is scrape, Web SDK will prioritize Branch > Facebook AppLinks > Twitter tags -->
-    <meta name="branch:deeplink:$ios_deeplink_path" content="branch metatag scraped for $ios_deeplink_path" />
-    <meta name="branch:deeplink:$android_deeplink_path" content="branch metatag scraped for $android_deeplink_path" />
-    <meta name="al:ios:url" content="Facebook applinks metatag scraped for $ios_deeplink_path">
-    <meta name="al:android:url" content="Facebook applinks metatag scraped for $android_deeplink_path">
-    <meta name="twitter:app:url:iphone" content="Twitter metatag scraped for $ios_deeplink_path">
-    <meta name="twitter:app:url:googleplay" content="Twitter metatag scraped for $android_deeplink_path">
 
     <!-- Branch Web SDK -->
     <script type="text/javascript">
@@ -110,15 +113,6 @@
                         <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Click to Launch Banner</button>
                         <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Click to Close Banner</button>
                         <p></p>
-                        <ul>
-                            <li class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a><p></p></li>
-                            <li class="skills">The web <a href="https://github.com/BranchMetrics/web-branch-deep-linking">SDK</a> must be embedded in the page HTML<p></p></li>
-                            <li class="skills">The web SDK uses a Test API key<p></p></li>
-                            <li class="skills">To prevent the banner from overlapping with the page's fixed nav bar, a special Branch div is embedded as the first child element of the nav bar.  This div can be retrieved from the dashboard template editor<p></p></li>
-                            <li class="skills">Dismissing the banner will hide the banner from that user for a set timeframe (customizable in the dashboard)<p></p></li>
-                            <li class="skills">The banner's "Get|Open" button will recognize if the user has the app (app must have the same API key)<p></p></li>
-                            <li class="skills">Banner button clicks will always pass in the referring page's URL in the link data, under a key called "$canonical_url"<p></p></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -228,7 +222,6 @@
     
 
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
-    var launchCount = 1;
     function launchBranchJourney(){
         var linkData = {
             campaign: 'This analytics tag cannot be overridded in Journeys',
@@ -240,21 +233,14 @@
                 'custom_bool': true,
                 'custom_int (today\s date)': Date.now(),
                 'custom_string (url)': window.location.href,
-                '$journeys_icon_image_url':'https://www.valorebooks.com/campus-life/wp-content/uploads/icon_340.png',
-                '$journeys_button_get_no_app':'changed!',
-                '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Banner relaunched ' + launchCount + ' times',
-                '$journeys_description':'Description reset by button click'
             }
         };
         branch.setBranchViewData(linkData);
         branch.track('pageview');
-        launchCount++;
     }
 
     // function for button to close journey (will NOT activate template's dismissal period)
     function closeBranchJourney(){
-        console.log("closeBranchJourney called");
         branch.closeJourney(function(err) {});
     }
 
