@@ -24,8 +24,8 @@
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK',function(err, data) {
         branch.setBranchViewData({
             data:{
-                'text2':'text set by SBVD',
-                '$journeys_description':'Description reset on load via JS'
+                'cart_contents':'sku123,sku345,sku567',
+                'rewards_id':12345
             }
         });
         console.log(data);
@@ -198,7 +198,7 @@
     function closeBranchJourney(){
         branch.closeJourney(function(err) {});
     }
-    
+
 
     </script>
 
