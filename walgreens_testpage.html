@@ -202,17 +202,17 @@
     // function to create a link via the web SDK
     function createLink(){
         branch.link({
-            tags: ['tag1','tag2'],
-            channel: 'facebook',
-            feature: 'dashboard',
-            stage: 'new user',
+            tags: ['store_12345','employee_007'],
+            channel: 'walgreens.com',
+            campaign: 'pill reminder',
+            feature: 'webSDK',
             data: {
-                mydata: 'something',
-                foo: 'bar',
-                '$desktop_url': 'http://myappwebsite.com',
-                '$ios_url': 'http://myappwebsite.com/ios',
-                '$ipad_url': 'http://myappwebsite.com/ipad',
-                '$android_url': 'http://myappwebsite.com/android',
+                'coupon_code':9999,
+                'rewards_id':12345,
+                'cart_contents':'sku123,sku456,sku789',
+                'rx_id':111222,
+                '$desktop_url': 'https://www.walgreens.com/',
+                '$canonical_url': 'https://www.walgreens.com/',
             }
         }, function(err, link) {
             document.getElementById("link").innerHTML=link; 
