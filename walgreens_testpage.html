@@ -182,10 +182,15 @@
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
     function launchBranchJourney(){
         var linkData = {
-            channel: 'channel was changed by javascript',
+            campaign: 'pill reminder',
+            feature: 'webSDK',
             data: {
-                'cart_contents':'sku111,sku111,sku111',
-                'rewards_id':00000
+                'coupon_code':9999,
+                'cart_contents':'sku123,sku456,sku789',
+                'rx_id':111222,
+                '$desktop_url': 'https://www.walgreens.com/pharmacy/',
+                '$canonical_url': 'https://www.walgreens.com/pharmacy/',
+                '$original_url': 'https://www.walgreens.com/pharmacy/'
             }
         };
         branch.setBranchViewData(linkData);
