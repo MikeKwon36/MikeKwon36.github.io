@@ -200,13 +200,10 @@
     // function to create a link via the web SDK
     function createLink(){
         branch.link({
-            tags: ['store_12345','employee_007'],
-            channel: 'walgreens.com',
             campaign: 'pill reminder',
             feature: 'webSDK',
             data: {
                 'coupon_code':9999,
-                'rewards_id':12345,
                 'cart_contents':'sku123,sku456,sku789',
                 'rx_id':111222,
                 '$desktop_url': 'https://www.walgreens.com/pharmacy/',
