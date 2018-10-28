@@ -79,7 +79,8 @@
                 } else {
                     if (paramsA == ''){
                          queryLogic = '';
-                    } else if (paramsB == ''){
+                    }
+                    if (paramsB == ''){
                          queryLogicB = '';
                     };
                     output = get3PLink(original_url) + queryLogic + paramsA.slice(0, paramsA.length - 1) + queryLogicB + paramsB.slice(0, paramsB.length - 1);

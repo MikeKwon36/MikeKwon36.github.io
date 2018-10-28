@@ -79,9 +79,11 @@
                 } else {
                     if (paramsA == ''){
                         queryLogic = '';
-                    } else if (paramsB == ''){
+                    }
+                    if (paramsB == ''){
                         queryLogicB = '';
-                    } else if (original_url.indexOf("?")>0){
+                    }
+                    if (original_url.indexOf("?")>0){
                         queryLogic = '%26';
                     };
                     output = get3PLink(original_url) + queryLogic + paramsA.slice(0, paramsA.length - 3) + queryLogicB + paramsB.slice(0, paramsB.length - 1);
