@@ -69,6 +69,7 @@
             
             //var encodedURL = encodeURIComponent(original_url);
             var queryLogic = '%3F';
+            var queryLogicB = '&';
             if (!/(http(s?))\:\/\//.test(original_url)) {
                 original_url = 'https://' + original_url;
             }
@@ -78,10 +79,12 @@
                 } else {
                     if (paramsA == ''){
                         queryLogic = '';
+                    } else if (paramsB == ''){
+                        queryLogicB = '';
                     } else if (original_url.indexOf("?")>0){
                         queryLogic = '%26';
                     };
-                    output = get3PLink(original_url) + queryLogic + paramsA.slice(0, paramsA.length - 3) + '&' + paramsB.slice(0, paramsB.length - 1);
+                    output = get3PLink(original_url) + queryLogic + paramsA.slice(0, paramsA.length - 3) + queryLogicB + paramsB.slice(0, paramsB.length - 1);
                 }
             }
 
