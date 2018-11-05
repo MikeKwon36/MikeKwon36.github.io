@@ -70,13 +70,14 @@
             //var encodedURL = encodeURIComponent(original_url);
             var queryLogic = '?';
             var queryLogicB = '?';
-            if (!/(http(s?))\:\/\//.test(original_url)) {
-                original_url = 'https://' + original_url;
-            }
             if (desktop_url) {
                 if (paramsA == '' && paramsB == '') {
                     output = original_url;
                 } else {
+                    if (original_url.indexOf("?")>0){
+                        queryLogic = '&';
+                        queryLogicB = '&';
+                    };
                     if (paramsA == ''){
                          queryLogic = '';
                     }
