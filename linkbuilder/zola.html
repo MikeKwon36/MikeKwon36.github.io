@@ -69,22 +69,17 @@
             
             //var encodedURL = encodeURIComponent(original_url);
             var queryLogic = '?';
-            var queryLogicB = '?';
+            var queryLogicB = '&';
             if (desktop_url) {
+                if (original_url.indexOf("?")>0){
+                    queryLogic = '&';
+                };
                 if (paramsA == '' && paramsB == '') {
                     output = original_url;
-                } else {
-                    if (original_url.indexOf("?")>0){
-                        queryLogic = '&';
-                        queryLogicB = '&';
-                    };
-                    if (paramsA == ''){
-                         queryLogic = '';
-                    }
-                    if (paramsB == ''){
-                         queryLogicB = '';
-                    };
-                    output = original_url + queryLogic + paramsA.slice(0, paramsA.length - 1) + queryLogicB + paramsB.slice(0, paramsB.length - 1);
+                } else if (paramsA == ''){
+                    queryLogicB = '';
+                }
+                output = original_url + queryLogic + paramsA.slice(0, paramsA.length - 1) + queryLogicB + paramsB.slice(0, paramsB.length - 1);
                 }
             }
 
