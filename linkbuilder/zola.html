@@ -101,7 +101,7 @@
         function addQuerylinkParam() {
             var newRowIndex = getRowCount() + 1;
 
-            var newRowHTML = `<tr id="row-${newRowIndex}"><td><label style="margin-right:10px">Query Param ${newRowIndex}</label></td><td><input class="form-control" style="width:300px" id="query-key-${newRowIndex}" type="text" placeholder="i.e., $desktop_url, $ios_url, $android_url"/></td><td><input class="form-control" style="width:450px" id="query-value-${newRowIndex}" type="text" placeholder="i.e., https://www.bk.com/offers, whopper"/></td></tr>`;
+            var newRowHTML = `<tr id="row-${newRowIndex}"><td><label style="margin-right:10px">Query Param ${newRowIndex}</label></td><td><input class="form-control" style="width:300px" id="query-key-${newRowIndex}" type="text" placeholder="i.e., $desktop_url, $ios_url, $android_url"/></td><td><input class="form-control" style="width:450px" id="query-value-${newRowIndex}" type="text" placeholder="i.e., https://www.zola.com, true"/></td></tr>`;
             $("#query_params").append(newRowHTML);
         }
 
@@ -150,7 +150,7 @@
             <tbody>
                 <tr class="toggle">
                     <td><label style="margin-right: 10px">Enter a web URL</label></td>
-                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., https://www.bk.com/offers"/></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., https://www.zola.com"/></td>
                 </tr>
             </tbody>
         </table>
