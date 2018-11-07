@@ -57,6 +57,8 @@
             if (utm_medium){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
+            } else {
+                utm_medium = "Email Braze";
             }
             if (utm_campaign){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
