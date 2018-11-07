@@ -54,19 +54,19 @@
             var ios = window.document.getElementById('$ios_url').value;
             var android = window.document.getElementById('$android_url').value;
 
-            if (utm_medium != null || utm_medium != ""){
+            if (utm_medium){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + utm_medium;
             }
-            if (utm_campaign != null || utm_campaign != ""){
+            if (utm_campaign){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + utm_campaign;
             }
-            if (utm_source != null || utm_source != ""){
+            if (utm_source){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + utm_source;
             }
-            if (utm_content != null || utm_content != ""){
+            if (utm_content){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + utm_content;
             }
