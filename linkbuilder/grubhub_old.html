@@ -56,19 +56,19 @@
 
             if (utm_medium){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
-                original_url = original_url + queryLogic + utm_medium;
+                original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
             }
             if (utm_campaign){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
-                original_url = original_url + queryLogic + utm_campaign;
+                original_url = original_url + queryLogic + "utm_campaign=" + utm_campaign;
             }
             if (utm_source){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
-                original_url = original_url + queryLogic + utm_source;
+                original_url = original_url + queryLogic + "utm_source=" + utm_source;
             }
             if (utm_content){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
-                original_url = original_url + queryLogic + utm_content;
+                original_url = original_url + queryLogic + "utm_content=" + utm_content;
             }
             if (desktop == null || desktop == ""){
                 desktop = original_url;
