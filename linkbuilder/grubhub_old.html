@@ -80,6 +80,8 @@
                 android = original_url;
             }
 
+            console.log(original_url);
+
             var linkData = {
                 tags: [utm_content],
                 feature: utm_medium,
@@ -101,9 +103,10 @@
 
             branch.link(linkData, function(err, link) {
                 if (err == null) {
+                    console.log(link);
                     document.getElementById('generated3PLink').value = link;
                 } else {
-                    console.log(err, link);
+                    console.log(err);
                     document.getElementById('generated3PLink').value = err;
                 }
             });
