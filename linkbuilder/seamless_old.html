@@ -1,687 +1,233 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>NBA Team Link Creator</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <link rel="apple-touch-icon" sizes="57x57" href="//branch.io/img/favicon/apple-touch-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="//branch.io/img/favicon/apple-touch-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="//branch.io/img/favicon/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="//branch.io/img/favicon/apple-touch-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="//branch.io/img/favicon/apple-touch-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="//branch.io/img/favicon/apple-touch-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="//branch.io/img/favicon/apple-touch-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="//branch.io/img/favicon/apple-touch-icon-152x152.png">
-        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,600,300' rel='stylesheet' type='text/css'>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <style>
-            .page-header, .panel-title, label {
-                font-weight: lighter
+<head>
+    <title>SEAMLESS EMAIL LINK CREATOR</title>
+    <link rel="icon" href="https://branch.io/img/press/kit/badge-black.png" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- jQuery Library via Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Import clipboard.js -->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+
+    <!-- Import Papa Parse -->
+    <script src="PapaParse-4.3.2/papaparse.min.js"></script>
+
+    <!-- Import FileSaver.js -->
+    <script src="FileSaver.js-master/FileSaver.min.js"></script>
+
+
+    <!-- Script to generate 3P link based on user inputs -->
+    <script>
+        function generate3PLink() {
+            //var domain = window.document.getElementById("branchDomain").value;
+            //var ESPProviderCode = window.document.getElementById("ESPProviderCode").value;
+            var desktop_url = false;
+            var original_url = window.document.getElementById("originalUrl").value;
+
+            if (!original_url) {
+                alert("Please enter a destination URL.");
+                window.document.getElementById("originalUrl").focus();
+                return
+            } else if (original_url) {
+                desktop_url = true;
             }
+            var paramsA = '';
+            var paramsB = '';
+            var output = '';
 
-            .btn, .page-header {
-                text-transform: uppercase
-            }
+            //Add analytics params as part of $original_url
+            var table2 = window.document.getElementById('analytic_params');
+            for (var i = 0, row; row = table2.rows[i]; i++) {
+                var key = table2.rows[i].cells[1].children[0].value
+                var value = table2.rows[i].cells[2].children[0].value
 
-            body {
-                font-family: "Open Sans", Helvetica, Arial;
-                background-color: #fafafa;
-                color: #444
-            }
-
-            label {
-                font-size: 110%
-            }
-
-            .panel-body {
-                display: grid
-            }
-
-            .panel-header {
-                margin-top: 70px
-            }
-
-            .page-header {
-                font-size: 300%;
-                margin-bottom: 30px
-            }
-
-            .panel-title {
-                font-size: 150%
-            }
-
-            .label {
-                display: inline-flex
-            }
-
-            .form-control {
-                margin-bottom: 10px;
-                height: inherit
-            }
-
-            .redactor_box, input.form-control, option, select {
-                border-radius: 3px;
-                border-color: #eee;
-                font-size: 16px;
-                line-height: normal;
-                margin-right: 0;
-                padding: 15px 20px;
-                -moz-box-shadow: none;
-                -webkit-box-shadow: none;
-                box-shadow: none;
-                width: 100%;
-                color: #444;
-                font-weight: 400;
-                background: #fff
-            }
-
-            .btn {
-                background-color: #1cadce;
-                font-weight: 700;
-                font-size: 16px;
-                display: inline-block;
-                padding: 15px 15px;
-                border-radius: 2px;
-                -moz-border-radius: 2px;
-                -webkit-border-radius: 2px;
-                color: #fff;
-                transition: background 250ms;
-                -webkit-transition: background 250ms;
-                margin: 30px auto 30px;
-                min-width: 170px
-            }
-
-            #final_url {
-                margin-top: 2%;
-                margin-bottom: 5%;
-                font-weight: lighter;
-                font-size: 110%
-            }
-
-            .navbar-brand img {
-                max-height: 40px
-            }
-
-            nav.navbar-main {
-                padding: 2px 0;
-                background-color: #2F2F2F;
-                position: fixed;
-                width: 100%;
-                z-index: 99;
-                border-radius: 0
-            }
-
-            .brand {
-                margin-top: -10px
-            }
-
-            .custom-select {
-                width: 145px;
-                padding: 15px;
-                font-size: 16px;
-                font-weight: 100;
-            }
-
-            p {
-                font-style: italic;
-                font-size: 85%;
-            }
-
-            .extra-field {
-                display: inline-flex;
-            }
-
-            .extra-field-input {
-                margin: 10px 40px 10px 40px !important;
-            }
-
-            .add-field-btn {
-                font-size: 12px;
-            }
-        </style>
-        <script>
-            var tricodeMap = {
-                "blazers": "POR",
-                "bucks": "MIL",
-                "bulls": "CHI",
-                "cavaliers": "CLE",
-                "celtics": "BOS",
-                "clippers": "LAC",
-                "grizzlies": "MEM",
-                "hawks": "ATL",
-                "heat": "MIA",
-                "hornets": "CHA",
-                "jazz": "UTA",
-                "kings": "SAC",
-                "knicks": "NYK",
-                "lakers": "LAL",
-                "magic": "ORL",
-                "mavericks": "DAL",
-                "nba": "NBA",
-                "nets": "BKN",
-                "nuggets": "DEN",
-                "pacers": "IND",
-                "pelicans": "NOP",
-                "pistons": "DET",
-                "raptors": "TOR",
-                "rockets": "HOU",
-                "sixers": "PHI",
-                "spurs": "SAS",
-                "suns": "PHX",
-                "thunder": "OKC",
-                "timberwolves": "MIN",
-                "warriors": "GSW",
-                "wizards": "WAS"
-            };
-
-            var defaultCanonical = "https://nba.com";
-            var domFieldCount = 0;
-            var intFieldCount = 0;
-
-            (function(b, r, a, n, c, h, _, s, d, k) {
-                if (!b[n] || !b[n]._q) {
-                    for (; s < _.length; )
-                        c(h, _[s++]);
-                    d = r.createElement(a);
-                    d.async = 1;
-                    d.src = "https://cdn.branch.io/branch-latest.min.js";
-                    k = r.getElementsByTagName(a)[0];
-                    k.parentNode.insertBefore(d, k);
-                    b[n] = h
+                if (key && value) {
+                    paramsA += (key + '%3D' + value + '%26');
                 }
             }
-            )(window, document, "script", "branch", function(b, r) {
-                b[r] = function() {
-                    b._q.push([r, arguments])
-                }
-            }, {
-                _q: [],
-                _v: 1
-            }, "addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
 
-            function addField(element) {
-                if (element.parentElement.id == "extra_param_panel_body_international") {
-                    intFieldCount++;
-                    var fieldCount = intFieldCount;
+            // Get query parameters and add to params variable
+            var table1 = window.document.getElementById('query_params');
+            for (var i = 0, row; row = table1.rows[i]; i++) {
+                var key = table1.rows[i].cells[1].children[0].value
+                var value = table1.rows[i].cells[2].children[0].value
+                if (key && value) {
+                    paramsB += (key + '=' + encodeURIComponent(value) + '&');
+                }
+            }
+            
+            //var encodedURL = encodeURIComponent(original_url);
+            var queryLogic = '%3F';
+            var queryLogicB = '&';
+            if (!/(http(s?))\:\/\//.test(original_url)) {
+                original_url = 'https://' + original_url;
+            }
+            if (desktop_url) {
+                if (paramsA == '' && paramsB == '') {
+                    output = get3PLink(original_url);
                 } else {
-                    domFieldCount++;
-                    var fieldCount = domFieldCount;
+                    if (paramsA == ''){
+                        queryLogic = '';
+                    }
+                    if (paramsB == ''){
+                        queryLogicB = '';
+                    }
+                    if (original_url.indexOf("?")>0){
+                        queryLogic = '%26';
+                    };
+                    output = get3PLink(original_url) + queryLogic + paramsA.slice(0, paramsA.length - 3) + queryLogicB + paramsB.slice(0, paramsB.length - 1);
                 }
-
-                var newField = '<span class="extra-field"><input type="text" id="' + element.parentElement.id + '_key_' + fieldCount + '" class="extra-field-input form-control" value="" placeholder="Key"/><input type="text" id="' + element.parentElement.id + '_value_' + fieldCount + '" class="extra-field-input form-control" value="" placeholder="Value"/></span>';
-                element.parentElement.innerHTML += newField;
             }
 
-            function createLink() {
-                //International Key
-                branch.init('key_live_ddEpNB63kFwdMG424MWxhbmirAlMX5V0');
+            window.document.getElementById("generated3PLink").value = output;
+        }
 
-                var marketingTitle = document.getElementById('marketing_title').value;
-                var teamName = document.getElementById('team_name_selector').value;
-                var linkAlias = document.getElementById('alias').value;
-                var postDate = document.getElementById('date').value;
-                var fallbackInternational = document.getElementById('fallback_international').value;
-                var fallbackUS = document.getElementById('fallback_us').value;
-                var channel = document.getElementById('channel').value;
-                var deeplinkValue = document.getElementById('deeplink_value').value;
-                var sectionId = document.getElementById('section_id').value;
-                var contentId = document.getElementById('content_id').value;
+        // Returns current number of query parameter rows
+        function getRowCount() {
+            var rowCount = window.document.getElementById('query_params').rows.length;
 
-                var ogTitle = document.getElementById('og_title').value;
-                var ogDescription = document.getElementById('og_description').value;
-                var ogImage = document.getElementById('og_image').value;
-                var ogUrl = document.getElementById('og_url').value;
-                var ogVideo = document.getElementById('og_video').value;
-                var ogType = document.getElementById('og_type').value;
-                var campaign = document.getElementById('campaign').value;
-                var content = document.getElementById('content_selector').value;
-                var media = document.getElementById('media_selector').value;
-                var time = document.getElementById('time_selector').value;
-                var hashtags = document.getElementById('hashtags').value;
-                var player = document.getElementById('playerName').value;
+            return rowCount;
+        }
 
-                if ((fallbackUS == null || fallbackUS == "") & tricodeMap[teamName] != "nba") {
-                    fallbackUS = "https://www.nba.com/" + teamName.toLowerCase() + "/leaguepass/pricing";
-                }
+        // Adds a new row for additional query parameters
+        function addQuerylinkParam() {
+            var newRowIndex = getRowCount() + 1;
 
-                if ((fallbackInternational == null || fallbackInternational == "") & tricodeMap[teamName] != "nba") {
-                    fallbackInternational = "http://www.nba.com/leaguepass?aff=" + teamName.toLowerCase() + "&cid=Leaguepass:teams:site:" + teamName.toLowerCase();
-                }
+            var newRowHTML = `<tr id="row-${newRowIndex}"><td><label style="margin-right:10px">Query Param ${newRowIndex}</label></td><td><input class="form-control" style="width:300px" id="query-key-${newRowIndex}" type="text" placeholder="i.e., $desktop_url, $ios_url, $android_url"/></td><td><input class="form-control" style="width:450px" id="query-value-${newRowIndex}" type="text" placeholder="i.e., https://www.seamless.com, recipe#34"/></td></tr>`;
+            $("#query_params").append(newRowHTML);
+        }
 
-                var internationalLinkData = {
-                    tags: [],
-                    channel: channel,
-                    campaign: teamName,
-                    type: 2,
-                    data: {
-                        "$one_time_use": false,
-                        "section_id": sectionId,
-                        "content_id": contentId,
-                        "$marketing_title": marketingTitle,
-                        "content": content,
-                        "media": media,
-                        "hashtags": hashtags,
-                        "player_name": player,
-                        "team_campaign": campaign
-                    }
-                };
-
-                var i;
-                for (i = 1; i <= intFieldCount; i++) {
-                    var key = document.getElementById('extra_param_panel_body_international_key_' + i).value;
-                    var value = document.getElementById('extra_param_panel_body_international_value_' + i).value;
-                    if (key != null && key != "" && value != null) {
-                        // allowing for an empty value, but not an empty key
-                        console.log('int key: ' + key);
-                        console.log('int value: ' + value);
-                        internationalLinkData.data[key] = value;
-                    }
-                }
-
-                if (fallbackInternational !== null && fallbackInternational != "") {
-                    internationalLinkData.data["$fallback_url"] = fallbackInternational;
-                    internationalLinkData.data["$canonical_url"] = fallbackInternational;
-                } else {
-                    internationalLinkData.data["$canonical_url"] = defaultCanonical;
-                }
-
-                // Create International Link
-                branch.link(internationalLinkData, function(err, internationalLink) {
-
-                    // Create Domestic Link
-                    if (err == null) {
-                        // Domestic Key
-                        branch.init('key_live_fgFkpjXwHs405M7eQv9fpbjkBEidTTkL');
-
-                        var domesticLinkData = {
-                            tags: [],
-                            channel: channel,
-                            alias: linkAlias,
-                            campaign: teamName,
-                            type: 2,
-                            data: {
-                                "$fallback_url": internationalLink,
-                                "$one_time_use": false,
-                                "deeplink": deeplinkValue,
-                                "tricode": tricodeMap[teamName],
-                                "$marketing_title": marketingTitle,
-                                "post_date": postDate,
-                                "content": content,
-                                "media": media,
-                                "hashtags": hashtags,
-                                "player_name": player,
-                                "team_campaign": campaign
-                            }
-                        };
-
-                        if (ogTitle != null && ogTitle != "") {
-                            domesticLinkData.data["$og_title"] = ogTitle
-                        }
-                        if (ogDescription != null && ogDescription != "") {
-                            domesticLinkData.data["$og_description"] = ogDescription
-                        }
-                        if (ogImage != null && ogImage != "") {
-                            domesticLinkData.data["$og_image_url"] = ogImage
-                        }
-                        if (ogUrl != null && ogUrl != "") {
-                            domesticLinkData.data["$og_url"] = ogUrl
-                        }
-                        if (ogType != null && ogType != "") {
-                            domesticLinkData.data["$og_type"] = ogType
-                        }
-                        if (ogVideo != null && ogVideo != "") {
-                            domesticLinkData.data["$og_video"] = ogVideo
-                        }
-
-                        var j;
-                        for (j = 1; j <= domFieldCount; j++) {
-                            var key = document.getElementById('extra_param_panel_body_domestic_key_' + j).value;
-                            var value = document.getElementById('extra_param_panel_body_domestic_value_' + j).value;
-                            if (key != null && key != "" && value != null) {
-                                // allowing for an empty value, but not an empty key
-                                console.log('dom key: ' + key);
-                                console.log('dom value: ' + value);
-                                domesticLinkData.data[key] = value;
-                            }
-                        }
-
-                        if (fallbackUS != null && fallbackUS != "") {
-                            domesticLinkData.data["$fallback_url_us"] = fallbackUS;
-                            domesticLinkData.data["$canonical_url"] = fallbackUS;
-
-                            branch.link(domesticLinkData, function(err, domesticLink) {
-                                if (err == null) {
-                                    document.getElementById('final_url').value = domesticLink;
-                                } else {
-                                    console.log(err, domesticLink);
-                                    document.getElementById('final_url').value = err;
-                                }
-                            });
-                        } else {
-                            domesticLinkData.data["$always_deeplink"] = "false";
-                            domesticLinkData.data["$ios_deepview"] = "false";
-
-                            // make new domestic link and put it as fallbackUS
-                            var domesticBackgroundLinkData = {
-                                tags: [],
-                                channel: channel,
-                                campaign: teamName,
-                                // type: 2,
-                                data: {
-                                    "$one_time_use": false,
-                                    "deeplink": deeplinkValue,
-                                    "tricode": tricodeMap[teamName],
-                                    "$canonical_url": defaultCanonical
-                                }
-                            }
-
-                            var j;
-                            for (j = 1; j <= domFieldCount; j++) {
-                                var key = document.getElementById('extra_param_panel_body_domestic_key_' + j).value;
-                                var value = document.getElementById('extra_param_panel_body_domestic_value_' + j).value;
-                                if (key != null && key != "" && value != null) {
-                                    // allowing for an empty value, but not an empty key
-                                    console.log('back key: ' + key);
-                                    console.log('back value: ' + value);
-                                    domesticBackgroundLinkData.data[key] = value;
-                                }
-                            }
-
-                            branch.link(domesticBackgroundLinkData, function(err, domesticBackgroundLink) {
-                                if (err == null) {
-                                    domesticLinkData.data["$fallback_url_us"] = domesticBackgroundLink;
-                                    domesticLinkData.data["$canonical_url"] = defaultCanonical;
-                                } else {
-                                    console.log(err, domesticBackgroundLink);
-                                    document.getElementById('final_url').value = err;
-                                }
-                            });
-
-                            branch.link(domesticLinkData, function(err, domesticLink) {
-                                if (err == null) {
-                                    document.getElementById('final_url').value = domesticLink;
-                                } else {
-                                    console.log(err, domesticLink);
-                                    document.getElementById('final_url').value = err;
-                                }
-                            });
-                        }
-                    } else {
-                        console.log(err, internationalLink);
-                        document.getElementById('final_url').value = err;
-                    }
-                });
+        // Removes a query parameter row
+        function removeQuerylinkParam() {
+            rowCount = getRowCount();
+            if (rowCount > 1) {
+                current_row = getRowCount();
+                $(`#row-${current_row}`).remove();
             }
-        </script>
-    </head>
-    <body>
-        <nav class="navbar navbar-default navbar-static-top navbar-main">
-            <div class="container">
-                <div class="navbar-header">
-                    <div class="navbar-brand brand">
-                        <a href="https://branch.io" target="_blank" class="logo-container">
-                            <div class="branch-logo">
-                                <img src="https://branch.io/img/logo_white.png" alt="BranchMetrics" title="Branch Metrics">
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <div class="container">
-            <div class="panel-header page-header">NBA Team Link Creator
-      </div>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#basic_fields" aria-expanded="false" aria-controls="other_fields">Basic Setup
-                </a>
-                            </h3>
-                        </div>
-                        <div id="basic_fields" class="collapse show">
-                            <div class="panel-body">
-                                <label>
-                                    Link Title (Required):
-                    <p>Name of the link on the Branch Quick Links dashboard page.</p>
-                                    <input type="text" id="marketing_title" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    Team Name (Required):
-                    <p>Which team is this link associated with?</p>
-                                    <select class="form-control custom-select" id="team_name_selector">
-                                        <option value="nba">NBA</option>
-                                        <optgroup label="East"></optgroup>
-                                        <option value="bucks">Bucks</option>
-                                        <option value="bulls">Bulls</option>
-                                        <option value="cavaliers">Cavaliers</option>
-                                        <option value="celtics">Celtics</option>
-                                        <option value="hawks">Hawks</option>
-                                        <option value="heat">Heat</option>
-                                        <option value="hornets">Hornets</option>
-                                        <option value="knicks">Knicks</option>
-                                        <option value="magic">Magic</option>
-                                        <option value="nets">Nets</option>
-                                        <option value="pacers">Pacers</option>
-                                        <option value="pistons">Pistons</option>
-                                        <option value="raptors">Raptors</option>
-                                        <option value="sixers">Sixers</option>
-                                        <option value="wizards">Wizards</option>
-                                        <optgroup label="West"></optgroup>
-                                        <option value="blazers">Blazers</option>
-                                        <option value="clippers">Clippers</option>
-                                        <option value="grizzlies">Grizzlies</option>
-                                        <option value="jazz">Jazz</option>
-                                        <option value="kings">Kings</option>
-                                        <option value="lakers">Lakers</option>
-                                        <option value="mavericks">Mavericks</option>
-                                        <option value="nuggets">Nuggets</option>
-                                        <option value="pelicans">Pelicans</option>
-                                        <option value="rockets">Rockets</option>
-                                        <option value="spurs">Spurs</option>
-                                        <option value="suns">Suns</option>
-                                        <option value="thunder">Thunder</option>
-                                        <option value="timberwolves">Timberwolves</option>
-                                        <option value="warriors">Warriors</option>
-                                    </select>
-                                </label>
-                                <label>
-                                    Content (Required):
-                    <p>What type of content is this link associated with?</p>
-                                    <select class="form-control custom-select" id="content_selector">
-                                        <option value="player">Player</option>
-                                        <option label="gameday">Gameday</option>
-                                        <option value="league_pass">League Pass</option>
-                                        <option label="interview">Interview</option>
-                                        <option label="draft">Draft</option>
-                                        <option label="other">[Other]</option>
-                                    </select>
-                                </label>
-                                <label>
-                                    Media (Required):
-                    <p>What media type is this link associated with?</p>
-                                    <select class="form-control custom-select" id="media_selector">
-                                        <option value="image">Image</option>
-                                        <option label="video">Video</option>
-                                    </select>
-                                </label>
-                                <label>
-                                    Time (Required):
-                    <p>What part of the seaason is this link associated with?</p>
-                                    <select class="form-control custom-select" id="time_selector">
-                                        <option value="off_season">Off Season</option>
-                                        <option label="preseason">Preseason</option>
-                                        <option value="regular_season">Regular Season</option>
-                                        <option label="playoffs">Playoffs</option>
-                                        <option label="finals">Finals</option>
-                                    </select>
-                                </label>
-                                <label>
-                                    Channel (Optional):
-                    <p>Where will this be used/posted?</p>
-                                    <input type="text" id="channel" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    Alias (Optional):
-                    
-                                    <p>
-                                        Alias will be appended to the link domain (nba.app.link). For example, if you entered "test_alias",
-                    we would create the following link: "https://nba.app.link/test_alias".
-                    <b>Note: link aliases may not be reused</b>
-                                    </p>
-                                    <input type="text" id="alias" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    Date (Optional):
-                    
-                                    <p>
-                                        The date will be appended to the link to help distiguish between posts. Please format: <b>ddmmyy</b>
-                                        . For example, April 10, 2018 would be <b>041018</b>
-                                        .
-                                    </p>
-                                    <input type="text" id="date" class="form-control" value=""/>
-                                </label>
-                                <!-- <div class="playerNameBox"> -->
-                                <label>
-                                    Player Name (Optional):
-                      <p>The name of the player in the player post.</p>
-                                    <input type="text" id="playerName" class="form-control" value=""/>
-                                </label>
-                                <!-- </div> -->
-                                <label>
-                                    Campaign (Optional):
-                    <p>The Social or marketing campaign name.</p>
-                                    <input type="text" id="campaign" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    Hashtags (Optional):
-                    <p>Team hashtag(s) associated with the post.</p>
-                                    <input type="text" id="hashtags" class="form-control" value=""/>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#fallback_fields" aria-expanded="false" aria-controls="other_fields">Fallback Behavior
-                </a>
-                            </h3>
-                        </div>
-                        <div id="fallback_fields" class="collapse">
-                            <div class="panel-body">
-                                <label>
-                                    US Web Fallback URL (Optional):
-                  <p>If the link is clicked in the US by a user without the app, where should that user go? If no value
-                  is specified, user will be taken to the App/Play Store on iOS/Android, or https://nba.com on desktop.</p>
-                                    <input type="text" id="fallback_us" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    International Web URL (Optional):
-                  <p>If the link is clicked outside of the US by a user without the app, where should that user go? If no value
-                  is specified, user will be taken to the App/Play Store on iOS/Android, or https://nba.com on desktop.</p>
-                                    <input type="text" id="fallback_international" class="form-control" value=""/>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#dl_fields" aria-expanded="false" aria-controls="other_fields">Deep Linking
-                </a>
-                            </h3>
-                        </div>
-                        <div id="dl_fields" class="collapse">
-                            <div class="panel-body">
-                                <label>
-                                    Deeplink Value (Optional):
-                  <p>Used for deep linking into the NBA Domestic mobile apps.</p>
-                                    <input type="text" id="deeplink_value" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    Section ID (Optional):
-                  <p>Used for deep linking into the NBA International mobile apps</p>
-                                    <input type="text" id="section_id" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    Content ID (Optional):
-                  <p>Used for deep linking into the NBA International mobile apps</p>
-                                    <input type="text" id="content_id" class="form-control" value=""/>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#og_fields" aria-expanded="false" aria-controls="other_fields">Social Media
-                </a>
-                            </h3>
-                        </div>
-                        <div id="og_fields" class="collapse">
-                            <div class="panel-body">
-                                <label>
-                                    OG Title (Optional):
-                  <p>Specifies a title to show if the link is posted on social media.</p>
-                                    <input type="text" id="og_title" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    OG Description (Optional):
-                  <p>Specifies a description to show if the link is posted on social media.</p>
-                                    <input type="text" id="og_description" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    OG Image URL (Optional):
-                  <p>Specifies an image to show if the link is posted on social media.</p>
-                                    <input type="text" id="og_image" class="form-control" value=""/>
-                                </label>
-                                <!-- Image Upload -->
-                                <label>
-                                    OG Video (Optional):
-                  <p>Specifies a video to show if the link is posted on social media.</p>
-                                    <input type="text" id="og_video" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    OG URL (Optional):
-                  <p>Specifies a url to serve as the canonical identifier of the og info.</p>
-                                    <input type="text" id="og_url" class="form-control" value=""/>
-                                </label>
-                                <label>
-                                    OG Type (Optional):
-                  <p>Specifies a type of og content (ie article, book, etc.).</p>
-                                    <input type="text" id="og_type" class="form-control" value=""/>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#other_fields" aria-expanded="false" aria-controls="other_fields">Other Fields
-                </a>
-                            </h3>
-                        </div>
-                        <div id="other_fields" class="collapse">
-                            <div class="panel-body" id="extra_param_panel_body_domestic">
-                                <button class="btn btn-info add-field-btn" onclick="addField(this)">Add Domestic Link Parameter</button>
-                            </div>
-                            <div class="panel-body" id="extra_param_panel_body_international">
-                                <button class="btn btn-info add-field-btn" onclick="addField(this)">Add International Link Parameter</button>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-info" onclick="createLink()">Create Link</button>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <input type="text" id="final_url" class="form-control" value="Final Link Goes Here" readonly/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
+
+        }
+
+
+        function get3PLink(original_url) {
+            var branch_url = 'https://' + 'seamless.app.link' + '/3p?' + encodeURIComponent('$3p') + '=' + 'e_ab' + '&' + encodeURIComponent('$original_url') + '=' + encodeURIComponent(original_url);
+
+            return branch_url;
+        }
+
+    </script>
+</head>
+
+<body class="container">
+    <!-- Initialize clipboard.js -->
+    <script>(function(){new Clipboard('#copy-button');})();</script>
+
+    <div>
+        </br>
+        <img src="https://branch.io/img/logo-dark.svg" style="width:100px;">
+        </br>
+        </br>
+        <h1 style="display:inline; vertical-align:middle">Seamless Email Link Creator</h1>
+    </div>
+
+    <!-- Description for one-off link creation -->
+    <section class="container toggle" id="description_oneoff">
+        <p><ol>
+            <li><strong>[REQUIRED]</strong> Enter the web URL redirect for users without the app (serves as deep link key)</li>
+            <li>Edit/Remove appstore redirects, if web redirect is needed</li>
+            <li>Add UTM Tags</li>
+            <li>Click <strong>Create Email Link</strong>, then copy and paste the Branch link into your email template</li>
+        </ol></p>
+    </section>
+
+    <section class="container" id="link-creation">
+        <!-- Table for user input -->
+
+        <h3 class="toggle">Set URL</h3>
+
+        <table>
+            <tbody>
+                <tr class="toggle">
+                    <td><label style="margin-right: 10px">Enter a web URL</label></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., http://www.seamless.com/promo/code/OFFERCODE"/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="toggle">Add Query Parameters</h3>
+
+        <!-- Deep linking parameters table -->
+        <table id="query_params" class="toggle">
+            <tr id="row-1">
+                <td><label style="margin-right: 10px">Query Param 1</label></td>
+                <td><input class="form-control" style="width:300px" id="query-key-1" type="text" value="$desktop_url"/></td>
+                <td><input class="form-control" style="width:450px" id="query-value-1" type="text" placeholder="Enter a custom url to redirect desktop users (if different than above)"/></td>
+            </tr>
+            <tr id="row-2">
+                <td><label style="margin-right: 10px">Query Param 2</label></td>
+                <td><input class="form-control" style="width:300px" id="query-key-2" type="text" value="$android_url"/></td>
+                <td><input class="form-control" style="width:450px" id="query-value-2" type="text" value="https://play.google.com/store/apps/details?id=com.seamlessweb.android.view&amp;hl=en_US"/></td>
+            </tr>
+            <tr id="row-3">
+                <td><label style="margin-right: 10px">Query Param 3</label></td>
+                <td><input class="form-control" style="width:300px" id="query-key-3" type="text" value="$ios_url"/></td>
+                <td><input class="form-control" style="width:450px" id="query-value-3" type="text" value="https://itunes.apple.com/us/app/seamless-local-food-delivery/id381840917?mt=8"/></td>
+            </tr>
+        </table>
+
+        <br>
+        <button class="btn toggle" id="add-query-button" style="background-color:#d3d3d3; display:inline;" onclick="addQuerylinkParam()">Add Query Param</button>
+        <button class="btn toggle" id="remove-query-button" style="background-color:#d3d3d3; display:inline;"onclick="removeQuerylinkParam()">Remove Query Param</button>
+        <br>
+
+        <h3 class="toggle">Add Analytics Tags</h3>
+        <table id="analytic_params" class="toggle">
+            <tr id="analytic-1">
+                <td><label style="margin-right: 10px">utm_medium</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-1" type="text" value="utm_medium" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-1" type="text" placeholder="i.e., email"/></td>
+            </tr>
+            <tr id="analytic-2">
+                <td><label style="margin-right: 10px">utm_source</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-2" type="text" value="utm_source" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-2" type="text" placeholder="i.e., appboy"/></td>
+            </tr>
+            <tr id="analytic-3">
+                <td><label style="margin-right: 10px">utm_campaign</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-3" type="text" value="utm_campaign" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-3" type="text" placeholder="i.e., 2018_promo"/></td>
+            </tr>
+            <tr id="analytic-4">
+                <td><label style="margin-right: 10px">utm_content</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-4" type="text" value="utm_content" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-4" type="text" placeholder="i.e., link_01"/></td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section>
+        <br>
+        <br>
+        <div class="text-center"><button class="form-control toggle" style="float:none; background-color:#89cff0; color: white; font-weight: bold;" onclick="generate3PLink()">Create Email Link</button></div>
+        <br>
+    </section>
+
+    <section class="container toggle" id="linkOutput">
+        <h3>Generated Email Link
+        <button class="btn" id="copy-button" style="background-color:#d3d3d3; display:inline;" data-clipboard-target="#generated3PLink">Copy Link</button>
+        </h3>
+        <textarea class="form-control" style="height:100px; margin-bottom:5%;" id="generated3PLink" type="text"></textarea>
+    </section>
+</body>
 </html>
