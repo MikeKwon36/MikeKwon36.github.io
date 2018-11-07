@@ -14,29 +14,18 @@
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Branch metatags -->
-    <meta name="branch:deeplink:onsitedemo" content="true" />
-    <meta name="branch:deeplink:text" content="text set by metatag" />
+    <meta name="branch:deeplink:$deeplink_path" content="/mrdc/new" />
     
     <!-- Branch Web SDK -->
     <script type="text/javascript">
 
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
-
-    // .init call to launch banner
-    console.log('Branch Init called at ' + Math.floor(Date.now() / 1000));
     branch.init('key_test_paBVfEPMMvUYqmY5nRzAubgiDuaNf3mK', function(err, data) {
         console.log(data);
-        console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
     });
 
     </script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body id="page-top" class="index">
        <!-- Navigation -->
@@ -83,9 +72,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <span class="name">TD Bank Demo</span>
+                        <span class="name">Banner uses test API and -alternate domain</span>
                         <hr class="star-light">
-                        <span class="skills">Testpage for Link and Journeys testing</span>
+                        <span class="skills">Live links below use tdbank.app.link, and test links use tdbank.test-app.link</span>
                     </div>
                 </div>
             </div>
@@ -100,12 +89,9 @@
                 <div class="col-lg-12">
                     <div class="intro-text">
                         <ul>
-                            <li class="name"><a href="https://tdbank.app.link/Di34CPJhZN">Link using the Live API Key</a><p></p></li>
+                            <li class="name"><a href="https://tdbank.app.link/6CX4OJGQER">Link using the Live API Key</a><p></p></li>
                             <li class="name"><a href="https://tdbank.test-app.link/bchvGVChZN">Link using the Test API key</a><p></p></li>
                         </ul>
-                        <br>
-                        <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
-                        <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
                     </div>
                 </div>
             </div>
@@ -200,13 +186,6 @@
     var listener = function(event, data) {
         console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
         console.log(data);
-
-        //track custom V1 event on Branch dashboard
-        branch.track(event, function (err, data) {
-            console.log(data);
-            console.log(err);
-        });
-
     };
 
 
@@ -220,34 +199,6 @@
     branch.addListener("didCloseJourney", listener);
     branch.addListener("didCallJourneyClose", listener);
     
-
-    // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
-    function launchBranchJourney(){
-        console.log("launchBranchJourney called");
-
-        //new link & analytics data for banner
-        var linkData = {
-            campaign: 'campaign cannot be changed',
-            feature: 'feature cannot be changed',
-            channel: 'channel was changed by javascript',
-            stage: 'stage was changed by javascript',
-            tags: [launchCount,'tag was changed by javascript'],
-            data: {
-                'custom_bool': true,
-                'custom_int (today\s date)': Date.now(),
-                'custom_string (url)': window.location.href,
-            }
-        };
-        branch.setBranchViewData(linkData);
-        branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
-    }
-
-    // function for button to close journey (will NOT activate template's dismissal period)
-    function closeBranchJourney(){
-        console.log("closeBranchJourney called");
-        branch.closeJourney(function(err) {});
-    }
-
     </script>
 
     <script src="/js/jquery-1.11.0.js"></script>
