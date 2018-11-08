@@ -194,24 +194,17 @@
 
     function launchBanner(){
 
-        // Grab new deep link data from ESPN meta tags
-        var meta;
-        if (document.querySelectorAll("meta[name='apple-itunes-app']").length > 0) {
-            meta = document.querySelector("meta[name='apple-itunes-app']").getAttribute("content");
-            var charindex = meta.search("app-argument=");
-            meta = meta.slice(charindex+28);
-        } else if (document.querySelectorAll("meta[name='twitter:app:url:iphone']").length > 0) {
-            meta = document.querySelector("meta[name='twitter:app:url:iphone']").getAttribute("content");
-            meta = meta.slice(15);
+        // Grab new deep link data from Twitter meta tags
+        if (document.querySelectorAll("meta[name='twitter:app:url:iphone']").length > 0) {
+            var meta = document.querySelector("meta[name='twitter:app:url:iphone']").getAttribute("content");
+            // Branch function to add new link data to banner before it launches
+            branch.setBranchViewData({
+                data:{
+                    'newData':'This changed by javascript',
+                    '$deeplink_path':meta
+                }
+            });
         }
-
-        // Branch function to add new link data to banner before it launches
-        branch.setBranchViewData({
-            data:{
-                'newData':'This changed by javascript',
-                '$deeplink_path':meta
-            }
-        });
         
         // Branch function to launch banner
         branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
