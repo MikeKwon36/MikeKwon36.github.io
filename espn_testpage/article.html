@@ -39,7 +39,6 @@
             meta = meta.slice(charindex+13);
         } else if (document.querySelectorAll("meta[name='twitter:app:url:iphone']").length > 0) {
             meta = document.querySelector("meta[name='twitter:app:url:iphone']").getAttribute("content");
-            meta = meta.slice(15);
         }
         branch.setBranchViewData({data:{'$deeplink_path':meta}});
     });
