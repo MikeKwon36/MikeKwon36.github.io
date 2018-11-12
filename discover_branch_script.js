@@ -11,6 +11,7 @@ function getCookieValue(cookieName) {
             dcuser_start = dcuser_start + cookieName.length + 1;
             dcuser_end = document.cookie.indexOf(";", dcuser_start);
             if (dcuser_end == -1) c_endV3 = document.cookie.length;
+            console.log(document.cookie.substring(dcuser_start, dcuser_end));
             return unescape(document.cookie.substring(dcuser_start, dcuser_end));
         }
     }
