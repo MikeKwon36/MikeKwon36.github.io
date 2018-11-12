@@ -18,7 +18,7 @@ function getCookieValue(cookieName) {
 }
 
 // initialize Branch
-branch.init('key_live_gevPwVGxd97F95YmLl3jThcjvxgKTSvI', function(err, data) {
+branch.init('key_test_nfzPCMNBa2WFWYXfOmWqLdmmyFfKNTt3', function(err, data) {
     console.log(data);
     console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
 });
