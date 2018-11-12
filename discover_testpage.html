@@ -25,6 +25,26 @@
     <!-- Branch Web SDK -->
     <script src="discover_branch_script.js" type="text/javascript"></script>
 
+    <script type="text/javascript">
+
+    var cookieName = 'dfsedskey';
+    if (document.cookie.length > 0) {
+        dcuser_start = document.cookie.indexOf(cookieName + "=");
+        if (dcuser_start != -1) {
+            dcuser_start = dcuser_start + cookieName.length + 1;
+            dcuser_end = document.cookie.indexOf(";", dcuser_start);
+            if (dcuser_end == -1) c_endV3 = document.cookie.length;
+            cookieName = document.cookie.substring(dcuser_start, dcuser_end); 
+            console.log(cookieName);
+            document.getElementById('cookie_title').value = 'Brian\'s browser has the discover cookie: ' + cookieName;
+        }
+    } else {
+        console.log(cookieName);
+        document.getElementById('cookie_title').value = 'Brian\'s browser does not have the discover cookie';
+    }
+
+    </script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -81,7 +101,7 @@
                     <div class="intro-text">
                         <span class="name">Branch Demo Page</span>
                         <hr class="star-light">
-                        <span class="skills">Testpage for Discover</span>
+                        <span class="skills" id="cookie_title">Brian's browser does not have the discover cookie</span>
                     </div>
                 </div>
             </div>
