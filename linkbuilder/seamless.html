@@ -50,6 +50,7 @@
             var utm_campaign = window.document.getElementById('utm_campaign').value;
             var utm_source = window.document.getElementById('utm_source').value;
             var utm_content = window.document.getElementById('utm_content').value;
+            var utm_term = window.document.getElementById('utm_term').value;
             var desktop = window.document.getElementById('$desktop_url').value;
             var ios = window.document.getElementById('$ios_url').value;
             var android = window.document.getElementById('$android_url').value;
@@ -71,6 +72,10 @@
             if (utm_content){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + "utm_content=" + utm_content;
+            }
+            if (utm_term){
+                if (original_url.indexOf("?")>0){queryLogic = '&';};
+                original_url = original_url + queryLogic + "utm_term=" + utm_term;
             }
             if (desktop == null || desktop == ""){
                 desktop = original_url;
@@ -177,7 +182,7 @@
             <tr id="analytic-1">
                 <td><label style="margin-right: 10px">utm_medium</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_medium" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="utm_medium" type="text" placeholder="i.e., email"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_medium" type="text" placeholder="i.e., email_owned"/></td>
             </tr>
             <tr id="analytic-2">
                 <td><label style="margin-right: 10px">utm_source</label></td>
@@ -193,6 +198,11 @@
                 <td><label style="margin-right: 10px">utm_content</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_content" disabled="true"/></td>
                 <td><input class="form-control" style="width:600px" id="utm_content" type="text" placeholder="i.e., link_01"/></td>
+            </tr>
+            <tr id="analytic-5">
+                <td><label style="margin-right: 10px">utm_term</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-5" type="text" value="utm_term" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_term" type="text" placeholder="i.e., food"/></td>
             </tr>
         </table>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SEAMLESS EMAIL LINK CREATOR</title>
+    <title>GRUBHUB EMAIL LONG LINK CREATOR</title>
     <link rel="icon" href="https://branch.io/img/press/kit/badge-black.png" />
     <link rel="stylesheet" href="style.css" />
 
@@ -104,7 +104,7 @@
         function addQuerylinkParam() {
             var newRowIndex = getRowCount() + 1;
 
-            var newRowHTML = `<tr id="row-${newRowIndex}"><td><label style="margin-right:10px">Query Param ${newRowIndex}</label></td><td><input class="form-control" style="width:300px" id="query-key-${newRowIndex}" type="text" placeholder="i.e., $desktop_url, $ios_url, $android_url"/></td><td><input class="form-control" style="width:450px" id="query-value-${newRowIndex}" type="text" placeholder="i.e., https://www.seamless.com, recipe#34"/></td></tr>`;
+            var newRowHTML = `<tr id="row-${newRowIndex}"><td><label style="margin-right:10px">Query Param ${newRowIndex}</label></td><td><input class="form-control" style="width:300px" id="query-key-${newRowIndex}" type="text" placeholder="i.e., $desktop_url, $ios_url, $android_url"/></td><td><input class="form-control" style="width:450px" id="query-value-${newRowIndex}" type="text" placeholder="i.e., https://www.grubhub.com, recipe#34"/></td></tr>`;
             $("#query_params").append(newRowHTML);
         }
 
@@ -120,7 +120,7 @@
 
 
         function get3PLink(original_url) {
-            var branch_url = 'https://' + 'seamless.app.link' + '/3p?' + encodeURIComponent('$3p') + '=' + 'e_ab' + '&' + encodeURIComponent('$original_url') + '=' + encodeURIComponent(original_url);
+            var branch_url = 'https://' + 'grubhub.app.link' + '/3p?' + encodeURIComponent('$3p') + '=' + 'e_ab' + '&' + encodeURIComponent('$original_url') + '=' + encodeURIComponent(original_url);
 
             return branch_url;
         }
@@ -137,7 +137,7 @@
         <img src="https://branch.io/img/logo-dark.svg" style="width:100px;">
         </br>
         </br>
-        <h1 style="display:inline; vertical-align:middle">Seamless Email Link Creator</h1>
+        <h1 style="display:inline; vertical-align:middle">Grubhub Email Link Creator</h1>
     </div>
 
     <!-- Description for one-off link creation -->
@@ -159,7 +159,7 @@
             <tbody>
                 <tr class="toggle">
                     <td><label style="margin-right: 10px">Enter a web URL</label></td>
-                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., http://www.seamless.com/promo/code/OFFERCODE"/></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., http://www.grubhub.com/promo/code/OFFERCODE"/></td>
                 </tr>
             </tbody>
         </table>
@@ -176,12 +176,12 @@
             <tr id="row-2">
                 <td><label style="margin-right: 10px">Query Param 2</label></td>
                 <td><input class="form-control" style="width:300px" id="query-key-2" type="text" value="$android_url"/></td>
-                <td><input class="form-control" style="width:450px" id="query-value-2" type="text" value="https://play.google.com/store/apps/details?id=com.seamlessweb.android.view&amp;hl=en_US"/></td>
+                <td><input class="form-control" style="width:450px" id="query-value-2" type="text" value="https://play.google.com/store/apps/details?id=com.grubhub.android&amp;hl=en_US"/></td>
             </tr>
             <tr id="row-3">
                 <td><label style="margin-right: 10px">Query Param 3</label></td>
                 <td><input class="form-control" style="width:300px" id="query-key-3" type="text" value="$ios_url"/></td>
-                <td><input class="form-control" style="width:450px" id="query-value-3" type="text" value="https://itunes.apple.com/us/app/seamless-local-food-delivery/id381840917?mt=8"/></td>
+                <td><input class="form-control" style="width:450px" id="query-value-3" type="text" value="https://itunes.apple.com/us/app/grubhub-local-food-delivery/id302920553?mt=8"/></td>
             </tr>
         </table>
 
@@ -195,7 +195,7 @@
             <tr id="analytic-1">
                 <td><label style="margin-right: 10px">utm_medium</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-1" type="text" value="utm_medium" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="analytic-value-1" type="text" placeholder="i.e., email"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-1" type="text" placeholder="i.e., email_owned"/></td>
             </tr>
             <tr id="analytic-2">
                 <td><label style="margin-right: 10px">utm_source</label></td>
@@ -211,6 +211,11 @@
                 <td><label style="margin-right: 10px">utm_content</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-4" type="text" value="utm_content" disabled="true"/></td>
                 <td><input class="form-control" style="width:600px" id="analytic-value-4" type="text" placeholder="i.e., link_01"/></td>
+            </tr>
+            <tr id="analytic-5">
+                <td><label style="margin-right: 10px">utm_term</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-5" type="text" value="utm_term" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-5" type="text" placeholder="i.e., food"/></td>
             </tr>
         </table>
 
