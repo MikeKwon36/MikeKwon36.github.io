@@ -30,8 +30,6 @@
     <!-- Script to generate 3P link based on user inputs -->
     <script>
         function generate3PLink() {
-            //var domain = window.document.getElementById("branchDomain").value;
-            //var ESPProviderCode = window.document.getElementById("ESPProviderCode").value;
             var desktop_url = false;
             var original_url = window.document.getElementById("originalUrl").value;
 
@@ -42,11 +40,15 @@
             } else if (original_url) {
                 desktop_url = true;
             }
+
+            var queryLogic = '%3F';
+            var queryLogicB = '&';
             var paramsA = '';
+            var paramsA_desktop = '';
             var paramsB = '';
             var output = '';
 
-            //Add analytics params as part of $original_url
+            //Add analytics params as part of $original_url & $desktop_url if it's different
             var table2 = window.document.getElementById('analytic_params');
             for (var i = 0, row; row = table2.rows[i]; i++) {
                 var key = table2.rows[i].cells[1].children[0].value
@@ -54,6 +56,7 @@
 
                 if (key && value) {
                     paramsA += (key + '%3D' + value + '%26');
+                    paramsA_desktop += (key + '=' + value + '&');
                 }
             }
 
@@ -63,13 +66,17 @@
                 var key = table1.rows[i].cells[1].children[0].value
                 var value = table1.rows[i].cells[2].children[0].value
                 if (key && value) {
+                    if (key == '$desktop_url' && paramsA_desktop){
+                        if (value.indexOf("?")>0){
+                            value = value + '&' + paramsA_desktop.slice(0, paramsA_desktop.length - 1);
+                        } else {
+                            value = value + '?' + paramsA_desktop.slice(0, paramsA_desktop.length - 1);                            
+                        }
+                    }
                     paramsB += (key + '=' + encodeURIComponent(value) + '&');
                 }
             }
             
-            //var encodedURL = encodeURIComponent(original_url);
-            var queryLogic = '%3F';
-            var queryLogicB = '&';
             if (!/(http(s?))\:\/\//.test(original_url)) {
                 original_url = 'https://' + original_url;
             }
@@ -77,10 +84,10 @@
                 if (paramsA == '' && paramsB == '') {
                     output = get3PLink(original_url);
                 } else {
-                    if (paramsA == ''){
+                    if (!paramsA){
                         queryLogic = '';
                     }
-                    if (paramsB == ''){
+                    if (!paramsB){
                         queryLogicB = '';
                     }
                     if (original_url.indexOf("?")>0){

@@ -30,8 +30,6 @@
     <!-- Script to generate 3P link based on user inputs -->
     <script>
         function generate3PLink() {
-            //var domain = window.document.getElementById("branchDomain").value;
-            //var ESPProviderCode = window.document.getElementById("ESPProviderCode").value;
             var desktop_url = false;
             var original_url = window.document.getElementById("originalUrl").value;
 
@@ -50,7 +48,7 @@
             var paramsB = '';
             var output = '';
 
-            //Add analytics params as part of $original_url
+            //Add analytics params as part of $original_url & $desktop_url if it's different
             var table2 = window.document.getElementById('analytic_params');
             for (var i = 0, row; row = table2.rows[i]; i++) {
                 var key = table2.rows[i].cells[1].children[0].value
