@@ -70,9 +70,9 @@
                 if (key && value) {
                     if (key == '$desktop_url' && paramsA_desktop){
                         if (value.indexOf("?")>0){
-                            value = value + '&' + paramsA_desktop.slice(0, paramsA_desktop.length - 3);
+                            value = value + '&' + paramsA_desktop.slice(0, paramsA_desktop.length - 1);
                         } else {
-                            value = value + '?' + paramsA_desktop.slice(0, paramsA_desktop.length - 3);                            
+                            value = value + '?' + paramsA_desktop.slice(0, paramsA_desktop.length - 1);                            
                         }
                     }
                     paramsB += (key + '=' + encodeURIComponent(value) + '&');
