@@ -42,6 +42,9 @@
             } else if (original_url) {
                 desktop_url = true;
             }
+
+            var queryLogic = '%3F';
+            var queryLogicB = '&';
             var paramsA = '';
             var paramsB = '';
             var output = '';
@@ -62,17 +65,18 @@
             for (var i = 0, row; row = table1.rows[i]; i++) {
                 var key = table1.rows[i].cells[1].children[0].value
                 var value = table1.rows[i].cells[2].children[0].value
-                if (key == '$desktop_url' && value){
-                    console.log(key + '' + value);
-                }
                 if (key && value) {
+                    if (key == '$desktop_url' && paramsA){
+                        if (original_url.indexOf("?")>0){
+                            value = value + '&' + paramsA.slice(0, paramsA.length - 3);
+                        } else {
+                            value = value + '?' + paramsA.slice(0, paramsA.length - 3);                            
+                        }
+                    }
                     paramsB += (key + '=' + encodeURIComponent(value) + '&');
                 }
             }
             
-            //var encodedURL = encodeURIComponent(original_url);
-            var queryLogic = '%3F';
-            var queryLogicB = '&';
             if (!/(http(s?))\:\/\//.test(original_url)) {
                 original_url = 'https://' + original_url;
             }
@@ -80,10 +84,10 @@
                 if (paramsA == '' && paramsB == '') {
                     output = get3PLink(original_url);
                 } else {
-                    if (paramsA == ''){
+                    if (!paramsA){
                         queryLogic = '';
                     }
-                    if (paramsB == ''){
+                    if (!paramsB){
                         queryLogicB = '';
                     }
                     if (original_url.indexOf("?")>0){
