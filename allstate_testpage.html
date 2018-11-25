@@ -51,10 +51,10 @@
         branch.link(linkData, function(err, link) {
             if (err == null) {
                 console.log(link);
-                document.getElementById('#gen_download&amp;Activate').href = link;
-                document.getElementById('#gen_download&amp;Activate_1').href = link;
-                document.getElementById('#gen_download&amp;Activate_2').href = link;
-                document.getElementById('#gen_download&amp;Activate_3').href = link;
+                var buttons = document.querySelectorAll('[data-di-id~="gen_download"]');
+                buttons.forEach(function(button) {
+                    button.href=link;
+                });
             } else {
                 console.log(err);
             }
