@@ -37,7 +37,6 @@
 
     branch.init('key_live_gcAx9wt12lwY51ypL4jtGgpfuujnzBU0', function(err, data) {
         var source_cid = getParameterByName('CID');
-        console.log('cid query param = ' + source_cid);
         var linkData = {
             tags: [source_cid,'Drivewise Sweepstakes Landing Page'],
             feature: 'marketing',
@@ -48,9 +47,7 @@
 
         branch.link(linkData, function(err, link) {
             if (err == null) {
-                console.log(link);
                 var buttons = document.querySelectorAll('[data-di-id*="gen_download"]');
-                console.log(buttons);
                 buttons.forEach(function(button) {
                     button.href=link;
                 });
