@@ -52,8 +52,11 @@
             if (err == null) {
                 console.log(link);
                 var buttons = document.querySelectorAll('[data-di-id~="gen_download"]');
+                console.log(buttons);
                 buttons.forEach(function(button) {
+                    console.log('current link is ' + button.href);
                     button.href=link;
+                    console.log('new link is ' + button.href);
                 });
             } else {
                 console.log(err);
