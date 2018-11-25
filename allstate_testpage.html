@@ -37,9 +37,7 @@
 
     branch.init('key_live_gcAx9wt12lwY51ypL4jtGgpfuujnzBU0', function(err, data) {
         var source_cid = getParameterByName('CID');
-        if(!source_cid){
-            source_cid = "organic";
-        }
+        if(!source_cid){source_cid = "organic";}
         var linkData = {
             tags: [source_cid,'Drivewise Sweepstakes Landing Page'],
             feature: 'marketing',
@@ -51,9 +49,7 @@
         branch.link(linkData, function(err, link) {
             if (err == null) {
                 var buttons = document.querySelectorAll('[data-di-id*="gen_download"]');
-                buttons.forEach(function(button) {
-                    button.href=link;
-                });
+                buttons.forEach(function(button) {button.href=link;});
             }
         });
     });
