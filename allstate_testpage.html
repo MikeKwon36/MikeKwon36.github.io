@@ -51,7 +51,7 @@
         branch.link(linkData, function(err, link) {
             if (err == null) {
                 console.log(link);
-                var buttons = document.querySelectorAll('li[data-di-id*="gen_download"]');
+                var buttons = document.querySelectorAll('[data-di-id*="gen_download"]');
                 console.log(buttons);
                 buttons.forEach(function(button) {
                     console.log('current link is ' + button.href);
