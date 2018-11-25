@@ -11,8 +11,6 @@
 
     <!-- Branch metatags for Hosted Deep Link Data -->
     <meta name="branch:deeplink:allstatebanner" content="yes" />
-    <meta name="branch:deeplink:$canonical_url" content="https://www.allstate.com/roadside-assistance.aspx?query=test" />
-
 
     <!-- Custom CSS & Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link rel="stylesheet" href="/style.css">    
@@ -27,10 +25,38 @@
 
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
 
-    console.log('Branch Init called at ' + Math.floor(Date.now() / 1000));
+    var canonical_url = window.location.href;
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(canonical_url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
     branch.init('key_test_fgqE3DD75irY04BlT0ftWbmmzroiwsWf', function(err, data) {
+        var source_cid = getParameterByName('CID');
+        var linkData = {
+            tags: [source_cid,'Drivewise Sweepstakes Landing Page'],
+            feature: 'marketing',
+            channel: 'Web',
+            campaign: '2018 Drivewise Sweeps',
+            data: {"$canonical_url": canonical_url}
+        };
+
+        branch.link(linkData, function(err, link) {
+            if (err == null) {
+                console.log(link);
+                document.getElementById('gen_download&Activate').href = link;
+                document.getElementById('gen_download&Activate_1').href = link;
+                document.getElementById('gen_download&Activate_2').href = link;
+                document.getElementById('gen_download&Activate_3').href = link;
+            } else {
+                console.log(err);
+            }
+        });
         console.log(data);
-        console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
     });
 
     // Branch listener object that retrieves banner link data and prints it to console
@@ -132,6 +158,11 @@
                 <div class="col-lg-12">
                     <div class="intro-text">
                         <ul>
+                            <li class="name"><a href="https://allstate.app.link/cVuSotCbxQ" class="btn btn-primary" data-di-id="#gen_download&amp;Activate">Download &amp; Activate</a><p></p></li>
+                            <li class="name"><a href="https://allstate.app.link/cVuSotCbxQ" class="btn btn-primary" data-di-id="#gen_download&amp;Activate_1">Download &amp; Activate</a><p></p></li>
+                            <li class="name"><a href="https://allstate.app.link/cVuSotCbxQ" class="btn btn-primary" data-di-id="#gen_download&amp;Activate_2">Download &amp; Activate</a><p></p></li>
+                            <li class="name"><a href="https://allstate.app.link/cVuSotCbxQ" class="btn btn-primary" data-di-id="#gen_download&amp;Activate_3">Download &amp; Activate</a><p></p></li>
+
                             <li class="name"><a href="https://allstate.app.link/cVuSotCbxQ?~tags=kwon">https://allstate.app.link/cVuSotCbxQ?~tags=kwon</a><p></p></li>
                             <li class="name"><a href="http://lb.service01.email-allstate.com/rts/go2.aspx?h=259144&amp;tp=i-H43-A2-DIn-cS1qv-1n-15-1c-cS1qu-ULXqz&amp;x=%7cT_EBUSINESS_DEEPLINKTEST_T%7c20180316%7c:EB%7cT_EBUSINESS_DEEPLINKTEST_T%7c20180316%7c:EB">Email link opens app to Roadside</a><p></p></li>
                             <li class="name"><a href="http://lb.quote01.email-allstate.com/rts/go2.aspx?h=266074&amp;tp=i-H43-A2-Dez-eaYBf-1n-15-1c-eaYBe-1OenFz&amp;x=T_EBUSINESS_DEEPLINKTEST_T%7c20180316%7c:EB">Email link opens app home screen, redirects users without app to App store</a><p></p></li>
@@ -218,13 +249,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll visible-xs visible-sm">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
-    </div>
 
 
      <!-- jQuery Version 1.11.0 -->
