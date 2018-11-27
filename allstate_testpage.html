@@ -36,10 +36,16 @@
     }
 
     branch.init('key_live_gcAx9wt12lwY51ypL4jtGgpfuujnzBU0', function(err, data) {
-        var source_cid = getParameterByName('CID');
-        var source_intcid = getParameterByName('INTCID');
+        var source_tag;
+        if (getParameterByName('CID')){
+            source_tag = getParameterByName('CID');
+        } else if (getParameterByName('INTCID')){
+            source_tag = getParameterByName('INTCID');
+        } else {
+            source_tag = 'organic';
+        }
         var linkData = {
-            tags: [source_cid,source_intcid],
+            tags: [source_tag,'Drivewise Sweepstakes Landing Page'],
             feature: 'marketing',
             channel: 'Web',
             campaign: '2018 Drivewise Sweeps',
