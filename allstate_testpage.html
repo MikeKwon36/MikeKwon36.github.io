@@ -37,18 +37,25 @@
 
     branch.init('key_live_gcAx9wt12lwY51ypL4jtGgpfuujnzBU0', function(err, data) {
         var source_tag;
+        var campaign_tag;
         if (getParameterByName('CID')){
-            source_tag = getParameterByName('CID');
+            campaign_tag = getParameterByName('CID');
+            source_tag = campaign_tag.substring(0, 3);
         } else if (getParameterByName('INTCID')){
-            source_tag = 'intcid=' + getParameterByName('INTCID');
+            campaign_tag = 'intcid=' + getParameterByName('INTCID');
+            source_tag = campaign_tag.substring(0, 6);
+        } else if (getParameterByName('CMP')){
+            campaign_tag = getParameterByName('CMP');
+            source_tag = campaign_tag.substring(0, 3);
         } else {
-            source_tag = 'organic';
+            campaign_tag = 'organic';
+            source_tag = campaign_tag;
         }
         var linkData = {
-            tags: [source_tag,'Drivewise Sweepstakes Landing Page'],
+            tags: [source_tag, campaign_tag],
             feature: 'marketing',
             channel: 'Web',
-            campaign: '2018 Drivewise Sweeps',
+            campaign: source_tag,
             data: {"$canonical_url": canonical_url}
         };
 
