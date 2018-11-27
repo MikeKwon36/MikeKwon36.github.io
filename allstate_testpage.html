@@ -54,13 +54,13 @@
         var source_tag;
         var campaign_tag;
         if (getParameterByName('CID')){
-            campaign_tag = getParameterByName('CID');
+            campaign_tag = 'cid=' + getParameterByName('CID');
             source_tag = campaign_tag.substring(0, 3);
         } else if (getParameterByName('INTCID')){
             campaign_tag = 'intcid=' + getParameterByName('INTCID');
             source_tag = campaign_tag.substring(0, 6);
         } else if (getParameterByName('CMP')){
-            campaign_tag = getParameterByName('CMP');
+            campaign_tag = 'cmp=' + getParameterByName('CMP');
             source_tag = campaign_tag.substring(0, 3);
         } else {
             campaign_tag = 'organic';
