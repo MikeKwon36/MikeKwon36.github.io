@@ -52,25 +52,25 @@
 
     branch.init('key_live_gcAx9wt12lwY51ypL4jtGgpfuujnzBU0', function(err, data) {
         var source_tag;
-        var campaign_tag;
+        var id_tag;
         if (getParameterByName('CID')){
-            campaign_tag = 'cid=' + getParameterByName('CID');
+            id_tag = 'cid=' + getParameterByName('CID');
             source_tag = getParameterByName('CID').substring(0, 3);
         } else if (getParameterByName('INTCID')){
-            campaign_tag = 'intcid=' + getParameterByName('INTCID');
+            id_tag = 'intcid=' + getParameterByName('INTCID');
             source_tag = getParameterByName('INTCID').substring(0, 6);
         } else if (getParameterByName('CMP')){
-            campaign_tag = 'cmp=' + getParameterByName('CMP');
+            id_tag = 'cmp=' + getParameterByName('CMP');
             source_tag = getParameterByName('CMP').substring(0, 3);
         } else if (document.referrer) {
-            campaign_tag = document.referrer;
-            source_tag = campaign_tag;
+            id_tag = 'referred by: ' + extractHostname(document.referrer);
+            source_tag = extractHostname(document.referrer);
         } else {
-            campaign_tag = 'organic';
-            source_tag = campaign_tag;            
+            id_tag = 'organic';
+            source_tag = id_tag;            
         }
         var linkData = {
-            tags: [source_tag, campaign_tag, host_domain],
+            tags: [source_tag, id_tag, host_domain],
             feature: 'Web SDK',
             channel: host_domain,
             campaign: source_tag,
