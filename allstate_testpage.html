@@ -50,27 +50,47 @@
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
+    function evalIdForSource(id){
+        var source_name;
+        if (id.substring(0, 3) == 'EMC'){
+            source_name = 'Email';
+        } else if (id.substring(0, 3) == 'SOC'){
+            source_name = 'Social Media';
+        } else if (id.substring(0, 3) == 'OTC'){
+            source_name = 'Other';
+        } else if (id.substring(0, 3) == 'KNC'){
+            source_name = 'Paid';
+        } else if (id.substring(0, 6) == 'MBL-APP'){
+            source_name = 'Mobile Apps';
+        } else if (id.substring(0, 3) == 'BAC'){
+            source_name = 'Display';
+        } else {
+            source_name = 'A.com';
+        }
+        return source_name;
+    }
+
     branch.init('key_live_gcAx9wt12lwY51ypL4jtGgpfuujnzBU0', function(err, data) {
         var source_tag;
         var id_tag;
         if (getParameterByName('CID')){
-            id_tag = 'cid=' + getParameterByName('CID');
-            source_tag = getParameterByName('CID').substring(0, 3);
+            id_tag = getParameterByName('CID');
+            source_tag = evalIdForSource(id_tag);
         } else if (getParameterByName('INTCID')){
-            id_tag = 'intcid=' + getParameterByName('INTCID');
-            source_tag = getParameterByName('INTCID').substring(0, 6);
+            id_tag = getParameterByName('INTCID');
+            source_tag = evalIdForSource(id_tag);
         } else if (getParameterByName('CMP')){
-            id_tag = 'cmp=' + getParameterByName('CMP');
-            source_tag = getParameterByName('CMP').substring(0, 3);
+            id_tag = getParameterByName('CMP');
+            source_tag = evalIdForSource(id_tag);
         } else if (document.referrer) {
-            id_tag = 'referred by ' + extractHostname(document.referrer);
+            id_tag = extractHostname(document.referrer);
             source_tag = extractHostname(document.referrer);
         } else {
             id_tag = 'organic';
             source_tag = id_tag;            
         }
         var linkData = {
-            tags: [id_tag, source_tag, 'Drivewise Sweepstakes Landing Page'],
+            tags: [source_tag, id_tag, 'Drivewise Sweepstakes Landing Page'],
             feature: 'Web SDK',
             channel: 'Web',
             campaign: '2018 Drivewise Sweeps',
