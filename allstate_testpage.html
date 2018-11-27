@@ -37,9 +37,9 @@
 
     branch.init('key_live_gcAx9wt12lwY51ypL4jtGgpfuujnzBU0', function(err, data) {
         var source_cid = getParameterByName('CID');
-        if(!source_cid){source_cid = "organic";}
+        var source_intcid = getParameterByName('INTCID');
         var linkData = {
-            tags: [source_cid,'Drivewise Sweepstakes Landing Page'],
+            tags: [source_cid,source_intcid],
             feature: 'marketing',
             channel: 'Web',
             campaign: '2018 Drivewise Sweeps',
