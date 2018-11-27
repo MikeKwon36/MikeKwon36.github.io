@@ -62,9 +62,12 @@
         } else if (getParameterByName('CMP')){
             campaign_tag = 'cmp=' + getParameterByName('CMP');
             source_tag = getParameterByName('CMP').substring(0, 3);
+        } else if (document.referrer) {
+            campaign_tag = document.referrer;
+            source_tag = campaign_tag;
         } else {
             campaign_tag = 'organic';
-            source_tag = campaign_tag;
+            source_tag = campaign_tag;            
         }
         var linkData = {
             tags: [source_tag, campaign_tag, host_domain],
