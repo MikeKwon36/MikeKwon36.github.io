@@ -40,7 +40,7 @@
         if (getParameterByName('CID')){
             source_tag = getParameterByName('CID');
         } else if (getParameterByName('INTCID')){
-            source_tag = getParameterByName('INTCID');
+            source_tag = 'intcid=' + getParameterByName('INTCID');
         } else {
             source_tag = 'organic';
         }
