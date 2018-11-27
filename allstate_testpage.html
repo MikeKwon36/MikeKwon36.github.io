@@ -63,7 +63,7 @@
             id_tag = 'cmp=' + getParameterByName('CMP');
             source_tag = getParameterByName('CMP').substring(0, 3);
         } else if (document.referrer) {
-            id_tag = 'referred by: ' + extractHostname(document.referrer);
+            id_tag = 'referred by ' + extractHostname(document.referrer);
             source_tag = extractHostname(document.referrer);
         } else {
             id_tag = 'organic';
