@@ -153,6 +153,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
+                        <button onclick="deepviewTest()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Deepview</button>
                         <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
                         <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
                         <button onclick="logCommerceEvent()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Log Commerce event</button>
@@ -319,18 +320,46 @@
         launchCount++;
     }
 
-    // function for button to close journey (will NOT activate template's dismissal period)
-    function closeBranchJourney(){
-        console.log("closeBranchJourney called");
+    //function to check if a banner is displaying
+    function doesJourneyExistOnPage() {
+        var elem = document.getElementById("branch-banner-iframe");
+        if (elem) {
+            return true;
+        }
+        return false;
+    }
 
-        //track custom V1 event on Branch dashboard
-        branch.track('closedJourney_test', function (err, data) {
-            console.log(data);
-            console.log(err);
+    // function for button to close journey (will NOT activate template's dismissal period)
+    function closeBranchJourney(){        
+        if(doesJourneyExistOnPage()){
+            //this is the call that closes the journey, with flags that disable the banner animations
+            console.log("closeBranchJourney called");
+            branch.closeJourney(function(err) {});
+        } else {
+            console.log("No Banner on the page");
+        }
+    }
+
+    // function to test deepview function
+    function deepviewTest(){
+        console.log("branch.deepview called");
+        branch.deepview({
+            channel: 'website',
+            data: {
+                mydata: 'content of my data',
+                foo: 'bar',
+                '$deeplink_path': 'item_id=12345'
+            },
+            feature: 'deepview',
+            tags: [ 'tag1', 'tag2' ]
+        },
+        {
+            make_new_link: true,
+            open_app: true
+        },
+        function(err) {
+            console.log(err || 'no error');
         });
-        
-        //this is the call that closes the journey, with flags that disable the banner animations
-        branch.closeJourney(function(err) {});
     }
 
     // function to log a new V2 event

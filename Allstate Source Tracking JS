@@ -1,0 +1,85 @@
+    <script type="text/javascript">
+
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
+
+    var canonical_url = window.location.href;
+
+    function extractHostname(url) {
+        var hostname;
+        if (url.indexOf("//") > -1) {
+            hostname = url.split('/')[2];
+        } else {
+            hostname = url.split('/')[0];
+        }
+        hostname = hostname.split(':')[0];
+        hostname = hostname.split('?')[0];
+        return hostname;
+    }
+
+    var host_domain = extractHostname(canonical_url);
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url.toUpperCase());
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    function evalIdForSource(id){
+        var source_name;
+        if (id.substring(0, 3) == 'EMC'){
+            source_name = 'Email';
+        } else if (id.substring(0, 3) == 'SOC'){
+            source_name = 'Social Media';
+        } else if (id.substring(0, 3) == 'OTC'){
+            source_name = 'Other';
+        } else if (id.substring(0, 3) == 'KNC'){
+            source_name = 'Paid';
+        } else if (id.substring(0, 6) == 'MBL-APP'){
+            source_name = 'Mobile Apps';
+        } else if (id.substring(0, 3) == 'BAC'){
+            source_name = 'Display';
+        } else {
+            source_name = 'A.com';
+        }
+        return source_name;
+    }
+
+    branch.init('key_live_gcAx9wt12lwY51ypL4jtGgpfuujnzBU0', function(err, data) {
+        var source_tag;
+        var id_tag;
+        if (getParameterByName('CID')){
+            id_tag = getParameterByName('CID');
+            source_tag = evalIdForSource(id_tag);
+        } else if (getParameterByName('INTCID')){
+            id_tag = getParameterByName('INTCID');
+            source_tag = evalIdForSource(id_tag);
+        } else if (getParameterByName('CMP')){
+            id_tag = getParameterByName('CMP');
+            source_tag = evalIdForSource(id_tag);
+        } else if (document.referrer) {
+            id_tag = extractHostname(document.referrer);
+            source_tag = extractHostname(document.referrer);
+        } else {
+            id_tag = 'organic';
+            source_tag = id_tag;            
+        }
+        var linkData = {
+            tags: [source_tag, id_tag, 'Drivewise Sweepstakes Landing Page'],
+            feature: 'Web SDK',
+            channel: 'Web',
+            campaign: '2018 Drivewise Sweeps',
+            data: {"$canonical_url": canonical_url}
+        };
+
+        branch.link(linkData, function(err, link) {
+            if (err == null) {
+                var buttons = document.querySelectorAll('[data-di-id*="gen_download"]');
+                buttons.forEach(function(button) {button.href=link;});
+            }
+        });
+    });
+
+    </script>
