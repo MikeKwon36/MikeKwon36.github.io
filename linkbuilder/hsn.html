@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HSN EMAIL LINK CREATOR</title>
+    <link rel="icon" href="https://branch.io/img/press/kit/badge-black.png" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- jQuery Library via Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Import clipboard.js -->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+
+    <!-- Import Papa Parse -->
+    <script src="PapaParse-4.3.2/papaparse.min.js"></script>
+
+    <!-- Import FileSaver.js -->
+    <script src="FileSaver.js-master/FileSaver.min.js"></script>
+
+    <!-- Branch web SDK -->
+    <script type="text/javascript">
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
+
+    branch.init('key_live_aenYDZ5rd9nmYDoO0HFhEkofsEkqxuT3', function(err, data) {});
+    </script>
+
+
+    <!-- Script to generate 3P link based on user inputs -->
+    <script>
+        function generate3PLink() {
+            var original_url = window.document.getElementById("originalUrl").value;
+
+            if (!original_url) {
+                alert("Please enter a destination URL.");
+                window.document.getElementById("originalUrl").focus();
+                return
+            }
+
+            var queryLogic = "?"
+            var utm_medium = window.document.getElementById('utm_medium').value;
+            var utm_campaign = window.document.getElementById('utm_campaign').value;
+            var utm_source = window.document.getElementById('utm_source').value;
+            var utm_content = window.document.getElementById('utm_content').value;
+            var utm_term = window.document.getElementById('utm_term').value;
+            var desktop = window.document.getElementById('$desktop_url').value;
+            var ios = window.document.getElementById('$ios_url').value;
+            var android = window.document.getElementById('$android_url').value;
+
+            if (utm_medium){
+                if (original_url.indexOf("?")>0){queryLogic = '&';};
+                original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
+                if (desktop) {
+                    if (desktop.indexOf("?")>0){queryLogic = '&';};
+                    desktop = desktop + queryLogic + "utm_medium=" + utm_medium;
+                }
+            } else {
+                utm_medium = "Email Braze";
+            }
+            if (utm_campaign){
+                if (original_url.indexOf("?")>0){queryLogic = '&';};
+                original_url = original_url + queryLogic + "utm_campaign=" + utm_campaign;
+                if (desktop) {
+                    if (desktop.indexOf("?")>0){queryLogic = '&';};
+                    desktop = desktop + queryLogic + "utm_campaign=" + utm_campaign;
+                }
+            }
+            if (utm_source){
+                if (original_url.indexOf("?")>0){queryLogic = '&';};
+                original_url = original_url + queryLogic + "utm_source=" + utm_source;
+                if (desktop) {
+                    if (desktop.indexOf("?")>0){queryLogic = '&';};
+                    desktop = desktop + queryLogic + "utm_source=" + utm_source;
+                }
+            }
+            if (utm_content){
+                if (original_url.indexOf("?")>0){queryLogic = '&';};
+                original_url = original_url + queryLogic + "utm_content=" + utm_content;
+                if (desktop) {
+                    if (desktop.indexOf("?")>0){queryLogic = '&';};
+                    desktop = desktop + queryLogic + "utm_content=" + utm_content;
+                }
+            }
+            if (utm_term){
+                if (original_url.indexOf("?")>0){queryLogic = '&';};
+                original_url = original_url + queryLogic + "utm_term=" + utm_term;
+                if (desktop) {
+                    if (desktop.indexOf("?")>0){queryLogic = '&';};
+                    desktop = desktop + queryLogic + "utm_term=" + utm_term;
+                }
+            }
+            if (!desktop){desktop = original_url;}
+            if (!ios){ios = original_url;}
+            if (!android){android = original_url;}
+
+            console.log(original_url);
+            console.log(desktop);
+            console.log(ios);
+            console.log(android);
+
+            var linkData = {
+                tags: [utm_content],
+                feature: utm_medium,
+                channel: utm_source,
+                campaign: utm_campaign,
+                data: {
+                    "utm_campaign": utm_campaign,
+                    "utm_source": utm_source,
+                    "utm_content": utm_content,
+                    "utm_medium": utm_medium,
+                    "utm_term": utm_term,
+                    "$desktop_url": desktop,
+                    "$ios_url": ios,
+                    "$android_url": android,
+                    "$3p": "e_ab",
+                    "$canonical_url": original_url,
+                    "$original_url": original_url
+                }
+            };
+
+            branch.link(linkData, function(err, link) {
+                if (err == null) {
+                    console.log(link);
+                    document.getElementById('generated3PLink').value = link;
+                } else {
+                    console.log(err);
+                    document.getElementById('generated3PLink').value = err;
+                }
+            });
+        }
+
+        </script>
+</head>
+
+<body class="container">
+    <!-- Initialize clipboard.js -->
+    <script>(function(){new Clipboard('#copy-button');})();</script>
+
+    <div>
+        </br>
+        <img src="https://branch.io/img/logo-dark.svg" style="width:100px;">
+        </br>
+        </br>
+        <h1 style="display:inline; vertical-align:middle">HSN Email Link Creator</h1>
+    </div>
+
+    <!-- Description for one-off link creation -->
+    <section class="container toggle" id="description_oneoff">
+        <p><ol>
+            <li><strong>[REQUIRED]</strong> Enter the web URL to convert (serves as deep link key)</li>
+            <li>Edit/Remove appstore redirects, if web redirect is needed</li>
+            <li>Add UTM Tags</li>
+            <li>Click <strong>Create Email Link</strong> and paste the Branch link into your email</li>
+            <li><strong>[DEBUGGER]</strong> Add "?debug=1" to the end of the link and paste it into your browser bar</li>
+        </ol></p>
+    </section>
+
+    <section class="container" id="link-creation">
+        <!-- Table for user input -->
+
+        <h3 class="toggle">Set URL</h3>
+
+        <table>
+            <tbody>
+                <tr class="toggle">
+                    <td><label style="margin-right: 10px">Enter a web URL</label></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., https://www.hsn.com/products/jade-of-yesteryear-burmese-jade-and-peridot-ring/8729715"/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="toggle">Set redirects</h3>
+
+        <!-- Deep linking parameters table -->
+        <table id="query_params" class="toggle">
+            <tr id="row-1">
+                <td><label style="margin-right: 10px">$desktop_url</label></td>
+                <td><input class="form-control" style="width:450px" id="$desktop_url" type="text" placeholder="Enter a custom url to redirect desktop users (if different than above)"/></td>
+            </tr>
+            <tr id="row-2">
+                <td><label style="margin-right: 10px">$android_url</label></td>
+                <td><input class="form-control" style="width:450px" id="$android_url" type="text" value="https://play.google.com/store/apps/details?id=com.hsn.android&amp;hl=en_US"/></td>
+            </tr>
+            <tr id="row-3">
+                <td><label style="margin-right: 10px">$ios_url</label></td>
+                <td><input class="form-control" style="width:450px" id="$ios_url" type="text" value="https://itunes.apple.com/us/app/hsn-shopping-app/id324326909?mt=8"/></td>
+            </tr>
+        </table>
+
+        <h3 class="toggle">Add Analytics Tags</h3>
+        <table id="analytic_params" class="toggle">
+            <tr id="analytic-1">
+                <td><label style="margin-right: 10px">utm_medium</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_medium" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_medium" type="text" placeholder="i.e., email_owned"/></td>
+            </tr>
+            <tr id="analytic-2">
+                <td><label style="margin-right: 10px">utm_source</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;"type="text" value="utm_source" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_source" type="text" placeholder="i.e., SFMC"/></td>
+            </tr>
+            <tr id="analytic-3">
+                <td><label style="margin-right: 10px">utm_campaign</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_campaign" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_campaign" type="text" placeholder="i.e., 2019_promo"/></td>
+            </tr>
+            <tr id="analytic-4">
+                <td><label style="margin-right: 10px">utm_content</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_content" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_content" type="text" placeholder="i.e., link_01"/></td>
+            </tr>
+            <tr id="analytic-5">
+                <td><label style="margin-right: 10px">utm_term</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-5" type="text" value="utm_term" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_term" type="text" placeholder="i.e., food"/></td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section>
+        <br>
+        <br>
+        <div class="text-center"><button class="form-control toggle" style="float:none; background-color:#89cff0; color: white; font-weight: bold;" onclick="generate3PLink()">Create Email Link</button></div>
+        <br>
+    </section>
+
+    <section class="container toggle" id="linkOutput">
+        <h3>Generated Email Link
+        <button class="btn" id="copy-button" style="background-color:#d3d3d3; display:inline;" data-clipboard-target="#generated3PLink">Copy Link</button>
+        </h3>
+        <textarea class="form-control" style="height:100px; margin-bottom:5%;" id="generated3PLink" type="text"></textarea>
+    </section>
+</body>
+</html>
