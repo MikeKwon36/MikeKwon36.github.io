@@ -58,8 +58,6 @@
                 original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
             } else {
                 utm_medium = "Email Salesforce";
-                if (original_url.indexOf("?")>0){queryLogic = '&';};
-                original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
             }
             if (utm_campaign){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
