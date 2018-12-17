@@ -30,26 +30,30 @@
     <script type="text/javascript">
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
 
-    branch.init('key_live_aenYDZ5rd9nmYDoO0HFhEkofsEkqxuT3', function(err, data) {});
+    branch.init('key_live_kpy3GW092zQwkpmTN5U65lmgyDl1z7Xl', function(err, data) {});
     </script>
 
 
     <!-- Script to generate 3P link based on user inputs -->
     <script>
         function generate3PLink() {
-            // Redirect variables
             var original_url = window.document.getElementById("originalUrl").value;
-            var desktop = window.document.getElementById('$desktop_url').value;
-            var deeplink_path = window.document.getElementById('$deeplink_path').value;
-            var queryLogic = "?"
-            if (!desktop){desktop = "https://www.hsn.com/";}
 
-            // Analytics variables
+            if (!original_url) {
+                alert("Please enter a destination URL.");
+                window.document.getElementById("originalUrl").focus();
+                return
+            }
+
+            var queryLogic = "?"
             var utm_medium = window.document.getElementById('utm_medium').value;
             var utm_campaign = window.document.getElementById('utm_campaign').value;
             var utm_source = window.document.getElementById('utm_source').value;
             var utm_content = window.document.getElementById('utm_content').value;
             var utm_term = window.document.getElementById('utm_term').value;
+            var deeplink_path = window.document.getElementById('$deeplink_path').value;
+            var ios = window.document.getElementById('$ios_url').value;
+            var android = window.document.getElementById('$android_url').value;
 
             if (utm_medium){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
@@ -65,7 +69,7 @@
                 if (desktop) {
                     if (desktop.indexOf("?")>0){queryLogic = '&';};
                     desktop = desktop + queryLogic + "utm_medium=" + utm_medium;
-                }                
+                }
             }
             if (utm_campaign){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
@@ -99,10 +103,13 @@
                     desktop = desktop + queryLogic + "utm_term=" + utm_term;
                 }
             }
+            if (!ios){ios = original_url;}
+            if (!android){android = original_url;}
 
             console.log(original_url);
-            console.log(desktop);
             console.log(deeplink_path);
+            console.log(ios);
+            console.log(android);
 
             var linkData = {
                 tags: [utm_content],
@@ -115,9 +122,13 @@
                     "utm_content": utm_content,
                     "utm_medium": utm_medium,
                     "utm_term": utm_term,
-                    "$desktop_url": desktop,
-                    "$3p": "e_et",
                     "$deeplink_path": deeplink_path,
+                    "$ios_deeplink_path": deeplink_path,
+                    "$android_deeplink_path": deeplink_path,
+                    "$ios_url": ios,
+                    "$android_url": android,
+                    "$3p": "e_et",
+                    "$canonical_url": original_url,
                     "$original_url": original_url
                 }
             };
@@ -151,32 +162,43 @@
     <!-- Description for one-off link creation -->
     <section class="container toggle" id="description_oneoff">
         <p><ol>
-            <li>Enter a web URL for mobile users without the app (leave blank to send to app store)</li>
-            <li>Enter a web URL to send desktop traffic</li>
-            <li>Enter a deeplink key to open a specific screen (leave blank to open home screen)</li>
+            <li><strong>[REQUIRED]</strong> Enter the web URL to convert</li>
+            <li>Remove appstore redirects, if mobile users should go to web</li>
             <li>Add UTM Tags</li>
-            <li>Click <strong>Create Email Link</strong> to generate your Branch link</li>
-            <li><strong>[To debug links]</strong> Add "?debug=1" to the link and paste it into your browser bar</li>
+            <li>Click <strong>Create Email Link</strong> and paste the Branch link into your email</li>
+            <li><strong>[DEBUGGER]</strong> Add "?debug=1" to the end of the link and paste it into your browser bar</li>
         </ol></p>
     </section>
 
     <section class="container" id="link-creation">
         <!-- Table for user input -->
 
+        <h3 class="toggle">Set URL</h3>
+
+        <table>
+            <tbody>
+                <tr class="toggle">
+                    <td><label style="margin-right: 10px">Enter a web URL</label></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., https://www.hsn.com/products/jade-of-yesteryear-burmese-jade-and-peridot-ring/8729715"/></td>
+                </tr>
+            </tbody>
+        </table>
+
         <h3 class="toggle">Configure Link Behavior</h3>
 
+        <!-- Deep linking parameters table -->
         <table id="query_params" class="toggle">
             <tr id="row-1">
-                <td><label style="margin-right: 10px">Enter a Mobile URL redirect</label></td>
-                <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="Leave blank to send to app stores"/></td>
+                <td><label style="margin-right: 10px">Deeplink key</label></td>
+                <td><input class="form-control" style="width:450px" id="$deeplink_path" type="text" placeholder="Enter a $android_deeplink_path key"/></td>
             </tr>
             <tr id="row-2">
-                <td><label style="margin-right: 10px">Enter a Desktop URL redirect</label></td>
-                <td><input class="form-control" style="width:500px" id="$desktop_url" type="text" placeholder="Leave blank to send to hsn.com"/></td>
+                <td><label style="margin-right: 10px">Android destination</label></td>
+                <td><input class="form-control" style="width:450px" id="$android_url" type="text" value="https://play.google.com/store/apps/details?id=com.seamlessweb.android.view&amp;hl=en_US"/></td>
             </tr>
             <tr id="row-3">
-                <td><label style="margin-right: 10px">Enter a deeplink key</label></td>
-                <td><input class="form-control" style="width:500px" id="$deeplink_path" type="text" placeholder="Leave blank to open app homescreen"/></td>
+                <td><label style="margin-right: 10px">iOS destination</label></td>
+                <td><input class="form-control" style="width:450px" id="$ios_url" type="text" value="https://itunes.apple.com/us/app/seamless-local-food-delivery/id381840917?mt=8"/></td>
             </tr>
         </table>
 
@@ -185,12 +207,12 @@
             <tr id="analytic-1">
                 <td><label style="margin-right: 10px">utm_medium</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_medium" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="utm_medium" type="text" placeholder="i.e., email_owned"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_medium" type="text" placeholder="i.e., email"/></td>
             </tr>
             <tr id="analytic-2">
                 <td><label style="margin-right: 10px">utm_source</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;"type="text" value="utm_source" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="utm_source" type="text" placeholder="i.e., SFMC"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_source" type="text" placeholder="i.e., salesforce"/></td>
             </tr>
             <tr id="analytic-3">
                 <td><label style="margin-right: 10px">utm_campaign</label></td>
@@ -205,7 +227,7 @@
             <tr id="analytic-5">
                 <td><label style="margin-right: 10px">utm_term</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-5" type="text" value="utm_term" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="utm_term" type="text" placeholder="i.e., food"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_term" type="text" placeholder="i.e., shopping"/></td>
             </tr>
         </table>
 
