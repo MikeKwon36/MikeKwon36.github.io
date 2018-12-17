@@ -117,11 +117,6 @@
                 channel: utm_source,
                 campaign: utm_campaign,
                 data: {
-                    "utm_campaign": utm_campaign,
-                    "utm_source": utm_source,
-                    "utm_content": utm_content,
-                    "utm_medium": utm_medium,
-                    "utm_term": utm_term,
                     "$deeplink_path": deeplink_path,
                     "$ios_deeplink_path": deeplink_path,
                     "$android_deeplink_path": deeplink_path,
@@ -163,10 +158,10 @@
     <section class="container toggle" id="description_oneoff">
         <p><ol>
             <li><strong>[REQUIRED]</strong> Enter the web URL to convert</li>
-            <li>Remove appstore redirects, if mobile users should go to web</li>
-            <li>Add UTM Tags</li>
-            <li>Click <strong>Create Email Link</strong> and paste the Branch link into your email</li>
-            <li><strong>[DEBUGGER]</strong> Add "?debug=1" to the end of the link and paste it into your browser bar</li>
+            <li>Remove appstore redirects, to send mobile users without the app to web</li>
+            <li>Add UTM analytics</li>
+            <li>Click <strong>Create Email Link</strong> to generate a new Branch link</li>
+            <li><strong>[To debug deep links]</strong> Add "?debug=1" to the link and paste it into the browser</li>
         </ol></p>
     </section>
 
@@ -190,7 +185,7 @@
         <table id="query_params" class="toggle">
             <tr id="row-1">
                 <td><label style="margin-right: 10px">Deeplink key</label></td>
-                <td><input class="form-control" style="width:450px" id="$deeplink_path" type="text" placeholder="Enter a $android_deeplink_path key"/></td>
+                <td><input class="form-control" style="width:450px" id="$deeplink_path" type="text" placeholder="Enter a value for $android_deeplink_path and $ios_deeplink_path"/></td>
             </tr>
             <tr id="row-2">
                 <td><label style="margin-right: 10px">Android destination</label></td>
