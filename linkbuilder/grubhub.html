@@ -64,6 +64,12 @@
                 }
             } else {
                 utm_medium = "Email Braze";
+                if (original_url.indexOf("?")>0){queryLogic = '&';};
+                original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
+                if (desktop) {
+                    if (desktop.indexOf("?")>0){queryLogic = '&';};
+                    desktop = desktop + queryLogic + "utm_medium=" + utm_medium;
+                }
             }
             if (utm_campaign){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};

@@ -50,6 +50,7 @@
             var utm_source = window.document.getElementById('utm_source').value;
             var utm_content = window.document.getElementById('utm_content').value;
             var utm_term = window.document.getElementById('utm_term').value;
+
             if (utm_medium){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
@@ -59,6 +60,12 @@
                 }
             } else {
                 utm_medium = "Email Salesforce";
+                if (original_url.indexOf("?")>0){queryLogic = '&';};
+                original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
+                if (desktop) {
+                    if (desktop.indexOf("?")>0){queryLogic = '&';};
+                    desktop = desktop + queryLogic + "utm_medium=" + utm_medium;
+                }                
             }
             if (utm_campaign){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
