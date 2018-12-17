@@ -163,22 +163,18 @@
     <section class="container" id="link-creation">
         <!-- Table for user input -->
 
-        <h3 class="toggle">Set URL</h3>
+        <h3 class="toggle">Configure Link Behavior</h3>
 
-        <table>
-            <tbody>
-                <tr class="toggle">
-                    <td><label style="margin-right: 10px">Enter a Mobile URL redirect</label></td>
-                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="Leave blank to send to app stores"/></td>
-                </tr>
-            </tbody>
-        </table>
         <table id="query_params" class="toggle">
             <tr id="row-1">
+                <td><label style="margin-right: 10px">Enter a Mobile URL redirect</label></td>
+                <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="Leave blank to send to app stores"/></td>
+            </tr>
+            <tr id="row-2">
                 <td><label style="margin-right: 10px">Enter a Desktop URL redirect</label></td>
                 <td><input class="form-control" style="width:500px" id="$desktop_url" type="text" placeholder="Leave blank to send to hsn.com"/></td>
             </tr>
-            <tr id="row-2">
+            <tr id="row-3">
                 <td><label style="margin-right: 10px">Enter a deeplink key</label></td>
                 <td><input class="form-control" style="width:500px" id="$deeplink_path" type="text" placeholder="Leave blank to open app homescreen"/></td>
             </tr>
