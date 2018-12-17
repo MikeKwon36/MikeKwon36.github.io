@@ -37,24 +37,19 @@
     <!-- Script to generate 3P link based on user inputs -->
     <script>
         function generate3PLink() {
+            // Redirect variables
             var original_url = window.document.getElementById("originalUrl").value;
-
-            if (!original_url) {
-                alert("Please enter a destination URL.");
-                window.document.getElementById("originalUrl").focus();
-                return
-            }
-
+            var desktop = window.document.getElementById('$desktop_url').value;
+            var deeplink_path = window.document.getElementById('$deeplink_path').value;
             var queryLogic = "?"
+            if (!desktop){desktop = "https://www.hsn.com/";}
+
+            // Analytics variables
             var utm_medium = window.document.getElementById('utm_medium').value;
             var utm_campaign = window.document.getElementById('utm_campaign').value;
             var utm_source = window.document.getElementById('utm_source').value;
             var utm_content = window.document.getElementById('utm_content').value;
             var utm_term = window.document.getElementById('utm_term').value;
-            var desktop = window.document.getElementById('$desktop_url').value;
-            var ios = window.document.getElementById('$ios_url').value;
-            var android = window.document.getElementById('$android_url').value;
-
             if (utm_medium){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
@@ -63,7 +58,7 @@
                     desktop = desktop + queryLogic + "utm_medium=" + utm_medium;
                 }
             } else {
-                utm_medium = "Email Braze";
+                utm_medium = "Email Salesforce";
             }
             if (utm_campaign){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
@@ -97,14 +92,10 @@
                     desktop = desktop + queryLogic + "utm_term=" + utm_term;
                 }
             }
-            if (!desktop){desktop = original_url;}
-            if (!ios){ios = original_url;}
-            if (!android){android = original_url;}
 
             console.log(original_url);
             console.log(desktop);
-            console.log(ios);
-            console.log(android);
+            console.log(deeplink_path);
 
             var linkData = {
                 tags: [utm_content],
@@ -118,10 +109,8 @@
                     "utm_medium": utm_medium,
                     "utm_term": utm_term,
                     "$desktop_url": desktop,
-                    "$ios_url": ios,
-                    "$android_url": android,
-                    "$3p": "e_ab",
-                    "$canonical_url": original_url,
+                    "$3p": "e_et",
+                    "$deeplink_path": deeplink_path,
                     "$original_url": original_url
                 }
             };
@@ -155,11 +144,12 @@
     <!-- Description for one-off link creation -->
     <section class="container toggle" id="description_oneoff">
         <p><ol>
-            <li><strong>[REQUIRED]</strong> Enter the web URL to convert (serves as deep link key)</li>
-            <li>Edit/Remove appstore redirects, if web redirect is needed</li>
+            <li>Enter a web URL to redirect mobile traffic</li>
+            <li>Enter a web URL in "$desktop_url", to send desktop traffic</li>
+            <li>Enter a value in "$deeplink_path", to deep link instead of open the app homescreen</li>
             <li>Add UTM Tags</li>
-            <li>Click <strong>Create Email Link</strong> and paste the Branch link into your email</li>
-            <li><strong>[DEBUGGER]</strong> Add "?debug=1" to the end of the link and paste it into your browser bar</li>
+            <li>Click <strong>Create Email Link</strong> to generate your Branch link</li>
+            <li><strong>[To debug links]</strong> Add "?debug=1" to the link and paste it into your browser bar</li>
         </ol></p>
     </section>
 
@@ -171,8 +161,8 @@
         <table>
             <tbody>
                 <tr class="toggle">
-                    <td><label style="margin-right: 10px">Enter a web URL</label></td>
-                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., https://www.hsn.com/products/jade-of-yesteryear-burmese-jade-and-peridot-ring/8729715"/></td>
+                    <td><label style="margin-right: 10px">Enter your Mobile URL redirect</label></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="Leave blank to send to app stores"/></td>
                 </tr>
             </tbody>
         </table>
@@ -183,15 +173,11 @@
         <table id="query_params" class="toggle">
             <tr id="row-1">
                 <td><label style="margin-right: 10px">$desktop_url</label></td>
-                <td><input class="form-control" style="width:450px" id="$desktop_url" type="text" placeholder="Enter a custom url to redirect desktop users (if different than above)"/></td>
+                <td><input class="form-control" style="width:450px" id="$desktop_url" type="text" placeholder="Leave blank to send to hsn.com"/></td>
             </tr>
             <tr id="row-2">
-                <td><label style="margin-right: 10px">$android_url</label></td>
-                <td><input class="form-control" style="width:450px" id="$android_url" type="text" value="https://play.google.com/store/apps/details?id=com.hsn.android&amp;hl=en_US"/></td>
-            </tr>
-            <tr id="row-3">
-                <td><label style="margin-right: 10px">$ios_url</label></td>
-                <td><input class="form-control" style="width:450px" id="$ios_url" type="text" value="https://itunes.apple.com/us/app/hsn-shopping-app/id324326909?mt=8"/></td>
+                <td><label style="margin-right: 10px">$deeplink_path</label></td>
+                <td><input class="form-control" style="width:450px" id="$deeplink_path" type="text" placeholder="Leave blank to open app homescreen"/></td>
             </tr>
         </table>
 
