@@ -52,12 +52,6 @@
             var utm_content = window.document.getElementById('utm_content').value;
             var utm_term = window.document.getElementById('utm_term').value;
             var deeplink_path = window.document.getElementById('$deeplink_path').value;
-            if (window.document.getElementById('$ios_url')){
-                var ios = window.document.getElementById('$ios_url').value;
-            } else {ios=original_url}
-            if (window.document.getElementById('$android_url')){
-                var android = window.document.getElementById('$android_url').value;
-            } else {android=original_url}
 
             if (utm_medium){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
@@ -84,10 +78,12 @@
                 original_url = original_url + queryLogic + "utm_term=" + utm_term;
             }
 
-            console.log("original_url = " + original_url);
-            console.log("$deeplink_path = " + deeplink_path);
-            console.log("ios_url = " + ios);
-            console.log("android_url = " + android);
+            if (window.document.getElementById('$ios_url')){
+                var ios = window.document.getElementById('$ios_url').value;
+            } else {ios=original_url}
+            if (window.document.getElementById('$android_url')){
+                var android = window.document.getElementById('$android_url').value;
+            } else {android=original_url}
 
             var linkData = {
                 tags: [utm_content],
