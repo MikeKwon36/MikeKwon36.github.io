@@ -116,6 +116,23 @@
             });
         }
 
+        // Returns current number of query parameter rows
+        function getRowCount() {
+            var rowCount = 
+
+            return rowCount;
+        }
+
+        // Removes a query parameter row
+        function removeQuerylinkParam() {
+            rowCount = window.document.getElementById('query_params').rows.length;
+            if (rowCount > 1) {
+                $(`#row-${rowCount}`).remove();
+                $(`#row-${window.document.getElementById('query_params').rows.length}`).remove();
+            }
+
+        }
+
         </script>
 </head>
 
@@ -170,6 +187,9 @@
                 <td><input class="form-control" style="width:450px" id="$ios_url" type="text" value="https://itunes.apple.com/us/app/seamless-local-food-delivery/id381840917?mt=8"/></td>
             </tr>
         </table>
+
+        <button class="btn toggle" id="remove-query-button" style="background-color:#d3d3d3; display:inline;"onclick="removeQuerylinkParam()">Remove App Store redirects</button>
+        <br>
 
         <h3 class="toggle">Add Analytics Tags</h3>
         <table id="analytic_params" class="toggle">
