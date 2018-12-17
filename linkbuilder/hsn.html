@@ -151,9 +151,9 @@
     <!-- Description for one-off link creation -->
     <section class="container toggle" id="description_oneoff">
         <p><ol>
-            <li>Enter a web URL to redirect mobile traffic</li>
-            <li>Enter a web URL in "$desktop_url", to send desktop traffic</li>
-            <li>Enter a value in "$deeplink_path", to deep link instead of open the app homescreen</li>
+            <li>Enter a web URL for mobile users without the app (leave blank to send to app store)</li>
+            <li>Enter a web URL to send desktop traffic</li>
+            <li>Enter a deeplink key to open a specific screen (leave blank to open home screen)</li>
             <li>Add UTM Tags</li>
             <li>Click <strong>Create Email Link</strong> to generate your Branch link</li>
             <li><strong>[To debug links]</strong> Add "?debug=1" to the link and paste it into your browser bar</li>
@@ -168,19 +168,19 @@
         <table>
             <tbody>
                 <tr class="toggle">
-                    <td><label style="margin-right: 10px">Enter your Mobile URL redirect</label></td>
+                    <td><label style="margin-right: 10px">Enter a Mobile URL redirect</label></td>
                     <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="Leave blank to send to app stores"/></td>
                 </tr>
             </tbody>
         </table>
         <table id="query_params" class="toggle">
             <tr id="row-1">
-                <td><label style="margin-right: 10px">Enter your Desktop URL redirect</label></td>
-                <td><input class="form-control" style="width:450px" id="$desktop_url" type="text" placeholder="Leave blank to send to hsn.com"/></td>
+                <td><label style="margin-right: 10px">Enter a Desktop URL redirect</label></td>
+                <td><input class="form-control" style="width:500px" id="$desktop_url" type="text" placeholder="Leave blank to send to hsn.com"/></td>
             </tr>
             <tr id="row-2">
                 <td><label style="margin-right: 10px">Enter a deeplink key</label></td>
-                <td><input class="form-control" style="width:450px" id="$deeplink_path" type="text" placeholder="Leave blank to open app homescreen"/></td>
+                <td><input class="form-control" style="width:500px" id="$deeplink_path" type="text" placeholder="Leave blank to open app homescreen"/></td>
             </tr>
         </table>
 
