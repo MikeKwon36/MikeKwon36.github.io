@@ -87,7 +87,7 @@
         // Adds a new row for additional query parameters
         function addQuerylinkParam() {
             var newRowIndex = getRowCount() + 1;
-            var newRowHTML = `<tr id="row-${newRowIndex}"><td><label style="margin-right:10px">Query Param ${newRowIndex}</label></td><td><input class="form-control" style="width:300px" id="query-key-${newRowIndex}" type="text" placeholder="i.e., $desktop_url, $ios_url, $android_url"/></td><td><input class="form-control" style="width:450px" id="query-value-${newRowIndex}" type="text" placeholder="i.e., https://www.grubhub.com, recipe#34"/></td></tr>`;
+            var newRowHTML = `<tr id="row-${newRowIndex}"><td><label style="margin-right:10px">Query Param ${newRowIndex}</label></td><td><input class="form-control" style="width:300px" id="query-key-${newRowIndex}" type="text" placeholder="i.e., $android_deeplink_path, $ios_url, $android_url"/></td><td><input class="form-control" style="width:450px" id="query-value-${newRowIndex}" type="text" placeholder="i.e., https://www.hsn.com"/></td></tr>`;
             $("#query_params").append(newRowHTML);
         }
 
@@ -116,7 +116,7 @@
         <img src="https://branch.io/img/logo-dark.svg" style="width:100px;">
         </br>
         </br>
-        <h1 style="display:inline; vertical-align:middle">Grubhub Email Long Link Creator</h1>
+        <h1 style="display:inline; vertical-align:middle">HSN Email Long Link Creator</h1>
     </div>
 
     <section class="container toggle" id="description_oneoff">
