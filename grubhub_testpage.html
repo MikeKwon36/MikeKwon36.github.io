@@ -162,6 +162,13 @@
 
     // Retrieve the url from the browser bar
     var canonical_url = window.location.href;
+    var efkwid;
+    var ef_id;
+    var gclid;
+    var utm_term;
+    var utm_medium;
+    var utm_campaign;
+    var utm_source;    
 
     function extractHostname(url) {
         var hostname;
@@ -186,13 +193,6 @@
 
     // Use Grubhub's Test API key to dynamically create a Branch link based on the page's source traffic
     branch.init('key_test_kpg7B31wpZga5sgQ9PDbJcjfyBkzvx2d', function(err, data) {
-        var efkwid;
-        var ef_id;
-        var gclid;
-        var utm_term;
-        var utm_medium;
-        var utm_campaign;
-        var utm_source;
 
         // Retrieve efkwid, if it's on the page url
         if (getParameterByName('efkwid')){
