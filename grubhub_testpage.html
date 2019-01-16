@@ -200,9 +200,6 @@
                 <div class="col-lg-12">
                     <div class="intro-text">
                         <a id="test" href="https://www.google.com"> Test Link </a>
-                        <button onclick="orderNoodles()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Order Noodles</button>
-                        <button onclick="orderBurgers()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Order Burgers</button>
-                        <button onclick="swapTemplate()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Swap template</button>
                         <p></p>
                     </div>
                 </div>
@@ -290,68 +287,6 @@
         </a>
     </div>
 
-
-    <!-- Branch javascript -->
-    <script type="text/javascript">
-
-    // Branch listener object that retrieves banner link data and prints it to console
-    var listener = function(event, data) {
-        console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
-        console.log(data);
-    };
-    branch.addListener("willShowJourney", listener);
-    branch.addListener("didShowJourney", listener);
-    branch.addListener("willNotShowJourney", listener);
-    branch.addListener("didClickJourneyCTA", listener);
-    branch.addListener("didClickJourneyClose", listener);
-    branch.addListener("willCloseJourney", listener);
-    branch.addListener("didCloseJourney", listener);
-    branch.addListener("didCallJourneyClose", listener);
-
-    
-    var foodID = 'Food!'
-    function orderNoodles(){
-        branch.closeJourney(function(err) {});
-        foodID = 'Noodles!'
-        branch.setBranchViewData({
-            data: {
-                '$canonical_url':window.location.href,
-                '$journeys_icon_image_url':'https://image.flaticon.com/icons/png/512/168/168564.png',
-                '$journeys_button_get_no_app':foodID,
-                '$journeys_button_get_has_app':foodID,
-                '$journeys_title':'Hungry for ' + foodID,
-                '$journeys_description':'Order ' + foodID + ' in the app!'
-            }
-        });
-        branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true});
-    }
-
-    function orderBurgers(){
-        branch.closeJourney(function(err) {});
-        foodID = 'Burgers!'
-        branch.setBranchViewData({
-            data: {
-                '$canonical_url':window.location.href,
-                '$journeys_icon_image_url':'https://cdn1.iconfinder.com/data/icons/jellycons-2-100-ios-8-app-icons/1024/Burger.png',
-                '$journeys_button_get_no_app':foodID,
-                '$journeys_button_get_has_app':foodID,
-                '$journeys_title':'Hungry for ' + foodID,
-                '$journeys_description':'Order ' + foodID + ' in the app!'
-            }
-        });
-        branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true});
-    }
-
-    function swapTemplate(){
-        branch.closeJourney(function(err) {});
-        if (templateID=='453238497136757764') {
-            templateID='453238701065589764';
-        } else if (templateID=='453238701065589764') {
-            templateID='453238497136757764';
-        };
-        branch.init('key_live_cnChxhZYcC9rBMAG82xLNjdcFBokyGD0', {'branch_view_id':templateID,'make_new_link': true});
-    }
-    </script>
 
     <script src="/js/jquery-1.11.0.js"></script>
     <script src="/js/bootstrap.min.js"></script>
