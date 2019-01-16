@@ -192,22 +192,22 @@
     branch.init('key_test_kpg7B31wpZga5sgQ9PDbJcjfyBkzvx2d', function(err, data) {
 
         // Retrieve the utm_term tag, if it's available
-        if (getParameterByName('utm_term')){
-            utm_source = getParameterByName('utm_term');
+        if (getParameterByName('utm_term',canonical_url)){
+            utm_term = getParameterByName('utm_term');
         }
 
         // Retrieve the utm_medium tag, if it's available
-        if (getParameterByName('utm_medium')){
-            utm_source = getParameterByName('utm_medium');
+        if (getParameterByName('utm_medium',canonical_url)){
+            utm_medium = getParameterByName('utm_medium');
         }
 
         // Retrieve the utm_campaign tag, if it's available
-        if (getParameterByName('utm_campaign')){
-            utm_source = getParameterByName('utm_campaign');
+        if (getParameterByName('utm_campaign',canonical_url)){
+            utm_cam = getParameterByName('utm_campaign');
         }
 
         // Retrieve the utm_source tag, if it's available
-        if (getParameterByName('utm_source')){
+        if (getParameterByName('utm_source',canonical_url)){
             utm_source = getParameterByName('utm_source');
         } else if (document.referrer) {
             // Set utm_source to the referring domain, if it's available, and hardcode utm_medium to SEO if the referring domain is Google, Bing, or Yahoo
