@@ -236,9 +236,11 @@
         // Retrieve the utm_source tag, if it's available
         if (getParameterByName('utm_source')){
             utm_source = getParameterByName('utm_source');
+            console.log(utm_source);
         } else if (document.referrer) {
             // Set utm_source to the referring domain, if it's available, and hardcode utm_medium to SEO if the referring domain is Google, Bing, or Yahoo
             utm_source = extractHostname(document.referrer);
+            console.log(utm_source);
 
             if (utm_source.includes("google") || utm_source.includes("yahoo") || utm_source.includes("bing")){
                 utm_medium="SEO";
