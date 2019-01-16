@@ -218,16 +218,19 @@
         // Retrieve the utm_term tag, if it's available
         if (getParameterByName('utm_term')){
             utm_source = getParameterByName('utm_term');
+            console.log(utm_term);
         }
 
         // Retrieve the utm_medium tag, if it's available
         if (getParameterByName('utm_medium')){
             utm_source = getParameterByName('utm_medium');
+            console.log(utm_medium);
         }
 
         // Retrieve the utm_campaign tag, if it's available
         if (getParameterByName('utm_campaign')){
             utm_source = getParameterByName('utm_campaign');
+            console.log(utm_campaign);
         }
 
         // Retrieve the utm_source tag, if it's available
