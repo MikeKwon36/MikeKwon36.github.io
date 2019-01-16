@@ -184,11 +184,11 @@
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
-        console.log("a");
+        console.log("kwona");
 
     // Use Grubhub's Test API key to dynamically create a Branch link based on the page's source traffic
     branch.init('key_test_kpg7B31wpZga5sgQ9PDbJcjfyBkzvx2d', function(err, data) {
-        console.log("kwon");
+        console.log("kwonb");
         var efkwid;
         var ef_id;
         var gclid;
@@ -199,13 +199,13 @@
 
         // Retrieve efkwid, if it's on the page url
         if (getParameterByName('efkwid')){
-            gclid = getParameterByName('efkwid');
+            efkwid = getParameterByName('efkwid');
             console.log(efkwid);
         }
 
         // Retrieve ef_id, if it's on the page url
         if (getParameterByName('ef_id')){
-            gclid = getParameterByName('ef_id');
+            ef_id = getParameterByName('ef_id');
         }
 
         // Retrieve gclid, if it's on the page url
