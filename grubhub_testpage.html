@@ -163,6 +163,7 @@
 
     // Retrieve the url from the browser bar
     var canonical_url = window.location.href;
+    console.log(canonical_url);
 
     function extractHostname(url) {
         var hostname;
@@ -198,7 +199,6 @@
         // Retrieve efkwid, if it's on the page url
         if (getParameterByName('efkwid')){
             gclid = getParameterByName('efkwid');
-            console.log(gclid);
         }
 
         // Retrieve ef_id, if it's on the page url
