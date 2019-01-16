@@ -55,6 +55,7 @@
         // Retrieve efkwid, if it's on the page url
         if (getParameterByName('efkwid')){
             gclid = getParameterByName('efkwid');
+            console.log(gclid);
         }
 
         // Retrieve ef_id, if it's on the page url
@@ -128,6 +129,7 @@
             if (err == null) {
                 var button = document.getElementById("test");
                 button.href=link;
+                console.log(link);
             }
         });
     });
