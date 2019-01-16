@@ -13,130 +13,6 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Branch Web SDK -->
-    <script type="text/javascript">
-
-    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
-
-    // Retrieve the url from the browser bar
-    var canonical_url = window.location.href;
-
-    function extractHostname(url) {
-        var hostname;
-        if (url.indexOf("//") > -1) {
-            hostname = url.split('/')[2];
-        } else {
-            hostname = url.split('/')[0];
-        }
-        hostname = hostname.split(':')[0];
-        hostname = hostname.split('?')[0];
-        return hostname;
-    }
-
-    function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url.toUpperCase());
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-
-    // Use Grubhub's Test API key to dynamically create a Branch link based on the page's source traffic
-    branch.init('key_test_kpg7B31wpZga5sgQ9PDbJcjfyBkzvx2d', function(err, data) {
-        var efkwid;
-        var ef_id;
-        var gclid;
-        var utm_term;
-        var utm_medium;
-        var utm_campaign;
-        var utm_source;
-
-        // Retrieve efkwid, if it's on the page url
-        if (getParameterByName('efkwid')){
-            gclid = getParameterByName('efkwid');
-            console.log(gclid);
-        }
-
-        // Retrieve ef_id, if it's on the page url
-        if (getParameterByName('ef_id')){
-            gclid = getParameterByName('ef_id');
-        }
-
-        // Retrieve gclid, if it's on the page url
-        if (getParameterByName('gclid')){
-            gclid = getParameterByName('gclid');
-        }
-
-        // Retrieve the utm_term tag, if it's available
-        if (getParameterByName('utm_term')){
-            utm_source = getParameterByName('utm_term');
-        }
-
-        // Retrieve the utm_medium tag, if it's available
-        if (getParameterByName('utm_medium')){
-            utm_source = getParameterByName('utm_medium');
-        }
-
-        // Retrieve the utm_campaign tag, if it's available
-        if (getParameterByName('utm_campaign')){
-            utm_source = getParameterByName('utm_campaign');
-        }
-
-        // Retrieve the utm_source tag, if it's available
-        if (getParameterByName('utm_source')){
-            utm_source = getParameterByName('utm_source');
-        } else if (document.referrer) {
-            // Set utm_source to the referring domain, if it's available, and hardcode utm_medium to SEO if the referring domain is Google, Bing, or Yahoo
-            utm_source = extractHostname(document.referrer);
-
-            if (utm_source.includes("google") || utm_source.includes("yahoo") || utm_source.includes("bing")){
-                utm_medium="SEO";
-            } else {
-                utm_medium="organic";
-            }
-
-            if (original_url.indexOf("?")>0){
-                canonical_url = canonical_url + "&utm_source=" + utm_source + "&utm_medium=" + utm_medium;
-            } else {
-                canonical_url = canonical_url + "?utm_source=" + utm_source + "&utm_medium=" + utm_medium;
-            }
-        } else {
-            // Set utm_medium to "Organic"
-            utm_medium = 'organic';
-            if (original_url.indexOf("?")>0){
-                canonical_url = canonical_url + "&utm_medium=" + utm_medium;
-            } else {
-                canonical_url = canonical_url + "?utm_medium=" + utm_medium;
-            }
-        }
-
-        var linkData = {
-            tags: [utm_term],
-            feature: utm_medium,
-            channel: utm_source,
-            campaign: utm_campaign,
-            data: {
-                "$canonical_url": canonical_url,
-                "efkwid": efkwid,
-                "ef_id": ef_id,
-                "gclid": gclid
-            }
-        };
-
-        // function to create a new Branch link
-        branch.link(linkData, function(err, link) {
-            if (err == null) {
-                var button = document.getElementById("test");
-                button.href=link;
-                console.log(link);
-            }
-        });
-    });
-
-</script>
-
-
 </head>
 <body id="page-top" class="index">
        <!-- Navigation -->
@@ -280,7 +156,128 @@
         </div>
     </footer>
 
+       <!-- Branch Web SDK -->
+    <script type="text/javascript">
 
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
+
+    // Retrieve the url from the browser bar
+    var canonical_url = window.location.href;
+
+    function extractHostname(url) {
+        var hostname;
+        if (url.indexOf("//") > -1) {
+            hostname = url.split('/')[2];
+        } else {
+            hostname = url.split('/')[0];
+        }
+        hostname = hostname.split(':')[0];
+        hostname = hostname.split('?')[0];
+        return hostname;
+    }
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url.toUpperCase());
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Use Grubhub's Test API key to dynamically create a Branch link based on the page's source traffic
+    branch.init('key_test_kpg7B31wpZga5sgQ9PDbJcjfyBkzvx2d', function(err, data) {
+        var efkwid;
+        var ef_id;
+        var gclid;
+        var utm_term;
+        var utm_medium;
+        var utm_campaign;
+        var utm_source;
+
+        // Retrieve efkwid, if it's on the page url
+        if (getParameterByName('efkwid')){
+            gclid = getParameterByName('efkwid');
+            console.log(gclid);
+        }
+
+        // Retrieve ef_id, if it's on the page url
+        if (getParameterByName('ef_id')){
+            gclid = getParameterByName('ef_id');
+        }
+
+        // Retrieve gclid, if it's on the page url
+        if (getParameterByName('gclid')){
+            gclid = getParameterByName('gclid');
+        }
+
+        // Retrieve the utm_term tag, if it's available
+        if (getParameterByName('utm_term')){
+            utm_source = getParameterByName('utm_term');
+        }
+
+        // Retrieve the utm_medium tag, if it's available
+        if (getParameterByName('utm_medium')){
+            utm_source = getParameterByName('utm_medium');
+        }
+
+        // Retrieve the utm_campaign tag, if it's available
+        if (getParameterByName('utm_campaign')){
+            utm_source = getParameterByName('utm_campaign');
+        }
+
+        // Retrieve the utm_source tag, if it's available
+        if (getParameterByName('utm_source')){
+            utm_source = getParameterByName('utm_source');
+        } else if (document.referrer) {
+            // Set utm_source to the referring domain, if it's available, and hardcode utm_medium to SEO if the referring domain is Google, Bing, or Yahoo
+            utm_source = extractHostname(document.referrer);
+
+            if (utm_source.includes("google") || utm_source.includes("yahoo") || utm_source.includes("bing")){
+                utm_medium="SEO";
+            } else {
+                utm_medium="organic";
+            }
+
+            if (original_url.indexOf("?")>0){
+                canonical_url = canonical_url + "&utm_source=" + utm_source + "&utm_medium=" + utm_medium;
+            } else {
+                canonical_url = canonical_url + "?utm_source=" + utm_source + "&utm_medium=" + utm_medium;
+            }
+        } else {
+            // Set utm_medium to "Organic"
+            utm_medium = 'organic';
+            if (original_url.indexOf("?")>0){
+                canonical_url = canonical_url + "&utm_medium=" + utm_medium;
+            } else {
+                canonical_url = canonical_url + "?utm_medium=" + utm_medium;
+            }
+        }
+
+        var linkData = {
+            tags: [utm_term],
+            feature: utm_medium,
+            channel: utm_source,
+            campaign: utm_campaign,
+            data: {
+                "$canonical_url": canonical_url,
+                "efkwid": efkwid,
+                "ef_id": ef_id,
+                "gclid": gclid
+            }
+        };
+
+        // function to create a new Branch link
+        branch.link(linkData, function(err, link) {
+            if (err == null) {
+                var button = document.getElementById("test");
+                button.href=link;
+                console.log(link);
+            }
+        });
+    });
+
+</script>
 
     <script src="/js/jquery-1.11.0.js"></script>
     <script src="/js/bootstrap.min.js"></script>
