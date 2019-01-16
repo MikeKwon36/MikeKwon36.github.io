@@ -156,8 +156,7 @@
         </div>
     </footer>
 
-       <!-- Branch Web SDK -->
-    <script type="text/javascript">
+<script type="text/javascript">
 
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
 
@@ -184,11 +183,9 @@
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
-        console.log("kwona");
 
     // Use Grubhub's Test API key to dynamically create a Branch link based on the page's source traffic
     branch.init('key_test_kpg7B31wpZga5sgQ9PDbJcjfyBkzvx2d', function(err, data) {
-        console.log("kwonb");
         var efkwid;
         var ef_id;
         var gclid;
@@ -200,47 +197,39 @@
         // Retrieve efkwid, if it's on the page url
         if (getParameterByName('efkwid')){
             efkwid = getParameterByName('efkwid');
-            console.log(efkwid);
         }
 
         // Retrieve ef_id, if it's on the page url
         if (getParameterByName('ef_id')){
             ef_id = getParameterByName('ef_id');
-            console.log(ef_id);
         }
 
         // Retrieve gclid, if it's on the page url
         if (getParameterByName('gclid')){
             gclid = getParameterByName('gclid');
-            console.log(gclid);
         }
 
         // Retrieve the utm_term tag, if it's available
         if (getParameterByName('utm_term')){
             utm_source = getParameterByName('utm_term');
-            console.log(utm_term);
         }
 
         // Retrieve the utm_medium tag, if it's available
         if (getParameterByName('utm_medium')){
             utm_source = getParameterByName('utm_medium');
-            console.log(utm_medium);
         }
 
         // Retrieve the utm_campaign tag, if it's available
         if (getParameterByName('utm_campaign')){
             utm_source = getParameterByName('utm_campaign');
-            console.log(utm_campaign);
         }
 
         // Retrieve the utm_source tag, if it's available
         if (getParameterByName('utm_source')){
             utm_source = getParameterByName('utm_source');
-            console.log(utm_source);
         } else if (document.referrer) {
             // Set utm_source to the referring domain, if it's available, and hardcode utm_medium to SEO if the referring domain is Google, Bing, or Yahoo
             utm_source = extractHostname(document.referrer);
-            console.log(utm_source);
 
             if (utm_source.includes("google") || utm_source.includes("yahoo") || utm_source.includes("bing")){
                 utm_medium="SEO";
@@ -279,8 +268,8 @@
         // function to create a new Branch link
         branch.link(linkData, function(err, link) {
             if (err == null) {
-                document.getElementById("test").href=link;
                 console.log(link);
+                // Add code here to inject your new Branch link into a clickable page element 
             }
         });
     });
