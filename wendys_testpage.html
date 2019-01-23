@@ -179,9 +179,9 @@
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
     function launchBranchJourney(){
         var linkData = {
-            campaign: 'dynamic_site_link',
+            campaign: 'change_deeplink_in_SPA',
             feature: 'Web SDK',
-            tags : ['onsite_demo'],
+            tags : ['onsite_SPA_demo'],
             data: {
                 'coupon_code':9999,
                 '$desktop_url': 'https://menu.wendys.com/en_US/product/bacon-maple-chicken-sandwich/',
@@ -203,7 +203,7 @@
         branch.link({
             campaign: 'dynamic_site_link',
             feature: 'Web SDK',
-            tags : ['onsite_demo'],
+            tags : ['onsite_link_demo'],
             data: {
                 'coupon_code':9999,
                 '$desktop_url': 'https://menu.wendys.com/en_US/product/bacon-maple-chicken-sandwich/',
