@@ -360,7 +360,9 @@
         function(err) {
             console.log(err || 'no error');
         });
-        console.log(branch.data());
+        branch.data(function(err, data) {
+            console.log(data);
+        });
     }
 
     // function to log a new V2 event
