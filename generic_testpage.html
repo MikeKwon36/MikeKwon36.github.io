@@ -360,8 +360,8 @@
         function(err) {
             console.log(err || 'no error');
         });
-        branch.data(function (object){
-            console.log("data function returns: " + object);
+        branch.data(function (err,data){
+            console.log("data function returns: " + data);
         });
     }
 
