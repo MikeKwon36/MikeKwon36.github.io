@@ -315,7 +315,7 @@
         });
 
         //function to launch journey with flags to disable banner animations
-        branch.logEvent('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
+        branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
 
         launchCount++;
     }
