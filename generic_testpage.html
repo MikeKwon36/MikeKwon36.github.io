@@ -47,11 +47,11 @@
 
     // .init call to launch banner
     //console.log('Branch Init called at ' + Math.floor(Date.now() / 1000));
-    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK',{
+    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK',{
     //    metadata : {
     //        'login_cookie' : 'dfsedskey'
     //    }
-    }, function(err, data) {
+    //}, function(err, data) {
 
         // Check if a Branch link opened the page (if yes, banner uses referring link's data)
         //if(!data.referring_link){
@@ -67,9 +67,9 @@
         //        }
         //    });
         //}
-        console.log(data);
-        console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
-    });
+    //    console.log(data);
+    //    console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
+    //});
 
 
     //.init that includes a 'branch_view_id' option to manually override journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (overwrites ~campaign to "_test")
@@ -81,9 +81,9 @@
 
 
     //.init that ignores referring Branch link that opened the page
-    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'make_new_link': true}, function(err, data) {
-    //    console.log(data);
-    //});
+    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'make_new_link': true}, function(err, data) {
+        console.log(data);
+    });
 
     </script>
 
