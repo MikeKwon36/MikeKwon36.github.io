@@ -13,11 +13,16 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
+        <!-- Execute Universal Link on page load -->
+    <script>
+
+    (function(){
+        window.location.href = 'https://espn.app.link/sms';
+    });
+    </script>
+
 </head>
 <body id="page-top" class="index">
-
-    <!-- iframe to load universal link -->
-    <iframe style="display:none" height="0" width="0" id="loader"></iframe>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -157,16 +162,6 @@
             </div>
         </div>
     </footer>
-
-
-        <!-- Execute Universal Link on page load -->
-    <script>
-
-    (function(){
-        var deepLink = 'https://espn.app.link/sms';
-        window.location.href = deepLink;
-    });
-    </script>
 
     <script src="/js/jquery-1.11.0.js"></script>
     <script src="/js/bootstrap.min.js"></script>
