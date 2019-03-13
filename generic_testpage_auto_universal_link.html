@@ -26,16 +26,16 @@
 
         // Android Chrome case
         if (userAgent != null && userAgent.match(regexp) && userAgent.indexOf('Version/') == -1) {
-            window.location = deepLink;
+            window.location.href = deepLink;
             window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
         }
         // iOS 9+ case
         else if (userAgent != null && userAgent.match(newIosRegexp)) {
             // Safari (non-Chrome) case
             if (userAgent.indexOf('CriOS/') == -1) {
-                window.location = fallbackLink;
+                window.location.href = fallbackLink;
             } else {
-                window.location = deepLink;
+                window.location.href = deepLink;
                 window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
             }
         } else {
@@ -46,7 +46,11 @@
   </script>
 </head>
 <body id="page-top" class="index">
-       <!-- Navigation -->
+
+    <!-- iframe to load universal link -->
+    <iframe style="display:none" height="0" width="0" id="loader"></iframe>
+
+    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
 
         <!-- Branch <div> that prevents banner from overlapping with a fixed|absolute positioned nav element, but adding a top-margin  -->
@@ -90,9 +94,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <span class="name">Journeys Demo</span>
+                        <span class="name">Auto-launch ESPN</span>
                         <hr class="star-light">
-                        <span class="skills">Testpage displaying a Journeys Banner</span>
+                        <span class="skills">Testpage launching a universal link automatically</span>
                     </div>
                 </div>
             </div>
