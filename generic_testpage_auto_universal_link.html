@@ -13,37 +13,6 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Execute Universal Link on page load -->
-
-    <script>
-
-    (function(){
-        var userAgent = navigator.userAgent;
-        var deepLink = 'https://espn.app.link/sms';
-        var fallbackLink = 'https://www.espn.com';
-        var regexp = new RegExp("Mozilla/5\.0 \\(Linux; Android .*\\) AppleWebKit/.* \\(KHTML, like Gecko\\) Chrome/.* Safari/.*");
-        var newIosRegexp = new RegExp("Mozilla/5\.0 \\((iPhone|iPad); CPU.*OS (9|[1-9][0-9]+)_.+ like Mac OS X\\) AppleWebKit/.* \\(KHTML, like Gecko\\) .*");
-
-        // Android Chrome case
-        if (userAgent != null && userAgent.match(regexp) && userAgent.indexOf('Version/') == -1) {
-            window.location.href = deepLink;
-            window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
-        }
-        // iOS 9+ case
-        else if (userAgent != null && userAgent.match(newIosRegexp)) {
-            // Safari (non-Chrome) case
-            if (userAgent.indexOf('CriOS/') == -1) {
-                window.location.href = fallbackLink;
-            } else {
-                window.location.href = deepLink;
-                window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
-            }
-        } else {
-            document.getElementById('loader').src = deepLink;
-            window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1000);
-        }
-    });
-  </script>
 </head>
 <body id="page-top" class="index">
 
@@ -96,7 +65,7 @@
                     <div class="intro-text">
                         <span class="name">Auto-launch ESPN</span>
                         <hr class="star-light">
-                        <span class="skills">Testpage launching a universal link automatically</span>
+                        <span class="skills">Launch universal link automatically via iframe</span>
                     </div>
                 </div>
             </div>
@@ -195,6 +164,37 @@
             <i class="fa fa-chevron-up"></i>
         </a>
     </div>
+
+        <!-- Execute Universal Link on page load -->
+    <script>
+
+    (function(){
+        var userAgent = navigator.userAgent;
+        var deepLink = 'https://espn.app.link/sms';
+        var fallbackLink = 'https://www.espn.com';
+        var regexp = new RegExp("Mozilla/5\.0 \\(Linux; Android .*\\) AppleWebKit/.* \\(KHTML, like Gecko\\) Chrome/.* Safari/.*");
+        var newIosRegexp = new RegExp("Mozilla/5\.0 \\((iPhone|iPad); CPU.*OS (9|[1-9][0-9]+)_.+ like Mac OS X\\) AppleWebKit/.* \\(KHTML, like Gecko\\) .*");
+
+        // Android Chrome case
+        if (userAgent != null && userAgent.match(regexp) && userAgent.indexOf('Version/') == -1) {
+            window.location.href = deepLink;
+            window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
+        }
+        // iOS 9+ case
+        else if (userAgent != null && userAgent.match(newIosRegexp)) {
+            // Safari (non-Chrome) case
+            if (userAgent.indexOf('CriOS/') == -1) {
+                window.location.href = fallbackLink;
+            } else {
+                window.location.href = deepLink;
+                window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
+            }
+        } else {
+            document.getElementById('loader').src = deepLink;
+            window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1000);
+        }
+    });
+    </script>
 
     <script src="/js/jquery-1.11.0.js"></script>
     <script src="/js/bootstrap.min.js"></script>
