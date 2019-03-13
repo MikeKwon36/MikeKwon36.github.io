@@ -163,30 +163,8 @@
     <script>
 
     (function(){
-        var userAgent = navigator.userAgent;
         var deepLink = 'https://espn.app.link/sms';
-        var fallbackLink = 'https://www.espn.com';
-        var regexp = new RegExp("Mozilla/5\.0 \\(Linux; Android .*\\) AppleWebKit/.* \\(KHTML, like Gecko\\) Chrome/.* Safari/.*");
-        var newIosRegexp = new RegExp("Mozilla/5\.0 \\((iPhone|iPad); CPU.*OS (9|[1-9][0-9]+)_.+ like Mac OS X\\) AppleWebKit/.* \\(KHTML, like Gecko\\) .*");
-
-        // Android Chrome case
-        if (userAgent != null && userAgent.match(regexp) && userAgent.indexOf('Version/') == -1) {
-            window.location.href = deepLink;
-            window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
-        }
-        // iOS 9+ case
-        else if (userAgent != null && userAgent.match(newIosRegexp)) {
-            // Safari (non-Chrome) case
-            if (userAgent.indexOf('CriOS/') == -1) {
-                window.location.href = fallbackLink;
-            } else {
-                window.location.href = deepLink;
-                window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
-            }
-        } else {
-            document.location.href = deepLink;
-            window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1000);
-        }
+        window.location.href = deepLink;
     });
     </script>
 
