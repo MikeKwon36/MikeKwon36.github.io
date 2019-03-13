@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Branch Demo Page</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Branch Demo Page">
+    <meta name="author" content="Mike Kwon">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+    <link rel="stylesheet" href="/style.css">    
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Execute Universal Link on page load -->
+
+    <script>
+
+    (function(){
+        var userAgent = navigator.userAgent;
+        var deepLink = 'https://espn.app.link/sms';
+        var fallbackLink = 'https://www.espn.com';
+        var regexp = new RegExp("Mozilla/5\.0 \\(Linux; Android .*\\) AppleWebKit/.* \\(KHTML, like Gecko\\) Chrome/.* Safari/.*");
+        var newIosRegexp = new RegExp("Mozilla/5\.0 \\((iPhone|iPad); CPU.*OS (9|[1-9][0-9]+)_.+ like Mac OS X\\) AppleWebKit/.* \\(KHTML, like Gecko\\) .*");
+
+        // Android Chrome case
+        if (userAgent != null && userAgent.match(regexp) && userAgent.indexOf('Version/') == -1) {
+            window.location = deepLink;
+            window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
+        }
+        // iOS 9+ case
+        else if (userAgent != null && userAgent.match(newIosRegexp)) {
+            // Safari (non-Chrome) case
+            if (userAgent.indexOf('CriOS/') == -1) {
+                window.location = fallbackLink;
+            } else {
+                window.location = deepLink;
+                window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
+            }
+        } else {
+            document.getElementById('loader').src = deepLink;
+            window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1000);
+        }
+    });
+  </script>
+</head>
+<body id="page-top" class="index">
+       <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+
+        <!-- Branch <div> that prevents banner from overlapping with a fixed|absolute positioned nav element, but adding a top-margin  -->
+        <div class="branch-journeys-top" style="display:none;"></div>
+
+        <div class="container">
+
+            <div class="navbar-header page-scroll">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">Branch Demo</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Top Section</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">Middle Section</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Bottom Section</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+        <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">Journeys Demo</span>
+                        <hr class="star-light">
+                        <span class="skills">Testpage displaying a Journeys Banner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+
+            <!-- Section Header -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Filler Text</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+
+            <!-- Description Text -->
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    
+    <!-- Contact Section -->
+<section id="contact">
+	<div class="container">
+		<!-- Section Header -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Filler Text</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+
+            <!-- Description Text -->
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+            </div>
+	</div>
+</section>
+
+    
+
+        <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Branch Demo Page</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Contact mkwon@branch.io for questions
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <script src="/js/jquery-1.11.0.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/classie.js"></script>
+    <script src="/js/cbpAnimatedHeader.js"></script>
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me_static.js"></script>
+    <script src="/js/freelancer.js"></script>
+
+    </body>
+</html>
