@@ -190,7 +190,7 @@
                 window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
             }
         } else {
-            document.getElementById('loader').src = deepLink;
+            document.location.href = deepLink;
             window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1000);
         }
     });
