@@ -13,19 +13,25 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-        <!-- Execute Universal Link on page load - Redirect will fire if app not installed -->
-    <script>
-    console.log("auto-load about to fire");
-    window.location.href = 'https://espn.app.link/sms';
+    <!-- Branch metatags -->
+    <meta name="branch:deeplink:category" content="running" />
+
+    <!-- Branch Web SDK -->
+    <script type="text/javascript">
+
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
+
+    branch.init('key_test_pnIjAzDYvTNc8fVX7cRUdcbpDzeZcyiY',function(err, data) {
+        console.log(data);
+    });
+
     </script>
 
 </head>
 <body id="page-top" class="index">
-
-    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
 
-        <!-- Branch <div> that prevents banner from overlapping with a fixed|absolute positioned nav element, but adding a top-margin  -->
+        <!-- Branch <div> that prevents banner from overlapping with fixed|absolute positioned nav element -->
         <div class="branch-journeys-top" style="display:none;"></div>
 
         <div class="container">
@@ -38,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#page-top">Branch Demo</a>
+                <a class="navbar-brand" href="#page-top">BoatUS Demo</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -60,15 +66,14 @@
         </div>
     </nav>
 
-        <!-- Header -->
     <header>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <span class="name">Auto-launch ESPN</span>
+                        <span class="name">Banner uses TEST API and -alternate domain</span>
                         <hr class="star-light">
-                        <span class="skills">Launch universal link via window.location.href</span>
+                        <span class="skills" id="link">Click "Create Link" button</span>
                     </div>
                 </div>
             </div>
@@ -82,24 +87,22 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
+                        <button onclick="createLink()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Create Link</button>
+                        <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
+                        <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-     <!-- About Section -->
     <section class="success" id="about">
         <div class="container">
-
-            <!-- Section Header -->
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Filler Text</h2>
                     <hr class="star-light">
                 </div>
             </div>
-
-            <!-- Description Text -->
             <div class="row">
                 <div class="col-lg-5 col-lg-offset-1 col-md-6">
                     <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
@@ -112,20 +115,14 @@
         </div>
     </section>
 
-
-    
-    <!-- Contact Section -->
 <section id="contact">
 	<div class="container">
-		<!-- Section Header -->
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Filler Text</h2>
                     <hr class="star-light">
                 </div>
             </div>
-
-            <!-- Description Text -->
             <div class="row">
                 <div class="col-lg-5 col-lg-offset-1 col-md-6">
                     <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
@@ -137,9 +134,6 @@
 	</div>
 </section>
 
-    
-
-        <!-- Footer -->
     <footer class="text-center">
         <div class="footer-above">
             <div class="container">
@@ -160,6 +154,65 @@
             </div>
         </div>
     </footer>
+
+    <!-- Branch javascript -->
+    <script>
+    
+    // Branch listener object that retrieves banner link data and prints it to console
+    var listener = function(event, data) {
+        console.log(data);
+    };
+    branch.addListener("willShowJourney", listener);
+    branch.addListener("didShowJourney", listener);
+    branch.addListener("willNotShowJourney", listener);
+    branch.addListener("didClickJourneyCTA", listener);
+    branch.addListener("didClickJourneyClose", listener);
+    branch.addListener("willCloseJourney", listener);
+    branch.addListener("didCloseJourney", listener);
+    branch.addListener("didCallJourneyClose", listener);
+    
+
+    // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
+    function launchBranchJourney(){
+        var linkData = {
+            campaign: 'change_deeplink_in_SPA',
+            feature: 'Web SDK',
+            tags : ['onsite_SPA_demo'],
+            data: {
+                'coupon_code':9999,
+                '$desktop_url': 'https://www.boatus.com/',
+                '$canonical_url': 'https://www.boatus.com/',
+                '$original_url': 'https://www.boatus.com/'
+            }
+        };
+        branch.setBranchViewData(linkData);
+        branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
+    }
+
+    // function for button to close journey (will NOT activate template's dismissal period)
+    function closeBranchJourney(){
+        branch.closeJourney(function(err) {});
+    }
+
+    // function to create a link via the web SDK
+    function createLink(){
+        branch.link({
+            campaign: 'dynamic_site_link',
+            feature: 'Web SDK',
+            tags : ['onsite_link_demo'],
+            data: {
+                'coupon_code':9999,
+                '$desktop_url': 'https://www.boatus.com/',
+                '$canonical_url': 'https://www.boatus.com/',
+                '$original_url': 'https://www.boatus.com/'
+            }
+        }, function(err, link) {
+            document.getElementById("link").innerHTML=link; 
+        });
+    }
+
+
+    </script>
 
     <script src="/js/jquery-1.11.0.js"></script>
     <script src="/js/bootstrap.min.js"></script>
