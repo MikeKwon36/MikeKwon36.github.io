@@ -48,6 +48,7 @@
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
         console.log(data);
         console.log(document.referrer);
+        branch.getBrowserFingerprintId(function(err, data) { console.log(data); });
     });
 
     // .init call to launch banner
