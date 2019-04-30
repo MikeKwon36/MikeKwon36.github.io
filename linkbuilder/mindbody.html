@@ -141,9 +141,10 @@
     <section class="container toggle" id="description_oneoff">
         <p><ol>
             <li><strong>[REQUIRED]</strong> Enter a web URL to send desktop traffic</li>
+            <li><strong>[REQUIRED]</strong> Add analytics values for tracking</li>
             <li><strong>[OPTIONAL]</strong> Add a $deeplink_path to open a specific app screen (use Leehey's rubric)</li>
             <li><strong>[OPTIONAL]</strong> Edit the $android_url and $ios_url destination for users without the app (defaults to the app stores, but will send users to the desktop url above if removed)</li>
-            <li><strong>[OPTIONAL]</strong> Add analytics values for tracking</li>
+            <li><strong>[OPTIONAL]</strong> To create a tracked email link that always sends users to the web, remove the $android_url and $ios_url by clicking the "Remove Query Param" button, and add the key "$web_only" with the value "true" (no quotations) by clicking the "Add Query Param" button</li>
             <li>Click <strong>Create Email Link</strong></li>
         </ol></p>
     </section>
