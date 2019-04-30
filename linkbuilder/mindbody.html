@@ -101,7 +101,7 @@
         function addQuerylinkParam() {
             var newRowIndex = getRowCount() + 1;
 
-            var newRowHTML = `<tr id="row-${newRowIndex}"><td><label style="margin-right:10px">Query Param ${newRowIndex}</label></td><td><input class="form-control" style="width:300px" id="query-key-${newRowIndex}" type="text" placeholder="i.e., $desktop_url, $ios_url, $android_url"/></td><td><input class="form-control" style="width:450px" id="query-value-${newRowIndex}" type="text" placeholder="i.e., https://mindbody.io/"/></td></tr>`;
+            var newRowHTML = `<tr id="row-${newRowIndex}"><td><label style="margin-right:10px">Query Param ${newRowIndex}</label></td><td><input class="form-control" style="width:300px" id="query-key-${newRowIndex}" type="text" placeholder="i.e., $web_only, $ios_url"/></td><td><input class="form-control" style="width:450px" id="query-value-${newRowIndex}" type="text" placeholder="i.e., true, https://mindbody.io/"/></td></tr>`;
             $("#query_params").append(newRowHTML);
         }
 
