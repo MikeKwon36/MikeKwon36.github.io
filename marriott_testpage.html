@@ -24,8 +24,7 @@
     branch.init('key_test_nhSpn5eZqdju3WUtYpnnDgbbyvdxwmQz',function(err, data) {
         branch.setBranchViewData({
             data:{
-                'mmbr':'This can be your user membership ID',
-                'rsrv':'This can be your user reservation number'
+                'confirmationno':'This is your user reservation number'
             }
         });
         console.log(data);
@@ -92,9 +91,9 @@
                 <div class="col-lg-12">
                     <div class="intro-text">
                         <ul>
-                            <li class="name"><a href="https://marriott.app.link/qbcBOTRryT">Live API deep link</a><p></p></li>
+                            <li class="name"><a href="https://marriott.app.link/GgUeJwMXyW">Live API deep link</a><p></p></li>
                             <li class="name"><a href="https://marriott.app.link/3p?%243p=e_ep&amp;%24original_url=https%3A%2F%2Fwww.marriott.com%2Fdefault.mi&amp;$web_only=true">Live API - Web-only link</a><p></p></li>
-                            <li class="name"><a href="https://marriott.test-app.link/h9ZQiw5syT">Test API deep link</a><p></p></li>
+                            <li class="name"><a href="https://marriott.test-app.link/LS4jPNFXyW">Test API deep link</a><p></p></li>
                             <li class="name"><a href="https://marriott.test-app.link/3p?%243p=e_ep&amp;%24original_url=https%3A%2F%2Fwww.marriott.com%2Fdefault.mi&amp;$web_only=true">Test API - Web-only link</a><p></p></li>
                         </ul>
                         <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
@@ -189,8 +188,7 @@
             feature: 'changed via javascript',
             tags : ['This can be the specific url'],
             data: {
-                'mmbr':'This can be your user membership ID',
-                'rsrv':'This can be your user reservation number'
+                'confirmationno':'This is your user reservation number'
             }
         };
         branch.setBranchViewData(linkData);
