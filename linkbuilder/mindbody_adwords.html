@@ -42,7 +42,9 @@
             }
 
             var queryLogic = '?';
-            if (original_url.indexOf("?")>0){queryLogic = '&';}
+            if (original_url.indexOf("?")>0){
+                queryLogic = '&';
+            }
             var paramsA = '';
             var paramsB = '';
             var output = '';
@@ -60,7 +62,12 @@
 
             // Get query parameters and add to params variable
             var branchLink = window.document.getElementById('query_params');
-            paramsB = ('branchify_url' + '=' + encodeURIComponent(value));
+            if (!branchLink){
+                alert("Please enter a Branch Link.");
+                window.document.getElementById("query-value-1").focus();
+                return
+            }
+            paramsB = ('branchify_url' + '=' + encodeURIComponent(branchLink));
             
             if (!/(http(s?))\:\/\//.test(original_url)) {
                 original_url = 'https://' + original_url;
@@ -73,11 +80,6 @@
                 } else {
                     if (!paramsA){
                         queryLogic = '';
-                    }
-                    if (!paramsB){
-                        alert("Please enter a Branch Link.");
-                        window.document.getElementById("query-value-1").focus();
-                        return
                     }
                     output = original_url + queryLogic + paramsA.slice(0, paramsA.length) + paramsB;
                 }
@@ -118,7 +120,7 @@
     <section class="container" id="link-creation">
         <!-- Table for user input -->
 
-        <h3 class="toggle">Set URL</h3>
+        <h3 class="toggle">Set URLs</h3>
 
         <table>
             <tbody>
@@ -133,8 +135,7 @@
         <table id="query_params" class="toggle">
             <tr id="row-1">
                 <td><label style="margin-right: 10px">Enter Branch Link from dashboard</label></td>
-                <td><input class="form-control" style="width:300px" id="query-key-1" type="text" value="branchify_url"/></td>
-                <td><input class="form-control" style="width:450px" id="query-value-1" type="text" placeholder="Enter Branch link from dashboard"/></td>
+                <td><input class="form-control" style="width:450px" id="branchLink" type="text" placeholder="i.e., https://mindbody.app.link/example"/></td>
             </tr>
         </table>
 
