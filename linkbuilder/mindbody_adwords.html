@@ -55,7 +55,7 @@
                 var value = table2.rows[i].cells[2].children[0].value
 
                 if (key && value) {
-                    paramsA += (key + '%3D' + value + '%26');
+                    paramsA += (key + '=' + value + '&');
                     paramsA_desktop += (key + '=' + value + '&');
                 }
             }
