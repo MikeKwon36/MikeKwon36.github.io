@@ -49,7 +49,7 @@
             var paramsB = '';
             var output = '';
 
-            //Add analytics params as part of $original_url & $desktop_url if it's different
+            //Add UTM params
             var table2 = window.document.getElementById('analytic_params');
             for (var i = 0, row; row = table2.rows[i]; i++) {
                 var key = table2.rows[i].cells[1].children[0].value
