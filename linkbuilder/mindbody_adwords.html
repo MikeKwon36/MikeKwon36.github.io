@@ -66,14 +66,7 @@
                 var key = table1.rows[i].cells[1].children[0].value
                 var value = table1.rows[i].cells[2].children[0].value
                 if (key && value) {
-                    if (key == '$desktop_url' && paramsA_desktop){
-                        if (value.indexOf("?")>0){
-                            value = value + '&' + paramsA_desktop.slice(0, paramsA_desktop.length - 1);
-                        } else {
-                            value = value + '?' + paramsA_desktop.slice(0, paramsA_desktop.length - 1);                            
-                        }
-                    }
-                    paramsB += (key + '=' + value + '&');
+                    paramsB += (key + '=' + encodeURIComponent(value));
                 }
             }
             
