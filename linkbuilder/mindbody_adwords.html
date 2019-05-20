@@ -42,6 +42,7 @@
             }
 
             var queryLogic = '?';
+            if (original_url.indexOf("?")>0){queryLogic = '&';}
             var paramsA = '';
             var paramsB = '';
             var output = '';
@@ -78,9 +79,6 @@
                         window.document.getElementById("query-value-1").focus();
                         return
                     }
-                    if (original_url.indexOf("?")>0){
-                        queryLogic = '&';
-                    };
                     output = original_url + queryLogic + paramsA.slice(0, paramsA.length) + paramsB;
                 }
             }
