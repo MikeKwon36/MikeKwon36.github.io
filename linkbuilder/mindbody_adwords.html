@@ -60,22 +60,22 @@
                 }
             }
 
-            // Get query parameters and add to params variable
-            var branchLink = window.document.getElementById('query_params');
+            // Get Branch Link
+            var branchLink = window.document.getElementById('branchLink');
             if (!branchLink){
                 alert("Please enter a Branch Link.");
-                window.document.getElementById("query-value-1").focus();
+                window.document.getElementById("branchLink").focus();
                 return
             }
-            paramsB = ('branchify_url' + '=' + encodeURIComponent(branchLink));
+            paramsB = ('branchify_url=' + encodeURIComponent(branchLink));
             
             if (!/(http(s?))\:\/\//.test(original_url)) {
                 original_url = 'https://' + original_url;
             }
             if (desktop_url) {
                 if (paramsA == '' && paramsB == '') {
-                    alert("Please enter a Mindbody.io URL");
-                    window.document.getElementById("query-value-1").focus();
+                    alert("Please enter a Branch Link");
+                    window.document.getElementById("branchLink").focus();
                     return
                 } else {
                     if (!paramsA){
@@ -86,13 +86,6 @@
             }
 
             window.document.getElementById("generated3PLink").value = output;
-        }
-
-        // Returns current number of query parameter rows
-        function getRowCount() {
-            var rowCount = window.document.getElementById('query_params').rows.length;
-
-            return rowCount;
         }
 
     </script>
@@ -128,15 +121,11 @@
                     <td><label style="margin-right: 10px">Enter Mindbody web URL</label></td>
                     <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., http://www.mindbody.io"/></td>
                 </tr>
+                <tr id="row-1">
+                    <td><label style="margin-right: 10px">Enter Branch Link from dashboard</label></td>
+                    <td><input class="form-control" style="width:500px" id="branchLink" type="text" placeholder="i.e., https://mindbody.app.link/example"/></td>
+                </tr>
             </tbody>
-        </table>
-
-        <!-- Deep linking parameters table -->
-        <table id="query_params" class="toggle">
-            <tr id="row-1">
-                <td><label style="margin-right: 10px">Enter Branch Link from dashboard</label></td>
-                <td><input class="form-control" style="width:450px" id="branchLink" type="text" placeholder="i.e., https://mindbody.app.link/example"/></td>
-            </tr>
         </table>
 
         <h3 class="toggle">Add Analytics Tags</h3>
