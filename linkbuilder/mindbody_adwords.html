@@ -41,7 +41,7 @@
                 desktop_url = true;
             }
 
-            var queryLogic = '%3F';
+            var queryLogic = '?';
             var queryLogicB = '&';
             var paramsA = '';
             var paramsA_desktop = '';
@@ -73,7 +73,7 @@
                             value = value + '?' + paramsA_desktop.slice(0, paramsA_desktop.length - 1);                            
                         }
                     }
-                    paramsB += (key + '=' + encodeURIComponent(value) + '&');
+                    paramsB += (key + '=' + value + '&');
                 }
             }
             
@@ -93,7 +93,7 @@
                         queryLogicB = '';
                     }
                     if (original_url.indexOf("?")>0){
-                        queryLogic = '%26';
+                        queryLogic = '&';
                     };
                     output = original_url + queryLogic + paramsA.slice(0, paramsA.length - 3) + queryLogicB + paramsB.slice(0, paramsB.length - 1);
                 }
