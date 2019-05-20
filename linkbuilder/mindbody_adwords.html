@@ -54,7 +54,7 @@
                 var value = table2.rows[i].cells[2].children[0].value
 
                 if (key && value) {
-                    paramsA += (key + '=' + value + '&');
+                    paramsA += (key + '=' + encodeURIComponent(value) + '&');
                 }
             }
 
