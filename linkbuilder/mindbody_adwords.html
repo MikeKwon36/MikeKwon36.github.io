@@ -42,7 +42,6 @@
             }
 
             var queryLogic = '?';
-            var queryLogicB = '&';
             var paramsA = '';
             var paramsB = '';
             var output = '';
@@ -59,14 +58,8 @@
             }
 
             // Get query parameters and add to params variable
-            var table1 = window.document.getElementById('query_params');
-            for (var i = 0, row; row = table1.rows[i]; i++) {
-                var key = table1.rows[i].cells[1].children[0].value
-                var value = table1.rows[i].cells[2].children[0].value
-                if (key && value) {
-                    paramsB += (key + '=' + encodeURIComponent(value));
-                }
-            }
+            var branchLink = window.document.getElementById('query_params');
+            paramsB = ('branchify_url' + '=' + encodeURIComponent(value));
             
             if (!/(http(s?))\:\/\//.test(original_url)) {
                 original_url = 'https://' + original_url;
@@ -88,7 +81,7 @@
                     if (original_url.indexOf("?")>0){
                         queryLogic = '&';
                     };
-                    output = original_url + queryLogic + paramsA.slice(0, paramsA.length - 1) + queryLogicB + paramsB.slice(0, paramsB.length);
+                    output = original_url + queryLogic + paramsA.slice(0, paramsA.length) + paramsB;
                 }
             }
 
@@ -138,12 +131,10 @@
             </tbody>
         </table>
 
-        <h3 class="toggle">Enter Branch Link</h3>
-
         <!-- Deep linking parameters table -->
         <table id="query_params" class="toggle">
             <tr id="row-1">
-                <td><label style="margin-right: 10px">Query Param 1</label></td>
+                <td><label style="margin-right: 10px">Enter Branch Link from dashboard</label></td>
                 <td><input class="form-control" style="width:300px" id="query-key-1" type="text" value="branchify_url"/></td>
                 <td><input class="form-control" style="width:450px" id="query-value-1" type="text" placeholder="Enter Branch link from dashboard"/></td>
             </tr>
