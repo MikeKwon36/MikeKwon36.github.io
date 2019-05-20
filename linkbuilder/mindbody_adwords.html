@@ -73,7 +73,7 @@
             }
             if (desktop_url) {
                 if (paramsA == '' && paramsB == '') {
-                    alert("Please enter a Branch Link.");
+                    alert("Please enter a Mindbody.io URL");
                     window.document.getElementById("query-value-1").focus();
                     return
                 } else {
@@ -81,7 +81,9 @@
                         queryLogic = '';
                     }
                     if (!paramsB){
-                        queryLogicB = '';
+                        alert("Please enter a Branch Link.");
+                        window.document.getElementById("query-value-1").focus();
+                        return
                     }
                     if (original_url.indexOf("?")>0){
                         queryLogic = '&';
