@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QVC CHEETAH EMAIL DEEP LINK CREATOR</title>
+    <link rel="icon" href="https://branch.io/img/press/kit/badge-black.png" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- jQuery Library via Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Import clipboard.js -->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+
+    <!-- Import Papa Parse -->
+    <script src="PapaParse-4.3.2/papaparse.min.js"></script>
+
+    <!-- Import FileSaver.js -->
+    <script src="FileSaver.js-master/FileSaver.min.js"></script>
+
+    <!-- Branch web SDK -->
+    <script type="text/javascript">
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
+
+    branch.init('key_live_kdsXO58ZZrQsaxYGNsmWcoghutb0B538', function(err, data) {});
+    </script>
+
+
+    <!-- Script to generate 3P link based on user inputs -->
+    <script>
+        function generate3PLink() {
+            var original_url = window.document.getElementById("originalUrl").value;
+
+            if (!original_url) {
+                alert("Please enter a destination URL.");
+                window.document.getElementById("originalUrl").focus();
+                return
+            }
+
+            var queryLogic = "?"
+            var utm_medium = window.document.getElementById('utm_medium').value;
+            var utm_campaign = window.document.getElementById('utm_campaign').value;
+            var utm_source = window.document.getElementById('utm_source').value;
+            var utm_content = window.document.getElementById('utm_content').value;
+            var cm_mmc = window.document.getElementById('cm_mmc').value;
+            var deeplink_path = window.document.getElementById('$deeplink_path').value;
+
+            if (!utm_medium){utm_medium = "Email CheetahMail";}
+            if (!utm_campaign){utm_campaign = " ";}
+            if (!utm_source){utm_source = " ";}
+            if (!utm_content){utm_content = " ";}
+            if (!deeplink_path){deeplink_path = " ";}
+            if (cm_mmc){
+                if (original_url.indexOf("?")>0){queryLogic = '&';};
+                original_url = original_url + queryLogic + "cm_mmc=" + cm_mmc;
+            } else {
+                cm_mmc = " ";
+            }
+
+
+            var linkData = {
+                tags: [utm_content],
+                feature: utm_medium,
+                channel: utm_source,
+                campaign: utm_campaign,
+                data: {
+                    "$deeplink_path": deeplink_path,
+                    "$ios_deeplink_path": deeplink_path,
+                    "$android_deeplink_path": deeplink_path,
+                    "cm_mmc": cm_mmc,
+                    "$deep_link": "true",
+                    "$3p": "e_cheetahmail",
+                    "$canonical_url": original_url,
+                    "$desktop_url": original_url,
+                    "$original_url": original_url
+                }
+            };
+
+            branch.link(linkData, function(err, link) {
+                if (err == null) {
+                    console.log(link);
+                    document.getElementById('generated3PLink').value = link;
+                } else {
+                    console.log(err);
+                    document.getElementById('generated3PLink').value = err;
+                }
+            });
+        }
+
+        </script>
+</head>
+
+<body class="container">
+    <!-- Initialize clipboard.js -->
+    <script>(function(){new Clipboard('#copy-button');})();</script>
+
+    <div>
+        </br>
+        <img src="https://branch.io/img/logo-dark.svg" style="width:100px;">
+        </br>
+        </br>
+        <h1 style="display:inline; vertical-align:middle">QVC Email Short Link Creator</h1>
+    </div>
+
+    <!-- Description for one-off link creation -->
+    <section class="container toggle" id="description_oneoff">
+        <p><ol>
+            <li><strong>[REQUIRED]</strong> Enter the web URL to convert</li>
+            <li><strong>[OPTIONAL]</strong> Add a deeplink path if you want the app to open a specific screen</li>
+            <li><strong>[OPTIONAL]</strong> Add analytics values</li>
+            <li>Click "Create Email Link" to generate a Branch link</li>
+            <li><strong>[To debug deep links]</strong> Add "?debug=1" to the link and paste it into your browser</li>
+        </ol></p>
+    </section>
+
+    <section class="container" id="link-creation">
+        <!-- Table for user input -->
+
+        <h3 class="toggle">Set URL</h3>
+
+        <table>
+            <tbody>
+                <tr class="toggle">
+                    <td><label style="margin-right: 10px">Enter a web URL</label></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="https://www.qvc.com/content/fashion/summer-fashions.html"/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="toggle">Configure Link Behavior</h3>
+
+        <!-- Deep linking parameters table -->
+        <table id="query_params" class="toggle">
+            <tr id="row-1">
+                <td><label style="margin-right: 10px">Deep Link Path</label></td>
+                <td><input class="form-control" style="width:500px" id="$deeplink_path" type="text" placeholder="Enter a value to make the app open a specific screen"/></td>
+            </tr>
+        </table>
+
+        <h3 class="toggle">Add Analytics Tags</h3>
+        <table id="analytic_params" class="toggle">
+            <tr id="analytic-1">
+                <td><label style="margin-right: 10px">utm_medium</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_medium" disabled="true"/></td>
+                <td><input class="form-control" style="width:500px" id="utm_medium" type="text" placeholder="i.e., email"/></td>
+            </tr>
+            <tr id="analytic-2">
+                <td><label style="margin-right: 10px">utm_source</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;"type="text" value="utm_source" disabled="true"/></td>
+                <td><input class="form-control" style="width:500px" id="utm_source" type="text" placeholder="i.e., transactional"/></td>
+            </tr>
+            <tr id="analytic-3">
+                <td><label style="margin-right: 10px">utm_campaign</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_campaign" disabled="true"/></td>
+                <td><input class="form-control" style="width:500px" id="utm_campaign" type="text" placeholder="i.e., emorder20181201"/></td>
+            </tr>
+            <tr id="analytic-4">
+                <td><label style="margin-right: 10px">utm_content</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_content" disabled="true"/></td>
+                <td><input class="form-control" style="width:500px" id="utm_content" type="text" placeholder="i.e., purchase"/></td>
+            </tr>
+            <tr id="analytic-5">
+                <td><label style="margin-right: 10px">cm_mmc</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-5" type="text" value="cm_mmc" disabled="true"/></td>
+                <td><input class="form-control" style="width:500px" id="cm_mmc" type="text" placeholder="i.e., Email-_-transactional-_-emorder20181201-_-purchase"/></td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section>
+        <br>
+        <br>
+        <div class="text-center"><button class="form-control toggle" style="float:none; background-color:#89cff0; color: white; font-weight: bold;" onclick="generate3PLink()">Create Email Short Link</button></div>
+        <br>
+    </section>
+
+    <section class="container toggle" id="linkOutput">
+        <h3>Generated Email Short Link
+        <button class="btn" id="copy-button" style="background-color:#d3d3d3; display:inline;" data-clipboard-target="#generated3PLink">Copy Link</button>
+        </h3>
+        <textarea class="form-control" style="height:100px; margin-bottom:5%;" id="generated3PLink" type="text"></textarea>
+    </section>
+</body>
+</html>
