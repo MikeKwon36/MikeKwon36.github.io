@@ -53,17 +53,17 @@
             var cm_mmc = window.document.getElementById('cm_mmc').value;
             var deeplink_path = window.document.getElementById('$deeplink_path').value;
 
-            if (!utm_medium){utm_medium = "Email CheetahMail";}
-            if (!utm_campaign){utm_campaign = " ";}
-            if (!utm_source){utm_source = " ";}
-            if (!utm_content){utm_content = " ";}
-            if (!deeplink_path){deeplink_path = " ";}
             if (cm_mmc){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + "cm_mmc=" + cm_mmc;
             } else {
                 cm_mmc = " ";
             }
+            if (!utm_medium){utm_medium = "Email CheetahMail";}
+            if (!utm_campaign){utm_campaign = cm_mmc;}
+            if (!utm_source){utm_source = " ";}
+            if (!utm_content){utm_content = " ";}
+            if (!deeplink_path){deeplink_path = " ";}
 
 
             var linkData = {
