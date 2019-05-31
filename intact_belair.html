@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Branch Demo Page</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Branch Demo Page">
+    <meta name="author" content="Mike Kwon">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+    <link rel="stylesheet" href="/style.css">    
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Branch metatags -->
+    <meta name="branch:deeplink:category" content="claims" />
+
+    <!-- Branch Web SDK with Intact TEST API key -->
+    <script type="text/javascript">
+
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
+
+    branch.init('key_test_gcz1x9AMh7eZKIYgmOM5DppgxAgAWYHv', function(err, data) {
+        console.log(data);
+    });
+    </script>
+
+</head>
+<body id="page-top" class="index">
+    <nav class="navbar navbar-default navbar-fixed-top">
+
+        <!-- Branch <div> that prevents banner from overlapping with fixed|absolute positioned nav element -->
+        <div class="branch-journeys-top" style="display:none;"></div>
+
+        <div class="container">
+
+            <div class="navbar-header page-scroll">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">Intact / BelairDirect Demo</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Top Section</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">Middle Section</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Bottom Section</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">Banner uses TEST API and -alternate domain</span>
+                        <hr class="star-light">
+                        <span class="skills" id="link">Click "Create Link" button</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <button onclick="createLink()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Create Link</button>
+                        <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
+                        <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Filler Text</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+<section id="contact">
+	<div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Filler Text</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+            </div>
+	</div>
+</section>
+
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Branch Demo Page</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Contact mkwon@branch.io for questions
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Branch javascript -->
+    <script>
+    
+    // Branch listener object that retrieves banner link data and prints it to console
+    var listener = function(event, data) {
+        console.log(data);
+    };
+    branch.addListener("willShowJourney", listener);
+    branch.addListener("didShowJourney", listener);
+    branch.addListener("willNotShowJourney", listener);
+    branch.addListener("didClickJourneyCTA", listener);
+    branch.addListener("didClickJourneyClose", listener);
+    branch.addListener("willCloseJourney", listener);
+    branch.addListener("didCloseJourney", listener);
+    branch.addListener("didCallJourneyClose", listener);
+    
+
+    // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
+    function launchBranchJourney(){
+        var linkData = {
+            campaign: 'change_deeplink_in_SPA',
+            feature: 'Web SDK',
+            tags : ['onsite_SPA_demo'],
+            data: {
+                'policy_id':9999,
+                '$desktop_url': 'https://www.intact.ca/qc/en/personal-insurance.html',
+                '$canonical_url': 'https://www.intact.ca/qc/en/personal-insurance.html',
+                '$original_url': 'https://www.intact.ca/qc/en/personal-insurance.html'
+            }
+        };
+        branch.setBranchViewData(linkData);
+        branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
+    }
+
+    // function for button to close journey (will NOT activate template's dismissal period)
+    function closeBranchJourney(){
+        branch.closeJourney(function(err) {});
+    }
+
+    // function to create a link via the web SDK
+    function createLink(){
+        branch.link({
+            campaign: 'dynamic_site_link',
+            feature: 'Web SDK',
+            tags : ['onsite_link_demo'],
+            data: {
+                'policy_id':9999,
+                '$desktop_url': 'https://www.intact.ca/qc/en/personal-insurance.html',
+                '$canonical_url': 'https://www.intact.ca/qc/en/personal-insurance.html',
+                '$original_url': 'https://www.intact.ca/qc/en/personal-insurance.html'
+            }
+        }, function(err, link) {
+            document.getElementById("link").innerHTML=link; 
+        });
+    }
+
+
+    </script>
+
+    <script src="/js/jquery-1.11.0.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/classie.js"></script>
+    <script src="/js/cbpAnimatedHeader.js"></script>
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me_static.js"></script>
+    <script src="/js/freelancer.js"></script>
+
+    </body>
+</html>
