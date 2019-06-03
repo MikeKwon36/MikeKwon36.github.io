@@ -23,6 +23,11 @@
 
     branch.init('key_test_fcEno5TPMfH6MaCPCyfDeedauBpwqiME', function(err, data) {
         console.log(data);
+        branch.setBranchViewData({
+            data:{
+                'custom':'value'
+            }
+        });
     });
     </script>
 
