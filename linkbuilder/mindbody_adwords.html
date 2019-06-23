@@ -69,7 +69,7 @@
             }
             
             // retrieve adwords macros
-            var questionMark = branchLink.indexOf("?");
+            var questionMark = branchLink.indexOf("a_google_adwords") + 16;
             console.log(questionMark);
             var adwordsMacros = branchLink.substring(questionMark, branchLink.length);
             console.log(adwordsMacros);
