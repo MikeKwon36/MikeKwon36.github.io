@@ -71,7 +71,7 @@
             // retrieve adwords macros
             var questionMark = branchLink.indexOf("a_google_adwords") + 16;
             console.log(questionMark);
-            var adwordsMacros = branchLink.substring(questionMark, branchLink.length);
+            var adwordsMacros = branchLink.substring(questionMark + 1, branchLink.length);
             console.log(adwordsMacros);
             branchLink = branchLink.slice(0,questionMark);
             console.log(branchLink);
