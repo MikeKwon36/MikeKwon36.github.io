@@ -61,12 +61,21 @@
             }
 
             // Get Branch Link
-            var branchLink = window.document.getElementById('branchLink').value;
+            var branchLink = window.document.getElementById('branchLink').value;            
             if (!branchLink){
                 alert("Please enter a Branch Link.");
                 window.document.getElementById("branchLink").focus();
                 return
             }
+            
+            // retrieve adwords macros
+            var questionMark = branchLink.indexOf("?");
+            console.log(questionMark);
+            var adwordsMacros = branchLink.substring(questionMark, branchLink.length);
+            console.log(adwordsMacros);
+            branchLink = branchLink.slice(0,questionMark);
+            console.log(branchLink);
+
             paramsB = ('branchify_url=' + encodeURIComponent(branchLink));
             
             if (!/(http(s?))\:\/\//.test(original_url)) {
@@ -78,7 +87,7 @@
                     window.document.getElementById("branchLink").focus();
                     return
                 } else {
-                    output = original_url + queryLogic + paramsA.slice(0, paramsA.length) + paramsB + "&gclid={gclid}&lpurl={lpurl}&~ad_set_id={adgroupid}&~campaign_id={campaignid}&~channel={network}&~keyword={keyword}&~placement={placement}";
+                    output = original_url + queryLogic + paramsA.slice(0, paramsA.length) + paramsB + adwordsMacros;
                 }
             }
 
