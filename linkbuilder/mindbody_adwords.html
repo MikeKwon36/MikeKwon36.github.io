@@ -30,15 +30,11 @@
     <!-- Script to generate 3P link based on user inputs -->
     <script>
         function generate3PLink() {
-            var desktop_url = false;
             var original_url = window.document.getElementById("originalUrl").value;
-
             if (!original_url) {
                 alert("Please enter a Mindbody.io URL.");
                 window.document.getElementById("originalUrl").focus();
                 return
-            } else if (original_url) {
-                desktop_url = true;
             }
 
             var queryLogic = '?';
@@ -76,21 +72,20 @@
             branchLink = branchLink.slice(0,macroStart);
             console.log(branchLink);
 
+            // Encode Branch link to be appended as url query parameter
             paramsB = ('branchify_url=' + encodeURIComponent(branchLink));
             
+            // Construct final url to be entered in Adwords Destination url field
             if (!/(http(s?))\:\/\//.test(original_url)) {
                 original_url = 'https://' + original_url;
             }
-            if (desktop_url) {
-                if (paramsA == '' && paramsB == '') {
-                    alert("Please enter a Branch Link");
-                    window.document.getElementById("branchLink").focus();
-                    return
-                } else {
-                    output = original_url + queryLogic + paramsA.slice(0, paramsA.length) + paramsB + "&" + adwordsMacros;
-                }
+            if (paramsA == '' && paramsB == '') {
+                alert("Please enter a Branch Link");
+                window.document.getElementById("branchLink").focus();
+                return
+            } else {
+                output = original_url + queryLogic + paramsA.slice(0, paramsA.length) + paramsB + "&" + adwordsMacros;
             }
-
             window.document.getElementById("generated3PLink").value = output;
         }
 
