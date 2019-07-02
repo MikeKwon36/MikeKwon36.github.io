@@ -57,7 +57,7 @@
             }
 
             // Get Branch Link
-            var branchLink = window.document.getElementById('branchLink').value;            
+            var branchLink = window.document.getElementById('branchLink').value;
             if (!branchLink){
                 alert("Please enter a Branch Link.");
                 window.document.getElementById("branchLink").focus();
@@ -68,8 +68,12 @@
             if (branchLink.indexOf("a_google_adwords")>1){
                 var macroStart = branchLink.indexOf("a_google_adwords") + 16;
                 console.log(macroStart);
-            } else {
+            } else if (branchLink.indexOf("?")>1) {
                 var macroStart = branchLink.indexOf("?");
+                console.log(macroStart);
+            } else {
+                var macroStart = branchLink.length;
+                console.log(macroStart);
             }
             var adwordsMacros = branchLink.substring(macroStart + 1, branchLink.length);
             console.log(adwordsMacros);
