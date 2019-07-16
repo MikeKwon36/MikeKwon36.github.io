@@ -1,0 +1,185 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>RADIO.COM ADWORDS RE-ENGAGEMENT LINKS</title>
+    <link rel="icon" href="https://branch.io/img/press/kit/badge-black.png" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- jQuery Library via Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Import clipboard.js -->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+
+    <!-- Import Papa Parse -->
+    <script src="PapaParse-4.3.2/papaparse.min.js"></script>
+
+    <!-- Import FileSaver.js -->
+    <script src="FileSaver.js-master/FileSaver.min.js"></script>
+
+
+    <!-- Script to generate 3P link based on user inputs -->
+    <script>
+        function generate3PLink() {
+            var original_url = window.document.getElementById("originalUrl").value;
+            if (!original_url) {
+                alert("Please enter a radio.com URL.");
+                window.document.getElementById("originalUrl").focus();
+                return
+            }
+
+            var queryLogic = '?';
+            if (original_url.indexOf("?")>0){
+                queryLogic = '&';
+            }
+            var paramsA = '';
+            var paramsB = '';
+            var output = '';
+
+            //Add UTM params
+            var table2 = window.document.getElementById('analytic_params');
+            for (var i = 0, row; row = table2.rows[i]; i++) {
+                var key = table2.rows[i].cells[1].children[0].value
+                var value = table2.rows[i].cells[2].children[0].value
+
+                if (key && value) {
+                    paramsA += (key + '=' + encodeURIComponent(value) + '&');
+                }
+            }
+
+            // Get Branch Link
+            var branchLink = window.document.getElementById('branchLink').value;
+            if (!branchLink){
+                alert("Please enter a Branch Link.");
+                window.document.getElementById("branchLink").focus();
+                return
+            }
+            
+            // retrieve adwords macros
+            if (branchLink.indexOf("a_google_adwords")>1){
+                var macroStart = branchLink.indexOf("a_google_adwords") + 16;
+                console.log(macroStart);
+            } else if (branchLink.indexOf("?")>1) {
+                var macroStart = branchLink.indexOf("?");
+                console.log(macroStart);
+            } else {
+                var macroStart = branchLink.length;
+                console.log(macroStart);
+            }
+            var adwordsMacros = branchLink.substring(macroStart + 1, branchLink.length);
+            console.log(adwordsMacros);
+            branchLink = branchLink.slice(0,macroStart);
+            console.log(branchLink);
+
+            // Encode Branch link to be appended as url query parameter
+            paramsB = ('branchify_url=' + encodeURIComponent(branchLink));
+            
+            // Construct final url to be entered in Adwords Destination url field
+            if (!/(http(s?))\:\/\//.test(original_url)) {
+                original_url = 'https://' + original_url;
+            }
+            if (paramsA == '' && paramsB == '') {
+                alert("Please enter a Branch Link");
+                window.document.getElementById("branchLink").focus();
+                return
+            } else {
+                output = original_url + queryLogic + paramsA.slice(0, paramsA.length) + paramsB + "&" + adwordsMacros;
+            }
+            window.document.getElementById("generated3PLink").value = output;
+        }
+
+    </script>
+</head>
+
+<body class="container">
+
+    <div>
+        </br>
+        <img src="https://branch.io/img/logo-dark.svg" style="width:100px;">
+        </br>
+        </br>
+        <h1 style="display:inline; vertical-align:middle">Radio.com Adwords Re-engagement Link Creator</h1>
+    </div>
+
+    <section class="container toggle" id="description_oneoff">
+        <p><ol>
+            <li>Create an <a href="https://docs.branch.io/deep-linked-ads/google-ads-non-uac/#create-a-branch-ad-link">Adwords link</a> in Branch's dashboard containing <strong>~campaign_id</strong> and <strong>$deeplink_path</strong> in the link data, and set its <strong>~campaign</strong> analytics to the same campaign name in Adwords</li>
+            <li>Enter a web URL for users without the app</li>
+            <li>Set UTM Tags</li>
+            <li>Click "Create Final Link" and paste the link into your campaign's "Final URL" field</li>
+        </ol></p>
+    </section>
+
+    <section class="container" id="link-creation">
+        <!-- Table for user input -->
+
+        <h3 class="toggle">Set URLs</h3>
+
+        <table>
+            <tbody>
+                <tr class="toggle">
+                    <td><label style="margin-right: 10px">Enter Radio.com web URL</label></td>
+                    <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., http://www.radio.com"/></td>
+                </tr>
+                <tr id="row-1">
+                    <td><label style="margin-right: 10px">Enter Branch Link from dashboard</label></td>
+                    <td><input class="form-control" style="width:500px" id="branchLink" type="text" placeholder="i.e., https://v7sj.app.link/example"/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="toggle">Add UTM Tags</h3>
+        <table id="analytic_params" class="toggle">
+            <tr id="analytic-1">
+                <td><label style="margin-right: 10px">utm_medium</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-1" type="text" value="utm_medium" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-1" type="text" placeholder="i.e., paid_advertising"/></td>
+            </tr>
+            <tr id="analytic-2">
+                <td><label style="margin-right: 10px">utm_source</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-2" type="text" value="utm_source" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-2" type="text" placeholder="i.e., adwords"/></td>
+            </tr>
+            <tr id="analytic-3">
+                <td><label style="margin-right: 10px">utm_campaign</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-3" type="text" value="utm_campaign" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-3" type="text" placeholder="i.e., 2019_promo"/></td>
+            </tr>
+            <tr id="analytic-4">
+                <td><label style="margin-right: 10px">utm_content</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-4" type="text" value="utm_content" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-4" type="text" placeholder="i.e., link_01"/></td>
+            </tr>
+            <tr id="analytic-5">
+                <td><label style="margin-right: 10px">utm_term</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-5" type="text" value="utm_term" disabled="true"/></td>
+                <td><input class="form-control" style="width:600px" id="analytic-value-5" type="text" placeholder="i.e., class01"/></td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section>
+        <br>
+        <br>
+        <div class="text-center"><button class="form-control toggle" style="float:none; background-color:#89cff0; color: white; font-weight: bold;" onclick="generate3PLink()">Create Final Link</button></div>
+        <br>
+    </section>
+
+    <section class="container toggle" id="linkOutput">
+        <h3>Generated Adwords Web Link
+        <button class="btn" id="copy-button" style="background-color:#d3d3d3; display:inline;" data-clipboard-target="#generated3PLink">Copy Link</button>
+        </h3>
+        <textarea class="form-control" style="height:100px; margin-bottom:5%;" id="generated3PLink" type="text"></textarea>
+    </section>
+</body>
+</html>
