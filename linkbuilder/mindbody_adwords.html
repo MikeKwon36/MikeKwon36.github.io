@@ -66,7 +66,7 @@
 
             // remove &%24always_deeplink=false
             if (branchLink.indexOf("&%24always_deeplink=false")>1){
-                branchLink.replace("&%24always_deeplink=false", "");
+                branchLink = branchLink.replace("&%24always_deeplink=false", "");
             }
             
             // retrieve adwords macros
