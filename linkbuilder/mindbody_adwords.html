@@ -63,6 +63,11 @@
                 window.document.getElementById("branchLink").focus();
                 return
             }
+
+            // remove &%24always_deeplink=false
+            if (branchLink.indexOf("&%24always_deeplink=false")>1){
+                branchLink.replace("&%24always_deeplink=false", "");
+            }
             
             // retrieve adwords macros
             if (branchLink.indexOf("a_google_adwords")>1){
@@ -79,6 +84,13 @@
             console.log(adwordsMacros);
             branchLink = branchLink.slice(0,macroStart);
             console.log(branchLink);
+
+            // Add URI Redirect Mode
+            if (branchLink.indexOf("?")>1) {
+                branchLink = branchLink + "&$uri_redirect_mode=1";
+            } else {
+                branchLink = branchLink + "?$uri_redirect_mode=1";
+            }
 
             // Encode Branch link to be appended as url query parameter
             paramsB = ('branchify_url=' + encodeURIComponent(branchLink));
