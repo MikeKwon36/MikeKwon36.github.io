@@ -20,12 +20,59 @@
     <!-- Branch Web SDK -->
     <script type="text/javascript">
 
+    var canonical_url = window.location.href;
+
+    function extractHostname(url) {
+        var hostname;
+        if (url.indexOf("//") > -1) {
+            hostname = url.split('/')[2];
+        } else {
+            hostname = url.split('/')[0];
+        }
+        hostname = hostname.split(':')[0];
+        hostname = hostname.split('?')[0];
+        return hostname;
+    }
+
+    var host_domain = extractHostname(canonical_url);
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), results = regex.exec(url.toUpperCase());
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
 
     branch.init('key_test_goOamMuwizSh9WfHuPsX2mfdEzbcigs6', {'no_journeys': true}, function(err, data) {
         console.log(data);
-        console.log(document.referrer);
-        branch.getBrowserFingerprintId(function(err, data) { console.log(data); });
+
+        var campaign_tag;
+        if (getParameterByName('utm_campaign')){
+            campaign_tag = getParameterByName('utm_campaign');
+        } else if (document.referrer) {
+            campaign_tag = document.referrer;
+        } else {
+            campaign_tag = 'organic';
+        }
+        var linkData = {
+            tags: [campaign_tag, host_domain],
+            feature: 'Web SDK',
+            channel: host_domain,
+            campaign: campaign_tag,
+            data: {"$canonical_url": canonical_url}
+        };
+
+        branch.link(linkData, function(err, link) {
+            if (err == null) {
+                var button = document.getElementById('link');
+                button.href=link;
+            }
+        });
+
     });
 
     </script>
@@ -95,6 +142,10 @@
                         <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
                         <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
                         <p></p>
+                        <ul>
+                            <li class="name"><a href="https://mikekwon36.github.io/trainline_referrer.html">Referrer Link</a><p></p></li>
+                            <li class="name"><a href="https://2n8w.test-app.link/VEUh9arlwY" id="link" class="btn btn-primary" >link</a><p></p></li>
+                        </ul>
                     </div>
                 </div>
             </div>
