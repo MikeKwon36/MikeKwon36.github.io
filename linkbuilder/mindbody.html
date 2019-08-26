@@ -34,7 +34,6 @@
             //var ESPProviderCode = window.document.getElementById("ESPProviderCode").value;
             var desktop_url = false;
             var original_url = window.document.getElementById("originalUrl").value;
-
             if (!original_url) {
                 alert("Please enter a destination URL.");
                 window.document.getElementById("originalUrl").focus();
@@ -45,7 +44,6 @@
             var paramsA = '';
             var paramsB = '';
             var output = '';
-
             //Add analytics params as part of $original_url
             var table2 = window.document.getElementById('analytic_params');
             for (var i = 0, row; row = table2.rows[i]; i++) {
@@ -75,7 +73,11 @@
             }
             if (desktop_url) {
                 if (paramsA == '' && paramsB == '') {
-                    output = get3PLink(original_url);
+                    if (document.getElementById("webOnlyCheck").checked) {
+                        output = get3PLinkWebOnly(original_url);
+                    } else {
+                        output = get3PLink(original_url);
+                    }
                 } else {
                     if (paramsA == ''){
                          queryLogic = '';
@@ -83,7 +85,11 @@
                     if (paramsB == ''){
                          queryLogicB = '';
                     };
-                    output = get3PLink(original_url) + queryLogic + paramsA.slice(0, paramsA.length - 1) + queryLogicB + paramsB.slice(0, paramsB.length - 1);
+                    if (document.getElementById("webOnlyCheck").checked) {
+                        output = get3PLinkWebOnly(original_url) + queryLogic + paramsA.slice(0, paramsA.length - 1) + queryLogicB + paramsB.slice(0, paramsB.length - 1);
+                    } else {
+                        output = get3PLink(original_url) + queryLogic + paramsA.slice(0, paramsA.length - 1) + queryLogicB + paramsB.slice(0, paramsB.length - 1);
+                    }
                 }
             }
 
@@ -115,13 +121,17 @@
 
         }
 
-
         function get3PLink(original_url) {
             var branch_url = 'https://' + 'mindbody.app.link' + '/3p?' + encodeURIComponent('$3p') + '=' + 'e_ab' + '&' + encodeURIComponent('$original_url') + '=' + encodeURIComponent(original_url);
 
             return branch_url;
         }
 
+        function get3PLinkWebOnly(original_url) {
+            var branch_url = 'https://' + 'mindbody.app.link' + '/e' + '/3p?' + encodeURIComponent('$3p') + '=' + 'e_ab' + '&' + encodeURIComponent('$original_url') + '=' + encodeURIComponent(original_url) + '&%24web_only=true';
+
+            return branch_url;
+        }
     </script>
 </head>
 
@@ -141,10 +151,11 @@
     <section class="container toggle" id="description_oneoff">
         <p><ol>
             <li><strong>[REQUIRED]</strong> Enter a web URL to send desktop traffic</li>
+            <li><strong>[REQUIRED]</strong> Select web-only if link should avoid launching app</li>
             <li><strong>[REQUIRED]</strong> Add analytics values</li>
             <li><strong>[OPTIONAL]</strong> Add a $deeplink_path to open a specific app screen (use Leehey's rubric)</li>
             <li><strong>[OPTIONAL]</strong> Set $android_url and $ios_url for users without the app (currently defaults to the app store, but will default to the desktop url if removed entirely)</li>
-            <li><strong>[OPTIONAL]</strong> To create a link that always sends users to the web, remove $android_url and $ios_url by clicking "Remove Query Param", and add "$web_only" with the value "true" (no quotations) by clicking "Add Query Param"</li>
+            <li><strong>[OPTIONAL]</strong> To create a link that always sends users to the web, check the "Always send users to web" checkbox and remove $android_url and $ios_url by clicking "Remove Query Param"</li>
             <li>Click <strong>Create Email Link</strong>.  Link data can be edited after their built, by changing the values directly on the url.</li>
         </ol></p>
     </section>
@@ -156,6 +167,16 @@
                 <tr class="toggle">
                     <td><label style="margin-right: 10px">Enter a web URL</label></td>
                     <td><input class="form-control" style="width:500px" id="originalUrl" type="text" placeholder="i.e., https://mindbody.io/"/></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="form-check">Set Link Behavior</h3>
+        <table>
+            <tbody>
+                <tr class="form-check">
+                    <td><label style="margin-right: 10px">Always send users to web</label></td>
+                    <td><input type="checkbox" class="form-check-input" id="webOnlyCheck"></td>
                 </tr>
             </tbody>
         </table>
@@ -187,18 +208,18 @@
         <h3 class="toggle">Add Analytics Tags</h3>
         <table id="analytic_params" class="toggle">
             <tr id="analytic-1">
-                <td><label style="margin-right: 10px">~feature</label></td>
-                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-1" type="text" value="~feature" disabled="true"/></td>
+                <td><label style="margin-right: 10px">utm_medium (auto maps to ~feature)</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-1" type="text" value="utm_medium" disabled="true"/></td>
                 <td><input class="form-control" style="width:600px" id="analytic-value-1" type="text" placeholder="i.e., email"/></td>
             </tr>
             <tr id="analytic-2">
-                <td><label style="margin-right: 10px">~channel</label></td>
-                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-2" type="text" value="~channel" disabled="true"/></td>
+                <td><label style="margin-right: 10px">utm_source (auto maps to ~channel)</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-2" type="text" value="utm_source" disabled="true"/></td>
                 <td><input class="form-control" style="width:600px" id="analytic-value-2" type="text" placeholder="i.e., promo"/></td>
             </tr>
             <tr id="analytic-3">
-                <td><label style="margin-right: 10px">~campaign</label></td>
-                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-3" type="text" value="~campaign" disabled="true"/></td>
+                <td><label style="margin-right: 10px">utm_campaign (auto maps to ~campaign)</label></td>
+                <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-3" type="text" value="utm_campaign" disabled="true"/></td>
                 <td><input class="form-control" style="width:600px" id="analytic-value-3" type="text" placeholder="i.e., May_2019_fitness"/></td>
             </tr>
             <tr id="analytic-4">
