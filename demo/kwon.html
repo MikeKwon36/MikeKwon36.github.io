@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Branch Demo Page</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Branch Demo Page">
+    <meta name="author" content="Mike Kwon">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+    <link rel="stylesheet" href="/style.css">    
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Branch metatags -->
+    <meta name="branch:deeplink:category" content="demo" />
+    <meta name="branch:deeplink:render_banner" content="true" />
+    <meta name="branch:deeplink:page_type" content="homepage" />
+    <meta name="branch:deeplink:page" content="homepage" />
+
+    <!-- Branch Web SDK -->
+    <script type="text/javascript">
+
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
+
+    // .init call to launch banner
+    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK',{}, function(err, data) {
+        console.log(data);
+        console.log(document.referrer);
+    });
+    </script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="page-top" class="index">
+       <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+
+        <!-- Branch <div> that prevents banner from overlapping with a fixed|absolute positioned nav element, but adding a top-margin  -->
+        <div class="branch-journeys-top" style="display:none;"></div>
+
+        <div class="container">
+
+            <div class="navbar-header page-scroll">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">Branch Demo</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Top Section</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">Middle Section</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Bottom Section</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+        <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">Homepage</span>
+                        <hr class="star-light">
+                        <span class="skills">Testpage displaying a Journeys Banner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <button onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; padding: 12px 32px; display: inline-block; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;"><a href="https://mikekwon36.github.io/demo/demo1.html?gclid=1234&amp;utm_medium=ads" style="color: white; text-align: center; text-decoration: none; font-size: 16px;">Navigate to page 1</a></button>
+                        <button onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; padding: 12px 32px; display: inline-block; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;"><a href="https://mikekwon36.github.io/demo/demo2.html" style="color: white; text-align: center; text-decoration: none; font-size: 16px;">Navigate to page 2</a></button>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+
+            <!-- Section Header -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Filler Text</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+
+            <!-- Description Text -->
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    
+    <!-- Contact Section -->
+<section id="contact">
+	<div class="container">
+		<!-- Section Header -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Filler Text</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+
+            <!-- Description Text -->
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <p>Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem</p>
+                </div>
+            </div>
+	</div>
+</section>
+
+    
+
+        <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Branch Demo Page</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Contact mkwon@branch.io for questions
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Branch javascript -->
+    <script>
+    
+    // Branch listener object that retrieves banner link data and prints it to console
+    var listener = function(event, data) {
+        console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
+        console.log(data);
+    };
+
+
+    // Listener objects are activated in the Branch instance for specific events via .addListener
+    branch.addListener("willShowJourney", listener);
+    branch.addListener("didShowJourney", listener);
+    branch.addListener("willNotShowJourney", listener);
+    branch.addListener("didClickJourneyCTA", listener);
+    branch.addListener("didClickJourneyClose", listener);
+    branch.addListener("willCloseJourney", listener);
+    branch.addListener("didCloseJourney", listener);
+    branch.addListener("didCallJourneyClose", listener);
+    
+
+    // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
+    function launchBranchJourney(){
+        var linkData = {
+            campaign: 'campaign cannot be changed',
+            feature: 'feature cannot be changed',
+            channel: 'channel was changed by javascript',
+            stage: 'stage was changed by javascript',
+            tags: ['tag was changed by javascript'],
+            data: {
+                'custom_bool': true,
+                'custom_int (today\s date)': Date.now(),
+                'custom_string (url)': window.location.href,
+                '$journeys_icon_image_url':'https://www.valorebooks.com/campus-life/wp-content/uploads/icon_340.png',
+                '$journeys_button_get_no_app':'changed!',
+                '$journeys_button_get_has_app':'changed!',
+                '$journeys_description':'Description reset by button click'
+            }
+        };
+        branch.setBranchViewData(linkData);
+        //function to launch journey with flags to disable banner animations
+        branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
+    }
+
+    //function to check if a banner is displaying
+    function doesJourneyExistOnPage() {
+        var elem = document.getElementById("branch-banner-iframe");
+        if (elem) {
+            return true;
+        }
+        return false;
+    }
+
+    // function for button to close journey (will NOT activate template's dismissal period)
+    function closeBranchJourney(){        
+        if(doesJourneyExistOnPage()){
+            //this is the call that closes the journey, with flags that disable the banner animations
+            console.log("closeBranchJourney called");
+            branch.closeJourney(function(err) {});
+        } else {
+            console.log("No Banner on the page");
+        }
+    }
+
+    // function to test deepview function
+    function dataCallback(){
+        console.log(".data() called");
+        branch.data(function(err, data) {
+            console.log(data);
+        });
+    }
+
+    </script>
+
+    <script src="/js/jquery-1.11.0.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/classie.js"></script>
+    <script src="/js/cbpAnimatedHeader.js"></script>
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me_static.js"></script>
+    <script src="/js/freelancer.js"></script>
+
+    </body>
+</html>
