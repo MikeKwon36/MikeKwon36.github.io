@@ -24,7 +24,13 @@
     branch.init('key_test_nhSpn5eZqdju3WUtYpnnDgbbyvdxwmQz',function(err, data) {
         branch.setBranchViewData({
             data:{
-                'confirmationno':'This is your user reservation number'
+                'confirmationno': "reservation number",
+                'booking_check_in_date': "mmddyyyy",
+                'fid': "CI",
+                'search_location': "abc",
+                'search_check_in_date': "mmddyyyy",
+                'search_check_out_date': "mmddyyyy",
+                'property_code': "def"
             }
         });
         console.log(data);
@@ -76,7 +82,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <span class="name">Banner uses TEST API and -alternate domain</span>
+                        <span class="name">Banner uses TEST API and alternate app.link domain</span>
                         <hr class="star-light">
                         <span class="skills" id="link">Click "Create Link" button</span>
                     </div>
