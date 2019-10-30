@@ -62,7 +62,7 @@
         // Check if a Branch link opened the page (if yes, banner uses referring link's data)
         //if(!data.referring_link){
         //    console.log(data.referring_link);
-            // SBVD overrides banner text & image on page load (SBVD can override Branch metatags, including $canonical_url)
+            // SBVD overrides banner text & image on page load (SBVD can override Branch metatags, $canonical_url - hardcoded values in banner template will still take priority)
             // $journeys_title and $journeys_description will always take precendence over liquid tags
         //    branch.setBranchViewData({
         //        data:{
