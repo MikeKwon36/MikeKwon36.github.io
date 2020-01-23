@@ -270,13 +270,6 @@
     var listener = function(event, data) {
         console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
         console.log(data);
-
-        //track custom V1 event on Branch dashboard
-        branch.track(event, function (err, data) {
-            console.log(data);
-            console.log(err);
-        });
-
     };
 
 
@@ -292,7 +285,6 @@
     
 
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
-    var launchCount = 1;
     function launchBranchJourney(){
         console.log("launchBranchJourney called");
 
@@ -302,7 +294,7 @@
             feature: 'feature cannot be changed',
             channel: 'channel was changed by javascript',
             stage: 'stage was changed by javascript',
-            tags: [launchCount,'tag was changed by javascript'],
+            tags: ['tag was changed by javascript'],
             data: {
                 'custom_bool': true,
                 'custom_int (today\s date)': Date.now(),
@@ -316,16 +308,8 @@
         };
         branch.setBranchViewData(linkData);
         
-        //track custom V1 event on Branch dashboard
-        branch.track('launchedJourney_test', function (err, data) {
-            console.log(data);
-            console.log(err);
-        });
-
         //function to launch journey with flags to disable banner animations
         branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
-
-        launchCount++;
     }
 
     //function to check if a banner is displaying
