@@ -14,18 +14,82 @@
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Branch metatags -->
+    <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed first will be overwritten" />
+    <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed later takes precedence" />
     <meta name="branch:deeplink:text" content="text set by metatag" />
 
-    <!-- Branch Web SDK -->
+    <!-- Analytics can't be changed by meta tags -->
+    <meta name="branch:deeplink:campaign" content="can't be overwritten by metatag" />
+    <meta name="branch:deeplink:feature" content="can't be overwritten by metatag" />
+    <meta name="branch:deeplink:channel" content="can't be overwritten by metatag" />
+    <meta name="branch:deeplink:tags" content="can't be overwritten by metatag" />
+    <meta name="branch:deeplink:stage" content="can't be overwritten by metatag" />
+    
+    <!-- <meta name="branch:deeplink:$canonical_url" content="Branch metatag can overwrite $canonical_url" /> -->
 
+    <!-- Web SDK will prioritize Branch tags > Facebook AppLinks > Twitter tags -->
+    <meta name="branch:deeplink:$ios_deeplink_path" content="branch metatag scraped for $ios_deeplink_path" />
+    <meta name="branch:deeplink:$android_deeplink_path" content="branch metatag scraped for $android_deeplink_path" />
+    <meta name="al:ios:url" content="Facebook applinks metatag scraped for $ios_deeplink_path">
+    <meta name="al:android:url" content="Facebook applinks metatag scraped for $android_deeplink_path">
+    <meta name="twitter:app:url:iphone" content="Twitter metatag scraped for $ios_deeplink_path">
+    <meta name="twitter:app:url:googleplay" content="Twitter metatag scraped for $android_deeplink_path">
+
+    <!-- CSS that modifies the Branch Banner iFrame -->
+    <style type="text/css">
+        #branch-banner-iframe {z-index: 1040 !important;}
+    </style>
+
+    <!-- Branch Web SDK -->
     <script type="text/javascript">
 
-    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId crossPlatformIds lastAttributedTouchData".split(" "), 0);
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
 
-    branch.init('key_test_kbVVEDnENerxK4uZEa1xPlnmuybmrz9D', function(err, data) {
-        // callback to handle err or data
+    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
         console.log(data);
+        console.log(document.referrer);
+        branch.getBrowserFingerprintId(function(err, data) { console.log(data); });
     });
+
+    // .init call to launch banner
+    //console.log('Branch Init called at ' + Math.floor(Date.now() / 1000));
+    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK',{
+    //    metadata : {
+    //        'login_cookie' : 'dfsedskey'
+    //    }
+    //}, function(err, data) {
+
+        // Check if a Branch link opened the page (if yes, banner uses referring link's data)
+        //if(!data.referring_link){
+        //    console.log(data.referring_link);
+            // SBVD overrides banner text & image on page load (SBVD can override Branch metatags, $canonical_url - hardcoded values in banner template will still take priority)
+            // $journeys_title and $journeys_description will always take precendence over liquid tags
+        //    branch.setBranchViewData({
+        //        data:{
+        //            'text2':'text set by SBVD',
+        //            '$journeys_icon_image_url':'http://android4fun.net/wp-content/uploads/2017/05/Voltron-Stickers.png',
+        //            '$journeys_title':'Title was reset on load',
+        //            '$journeys_description':'Description reset on load via JS'
+        //        }
+        //    });
+        //}
+    //    console.log(data);
+    //    console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
+    //});
+
+
+    //.init that includes a 'branch_view_id' option to manually override journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (overwrites ~campaign to "_test")
+    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'branch_view_id':"422865304512181251"}, function(err, data) {});
+
+
+    //.init that blocks journey from loading (no link data will be retrieved from the listeners), but track('pageview') can still launch it later in the session
+    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'no_journeys': true}, function(err, data) {});
+
+
+    //.init that ignores referring Branch link that opened the page
+    // branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'make_new_link': true}, function(err, data) {
+    //    console.log(data);
+    //});
 
     </script>
 
@@ -35,7 +99,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 <body id="page-top" class="index">
        <!-- Navigation -->
@@ -54,7 +117,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#page-top">Boohoo Branch Demo</a>
+                <a class="navbar-brand" href="#page-top">Branch Demo</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -98,11 +161,21 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
+                        <button onclick="dataCallback()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Deepview</button>
                         <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
                         <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
                         <button onclick="logCommerceEvent()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Log Commerce event</button>
 
                         <p></p>
+                        <ul>
+                            <li class="name">The banner is built in Branch's <a href="https://dashboard.branch.io/web/journeys">Dashboard</a><p></p></li>
+                            <li class="skills">The web <a href="https://github.com/BranchMetrics/web-branch-deep-linking">SDK</a> must be embedded in the page HTML<p></p></li>
+                            <li class="skills">The web SDK uses a Test API key<p></p></li>
+                            <li class="skills">To prevent the banner from overlapping with the page's fixed nav bar, a special Branch div is embedded as the first child element of the nav bar.  This div can be retrieved from the dashboard template editor<p></p></li>
+                            <li class="skills">Dismissing the banner will hide the banner from that user for a set timeframe (customizable in the dashboard)<p></p></li>
+                            <li class="skills">The banner's "Get|Open" button will recognize if the user has the app (app must have the same API key)<p></p></li>
+                            <li class="skills">Banner button clicks will always pass in the referring page's URL in the link data, under a key called "$canonical_url"<p></p></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -175,12 +248,19 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Contact oshpilev@branch.io for questions
+                        Contact mkwon@branch.io for questions
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
 
 
     <!-- Branch javascript -->
@@ -206,6 +286,8 @@
 
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
     function launchBranchJourney(){
+        console.log("launchBranchJourney called");
+
         //new link & analytics data for banner
         var linkData = {
             campaign: 'campaign cannot be changed',
@@ -216,7 +298,11 @@
             data: {
                 'custom_bool': true,
                 'custom_int (today\s date)': Date.now(),
-                '$canonical_url': window.location.href,
+                'custom_string (url)': window.location.href,
+                '$journeys_icon_image_url':'https://www.valorebooks.com/campus-life/wp-content/uploads/icon_340.png',
+                '$journeys_button_get_no_app':'changed!',
+                '$journeys_button_get_has_app':'changed!',
+                '$journeys_title':'Banner relaunched',
                 '$journeys_description':'Description reset by button click'
             }
         };
@@ -246,6 +332,13 @@
         }
     }
 
+    // function to test deepview function
+    function dataCallback(){
+        console.log(".data() called");
+        branch.data(function(err, data) {
+            console.log(data);
+        });
+    }
 
     // function to log a new V2 event
     function logCommerceEvent(){
