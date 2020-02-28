@@ -31,6 +31,22 @@
         console.log(data);
         console.log(document.referrer);
         branch.getBrowserFingerprintId(function(err, data) { console.log(data); });
+        
+        // Branch listener object that retrieves banner link data and prints it to console
+        var listener = function(event, data) {
+            console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
+            console.log(data);
+        };
+
+        // Listener objects are activated in the Branch instance for specific events via .addListener
+        branch.addListener("willShowJourney", listener);
+        branch.addListener("didShowJourney", listener);
+        branch.addListener("willNotShowJourney", listener);
+        branch.addListener("didClickJourneyCTA", listener);
+        branch.addListener("didClickJourneyClose", listener);
+        branch.addListener("willCloseJourney", listener);
+        branch.addListener("didCloseJourney", listener);
+        branch.addListener("didCallJourneyClose", listener);
     });
 
     </script>
@@ -196,25 +212,7 @@
 
 
     <!-- Branch javascript -->
-    <script>
-    
-    // Branch listener object that retrieves banner link data and prints it to console
-    var listener = function(event, data) {
-        console.log(event + ' fired at ' + Math.floor(Date.now() / 1000));
-        console.log(data);
-    };
-
-
-    // Listener objects are activated in the Branch instance for specific events via .addListener
-    branch.addListener("willShowJourney", listener);
-    branch.addListener("didShowJourney", listener);
-    branch.addListener("willNotShowJourney", listener);
-    branch.addListener("didClickJourneyCTA", listener);
-    branch.addListener("didClickJourneyClose", listener);
-    branch.addListener("willCloseJourney", listener);
-    branch.addListener("didCloseJourney", listener);
-    branch.addListener("didCallJourneyClose", listener);
-    
+    <script>    
 
     // function to manually launch journey and change banner link data (will NOT launch if banner's dismissal period active)
     function launchBranchJourney(){
