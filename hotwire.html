@@ -16,13 +16,24 @@
     <!-- Branch metatags -->
     <meta name="branch:deeplink:productId" content="example" />
 
-
     <!-- Branch Web SDK -->
     <script type="text/javascript">
 
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
 
     branch.init('key_test_opFeSojeb9QeGJuqgK70LnkjDzfct1Mi', function(err, data) {
+        var linkData = {
+            campaign: 'campaign cannot be changed',
+            feature: 'feature cannot be changed',
+            channel: 'channel was changed by javascript',
+            stage: 'stage was changed by javascript',
+            tags: ['tag was changed by javascript'],
+            data: {
+                '$canonical_url': window.location.href,
+                '$deeplink_path': "hotwire://init",
+            }
+        };
+        branch.setBranchViewData(linkData);
         console.log(data);
     });
 
@@ -210,7 +221,8 @@
             stage: 'stage was changed by javascript',
             tags: ['tag was changed by javascript'],
             data: {
-                '$canonical_url': window.location.href,
+                '$canonical_url': "https://www.hotwire.com",
+                '$deeplink_path': "hotwire://travel/custom",
                 '$journeys_description':'Description reset by button click'
             }
         };
@@ -239,7 +251,6 @@
             console.log("No Banner on the page");
         }
     }
-
 
 
     </script>
