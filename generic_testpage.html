@@ -49,6 +49,7 @@
         console.log(data);
         console.log(document.referrer);
         branch.getBrowserFingerprintId(function(err, data) { console.log(data); });
+        branch.crossPlatformIds(function(err, data){ console.log(data); });
     });
 
     // .init call to launch banner
