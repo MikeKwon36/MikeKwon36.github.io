@@ -52,7 +52,6 @@
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
         console.log(data);
         console.log(document.referrer);
-        console.log("branch-banner-iframe loaded url at " + document.getElementById("branch-banner-iframe").src);
         branch.getBrowserFingerprintId(function(err, data) { console.log(data); });
         branch.crossPlatformIds(function(err, data){ console.log(data); });
     });
@@ -322,6 +321,7 @@
     function doesJourneyExistOnPage() {
         var elem = document.getElementById("branch-banner-iframe");
         if (elem) {
+            console.log(document.getElementById("branch-banner-iframe").src);
             return true;
         }
         return false;
