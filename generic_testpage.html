@@ -36,10 +36,13 @@
     <meta name="twitter:app:url:iphone" content="Twitter metatag scraped for $ios_deeplink_path">
     <meta name="twitter:app:url:googleplay" content="Twitter metatag scraped for $android_deeplink_path">
 
-    <!-- CSS that modifies the Branch Banner iFrame -->
+    <!-- CSS that modifies the Branch Banner iFrame
+    
     <style type="text/css">
         #branch-banner-iframe {z-index: 1040 !important;}
     </style>
+    
+    -->
 
     <!-- Branch Web SDK -->
     <script type="text/javascript">
@@ -49,6 +52,7 @@
     branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
         console.log(data);
         console.log(document.referrer);
+        console.log("banner iframe loaded url - " + document.getElementById("branch-banner-iframe").src)
         branch.getBrowserFingerprintId(function(err, data) { console.log(data); });
         branch.crossPlatformIds(function(err, data){ console.log(data); });
     });
@@ -422,7 +426,7 @@
 
     </script>
 
-    <script src="/js/jquery-1.11.0.js"></script>
+    <script src="/js/jquery-3.4.1.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.easing.min.js"></script>
     <script src="/js/classie.js"></script>
