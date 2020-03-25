@@ -49,34 +49,41 @@
 
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
 
-    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', function(err, data) {
+    branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK',
+    
+    // setting targeting metadata to programmatically trigger banners
+    {
+        metadata : {
+            'launchBanner' : 'yes'
+        }
+    },
+
+    // reacting to Branch SDK initialization
+    function(err, data) {
+
+        // Setting link data programmatically
+        // SBVD can override Branch metatags & $canonical_url, but not hardcoded values in banner template will
+        // $journeys_title and $journeys_description will always take precendence over liquid tags
+        branch.setBranchViewData({
+            data:{
+                'text2':'set by SBVD',
+                'customKey' : 'set by SBVD'
+            }
+        });
+
         console.log(data);
         console.log(document.referrer);
+
+        // Retrieving Branch browser fingerprint post initialization
         branch.getBrowserFingerprintId(function(err, data) { console.log(data); });
+
+        // Retrieving Branch CPID post initialization
         branch.crossPlatformIds(function(err, data){ console.log(data); });
     });
-
-    // .init call to launch banner
-    //console.log('Branch Init called at ' + Math.floor(Date.now() / 1000));
-    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK',{
-    //    metadata : {
-    //        'login_cookie' : 'dfsedskey'
-    //    }
-    //}, function(err, data) {
 
         // Check if a Branch link opened the page (if yes, banner uses referring link's data)
         //if(!data.referring_link){
         //    console.log(data.referring_link);
-            // SBVD overrides banner text & image on page load (SBVD can override Branch metatags, $canonical_url - hardcoded values in banner template will still take priority)
-            // $journeys_title and $journeys_description will always take precendence over liquid tags
-        //    branch.setBranchViewData({
-        //        data:{
-        //            'text2':'text set by SBVD',
-        //            '$journeys_icon_image_url':'http://android4fun.net/wp-content/uploads/2017/05/Voltron-Stickers.png',
-        //            '$journeys_title':'Title was reset on load',
-        //            '$journeys_description':'Description reset on load via JS'
-        //        }
-        //    });
         //}
     //    console.log(data);
     //    console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
