@@ -38,10 +38,45 @@
     <script>
         function generate3PLink() {
             var original_url = window.document.getElementById("originalUrl").value;
+            var utm_medium = window.document.getElementById("utm_medium").value;
+            var utm_source = window.document.getElementById("utm_source").value;
+            var utm_campaign = window.document.getElementById("utm_campaign").value;
+            var utm_content = window.document.getElementById("utm_content").value;
+            var utm_term = window.document.getElementById("utm_term").value;
 
             if (!original_url) {
                 alert("Please enter a destination URL.");
                 window.document.getElementById("originalUrl").focus();
+                return
+            }
+
+            if (!utm_medium) {
+                alert("Please enter a utm_medium.");
+                window.document.getElementById("utm_medium").focus();
+                return
+            }
+
+            if (!utm_source) {
+                alert("Please enter a utm_source.");
+                window.document.getElementById("utm_source").focus();
+                return
+            }
+
+            if (!utm_campaign) {
+                alert("Please enter a utm_campaign.");
+                window.document.getElementById("utm_campaign").focus();
+                return
+            }
+
+            if (!utm_content) {
+                alert("Please enter a utm_content.");
+                window.document.getElementById("utm_content").focus();
+                return
+            }
+
+            if (!utm_term) {
+                alert("Please enter a utm_term.");
+                window.document.getElementById("utm_term").focus();
                 return
             }
 
@@ -56,14 +91,6 @@
             var android = window.document.getElementById('$android_url').value;
 
             if (utm_medium){
-                if (original_url.indexOf("?")>0){queryLogic = '&';};
-                original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
-                if (desktop) {
-                    if (desktop.indexOf("?")>0){queryLogic = '&';};
-                    desktop = desktop + queryLogic + "utm_medium=" + utm_medium;
-                }
-            } else {
-                utm_medium = "Email Braze";
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
                 if (desktop) {
