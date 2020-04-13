@@ -153,9 +153,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <span class="name">Journeys Demo</span>
+                        <span class="name">Journeys/TMTA Demo</span>
                         <hr class="star-light">
-                        <span class="skills">Testpage displaying a Journeys Banner</span>
+                        <span class="skills">Testpage displaying Branch Web Functionality</span>
                     </div>
                 </div>
             </div>
@@ -178,9 +178,8 @@
                         <button onclick="logout()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Remove User Identity</button>
                         <button onclick="logCommerceEvent()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Log Commerce event</button>
                         <form onsubmit="sendSMS(this); return false;">
-                            <input id="phone" name="phone" type="tel" placeholder="(123) 456-7890" />
-                            <br/>
-                            <input type="submit"/>
+                            <input style="border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:70%; margin: 5px 0px 5px 0px;" id="phone" name="phone" type="tel" placeholder="(123) 456-7890" />
+                            <input style="border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:20%; margin: 5px 0px 5px 0px;"  type="submit"/>
                         </form>
                         <p></p>
                     </div>
@@ -277,20 +276,22 @@
     function sendSMS(form) {
         var phone = form.phone.value;
         var linkData = {
-            tags: [],
-            channel: 'Website',
-            feature: 'TextMeTheApp',
+            tags: ['Set by JS in TMTA function'],
+            campaign: 'Set by JS in TMTA function',
+            channel: 'Set by JS in TMTA function',
+            feature: 'Set by JS in TMTA function',
             data: {
-                'foo': 'bar'
+                '$custom_sms_text': 'Link sent from Branch TMTA - {{ link }}',
+                '$canonical_url': document.window.href
             }
         };
 
         var options = {};
         var callback = function(err, result) {
             if (err) {
-                console.log("Sorry, something went wrong.");
+                console.log(err);
             } else {
-                console.log("SMS sent!");
+                console.log(result);
             }
         };
 
