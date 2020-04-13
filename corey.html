@@ -149,6 +149,10 @@
                         <button onclick="login()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Set User Identity</button>
                         <button onclick="logout()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Remove User Identity</button>
                         <button onclick="logCommerceEvent()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Log Commerce event</button>
+                        <form style="width:100%" onsubmit="sendSMS(this); return false;">
+                            <input style="border-radius: 12px; background-color: #ffffff; border: none; color: black; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:70%; margin: 5px 5px 5px 0px;" id="phone" name="phone" type="tel" placeholder="Enter number: (123) 456-7890" />
+                            <input style="border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 12px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:25%; margin: 5px 0px 5px 0px;"  type="submit" value="Send SMS"/>
+                        </form>
 
                         <p></p>
                     </div>
@@ -240,6 +244,33 @@
 
     <!-- Branch javascript -->
     <script>
+
+    // Branch Text-Me-The-App
+    function sendSMS(form) {
+        var phone = form.phone.value;
+        var linkData = {
+            tags: ['Set by JS in TMTA function'],
+            campaign: 'Set by JS in TMTA function',
+            channel: 'Set by JS in TMTA function',
+            feature: 'Set by JS in TMTA function',
+            data: {
+                '$custom_sms_text': 'Set by JS in TMTA function - {{ link }}',
+                '$canonical_url': 'Set by JS in TMTA function'
+            }
+        };
+
+        var options = {};
+        var callback = function(err, result) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(result);
+            }
+        };
+
+        branch.sendSMS(phone, linkData, options, callback);
+        form.phone.value = "";
+    };
     
     // Branch listener object that retrieves banner link data and prints it to console
     var listener = function(event, data) {
