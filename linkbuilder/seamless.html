@@ -90,14 +90,24 @@
             var ios = window.document.getElementById('$ios_url').value;
             var android = window.document.getElementById('$android_url').value;
 
+
+
+            console.log(desktop);
+            if (desktop){
+                if (desktop.indexOf("?")>0){queryLogic = '&';};
+                    desktop = desktop + queryLogic;
+                    console.log(desktop);
+                }
+
             if (utm_medium){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
                 if (desktop) {
-                    if (desktop.indexOf("?")>0){queryLogic = '&';};
-                    desktop = desktop + queryLogic + "utm_medium=" + utm_medium;
+                    desktop = desktop + "utm_medium=" + utm_medium;
+                    console.log(desktop);
                 }
             }
+            
             if (utm_campaign){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + "utm_campaign=" + utm_campaign;
