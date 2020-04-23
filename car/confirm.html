@@ -13,91 +13,15 @@
     <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- Branch metatags -->
-    <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed first will be overwritten" />
-    <meta name="branch:deeplink:productId" content="For duplicate Branch metatags, the tag listed later takes precedence" />
-    <meta name="branch:deeplink:text" content="set by metatag" />
-    <meta name="branch:deeplink:$journeys_title" content="set by metatag" />
-
-    <!-- Analytics can't be changed by meta tags -->
-    <meta name="branch:deeplink:campaign" content="set by metatag" />
-    <meta name="branch:deeplink:feature" content="set by metatag" />
-    <meta name="branch:deeplink:channel" content="set by metatag" />
-    <meta name="branch:deeplink:tags" content="set by metatag" />
-    <meta name="branch:deeplink:stage" content="set by metatag" />
-    
-    <!-- <meta name="branch:deeplink:$canonical_url" content="Branch metatag can overwrite $canonical_url" /> -->
-
-    <!-- Web SDK will prioritize Branch tags > Facebook AppLinks > Twitter tags -->
-    <meta name="branch:deeplink:$ios_deeplink_path" content="set by metatag" />
-    <meta name="branch:deeplink:$android_deeplink_path" content="set by metatag" />
-    <meta name="al:ios:url" content="Facebook applinks metatag">
-    <meta name="al:android:url" content="Facebook applinks metatag">
-    <meta name="twitter:app:url:iphone" content="Twitter metatag">
-    <meta name="twitter:app:url:googleplay" content="Twitter metatag">
-
-    <!-- CSS that modifies the Branch Banner iFrame
-    
-    <style type="text/css">
-        #branch-banner-iframe {z-index: 1040 !important;}
-    </style>
-    
-    -->
-
     <!-- Branch Web SDK -->
     <script type="text/javascript">
 
     (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent logEvent disableTracking getBrowserFingerprintId".split(" "), 0);
 
-    branch.init('key_live_jkBmIohdk4JhUMwDoGX7UmbgEqbgs3s7',
-    
-    // setting targeting metadata to programmatically trigger banners
-    { metadata : { 'launchBanner' : 'true' } },
-
-    // reacting to Branch SDK initialization
-    function(err, data) {
-
-        // Setting link data programmatically
-        // SBVD can override Branch metatags & $canonical_url, but not hardcoded values in banner template will
-        // $journeys_title and $journeys_description will always take precendence over liquid tags
-        branch.setBranchViewData({
-            data:{
-                'text2':'set by SBVD',
-                'customKey' : 'set by SBVD'
-            }
-        });
-
+    branch.init('key_live_jkBmIohdk4JhUMwDoGX7UmbgEqbgs3s7', function(err, data) {
         console.log(data);
         console.log(document.referrer);
-
-        // Retrieving Branch browser fingerprint post initialization
-        branch.getBrowserFingerprintId(function(err, data) { console.log(data); });
-
-        // Retrieving Branch CPID post initialization
-        branch.crossPlatformIds(function(err, data){ console.log(data); });
     });
-
-        // Check if a Branch link opened the page (if yes, banner uses referring link's data)
-        //if(!data.referring_link){
-        //    console.log(data.referring_link);
-        //}
-    //    console.log(data);
-    //    console.log('Branch SDK finished initializing at ' + Math.floor(Date.now() / 1000));
-    //});
-
-
-    //.init that includes a 'branch_view_id' option to manually override journeys filters, dismissal periods, & persona matching to launch a banner identified by its ID (overwrites ~campaign to "_test")
-    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'branch_view_id':"422865304512181251"}, function(err, data) {});
-
-
-    //.init that blocks journey from loading (no link data will be retrieved from the listeners), but track('pageview') can still launch it later in the session
-    //branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'no_journeys': true}, function(err, data) {});
-
-
-    //.init that ignores referring Branch link that opened the page
-    // branch.init('key_live_nmuDTgQEuQ2k3LLCb7Tt8gioBBosX7IK', {'make_new_link': true}, function(err, data) {
-    //    console.log(data);
-    //});
 
     </script>
 
@@ -172,15 +96,6 @@
                         <button onclick="launchBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner</button>
                         <button onclick="launchBranchJourneyNewCTA()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Launch Banner w/Custom Redirect</button>
                         <button onclick="closeBranchJourney()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Close Banner</button>
-                        <button onclick="disableTracking()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Disable Tracking</button>
-                        <button onclick="enableTracking()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Enable Tracking</button>
-                        <button onclick="login()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Set User Identity</button>
-                        <button onclick="logout()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Remove User Identity</button>
-                        <button onclick="logCommerceEvent()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Log Commerce event</button>
-                        <form style="width:100%" onsubmit="sendSMS(this); return false;">
-                            <input style="border-radius: 12px; background-color: #ffffff; border: none; color: black; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:70%; margin: 5px 5px 5px 0px;" id="phone" name="phone" type="tel" placeholder="Enter number: (123) 456-7890" />
-                            <input style="border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 12px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:25%; margin: 5px 0px 5px 0px;"  type="submit" value="Send SMS"/>
-                        </form>
                         <p></p>
                     </div>
                 </div>
@@ -272,32 +187,6 @@
     <!-- Branch javascript -->
     <script>
 
-    // Branch Text-Me-The-App
-    function sendSMS(form) {
-        var phone = form.phone.value;
-        var linkData = {
-            tags: ['Set by JS in TMTA function'],
-            campaign: 'Set by JS in TMTA function',
-            channel: 'Set by JS in TMTA function',
-            feature: 'Set by JS in TMTA function',
-            data: {
-                '$custom_sms_text': 'Set by JS in TMTA function - {{ link }}',
-                '$canonical_url': 'Set by JS in TMTA function'
-            }
-        };
-
-        var options = {};
-        var callback = function(err, result) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(result);
-            }
-        };
-
-        branch.sendSMS(phone, linkData, options, callback);
-        form.phone.value = "";
-    };
     
     // Branch listener object that retrieves banner link data and prints it to console
     var listener = function(event, data) {
@@ -330,11 +219,7 @@
             tags: ['set by SBVD'],
             data: {
                 'text3': 'set by SBVD',
-                '$canonical_url': window.location.href,
-                '$journeys_button_get_no_app':'changed!',
-                '$journeys_button_get_has_app':'changed!',
-                '$journeys_title':'Banner relaunched',
-                '$journeys_description':'Description reset by button click'
+                '$canonical_url': window.location.href
             }
         };
         branch.setBranchViewData(linkData);
@@ -385,110 +270,6 @@
         } else {
             console.log("No Banner on the page");
         }
-    }
-
-    // function to set a user identity
-    function login(){
-        branch.setIdentity('kwon', function (err, data) {
-            console.log(err, data);
-        });
-    }
-
-    // function to logout a user identity
-    function logout(){
-        branch.logout(function(err, data) {
-            console.log(err, data);
-        });
-    }
-
-    // function to disable tracking
-    function disableTracking(){
-        branch.disableTracking(true);
-        console.log("Tracking disabled")
-    }
-
-    // function to enable tracking
-    function enableTracking(){
-        branch.disableTracking(false);
-        console.log("Tracking enabled")
-    }
-
-    // function to log a new V2 event
-    function logCommerceEvent(){
-        var event_and_custom_data = {
-            "transaction_id": "kwon_id_3",
-            "currency": "USD",
-            "revenue": 101.2,
-            "shipping": 1.5,
-            "tax": 2.5,
-            "coupon": "promo-1234",
-            "affiliation": "high_fi",
-            "description": "Preferred purchase",
-            "purchase_loc": "New York",
-            "store_pickup": "unavailable"
-        };
-
-        var content_items = [
-            {
-            "$content_schema": "COMMERCE_PRODUCT",
-            "$og_title": "Nike Shoe",
-            "$og_description": "Start loving your steps",
-            "$og_image_url": "http://example.com/img1.jpg",
-            "$canonical_identifier": "nike/1234",
-            "$publicly_indexable": false,
-            "$price": 101.2,
-            "$locally_indexable": true,
-            "$quantity": 1,
-            "$sku": "1101123445",
-            "$product_name": "Runner",
-            "$product_brand": "Nike",
-            "$product_category": "Sporting Goods",
-            "$product_variant": "XL",
-            "$rating_average": 4.2,
-            "$rating_count": 5,
-            "$rating_max": 2.2,
-            "$creation_timestamp": 1499892854966,
-            "$exp_date": 1499892854966,
-            "$keywords": [ "sneakers", "shoes" ],
-            "$address_street": "230 South LaSalle Street",
-            "$address_city": "Chicago",
-            "$address_region": "IL",
-            "$address_country": "US",
-            "$address_postal_code": "60604",
-            "$latitude": 12.07,
-            "$longitude": -97.5,
-            "$image_captions": [ "my_img_caption1", "my_img_caption_2" ],
-            "$condition": "NEW",
-            "$custom_fields": {"foo1":"bar1","foo2":"bar2"}
-            },
-            {
-            "$og_title": "Nike Woolen Sox",
-            "$canonical_identifier": "nike/5324",
-            "$og_description": "Fine combed woolen sox for those who love your foot",
-            "$publicly_indexable": false,
-            "$price": 80.2,
-            "$locally_indexable": true,
-            "$quantity": 5,
-            "$sku": "110112467",
-            "$product_name": "Woolen Sox",
-            "$product_brand": "Nike",
-            "$product_category": "Apparel & Accessories",
-            "$product_variant": "Xl",
-            "$rating_average": 3.3,
-            "$rating_count": 5,
-            "$rating_max": 2.8,
-            "$creation_timestamp": 1499892854966
-            }];
-
-        branch.logEvent(
-            "PURCHASE",
-            event_and_custom_data,
-            content_items,
-            function(err) { console.log(err); }
-        );
-        console.log('V2 commerce event called');
-        console.log(event_and_custom_data);
-        console.log(content_items);
     }
 
     </script>
