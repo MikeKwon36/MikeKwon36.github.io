@@ -38,10 +38,45 @@
     <script>
         function generate3PLink() {
             var original_url = window.document.getElementById("originalUrl").value;
+            var utm_medium = window.document.getElementById("utm_medium").value;
+            var utm_source = window.document.getElementById("utm_source").value;
+            var utm_campaign = window.document.getElementById("utm_campaign").value;
+            var utm_content = window.document.getElementById("utm_content").value;
+            var utm_term = window.document.getElementById("utm_term").value;
 
             if (!original_url) {
                 alert("Please enter a destination URL.");
                 window.document.getElementById("originalUrl").focus();
+                return
+            }
+
+            if (!utm_medium) {
+                alert("Please enter a utm_medium.");
+                window.document.getElementById("utm_medium").focus();
+                return
+            }
+
+            if (!utm_source) {
+                alert("Please enter a utm_source.");
+                window.document.getElementById("utm_source").focus();
+                return
+            }
+
+            if (!utm_campaign) {
+                alert("Please enter a utm_campaign.");
+                window.document.getElementById("utm_campaign").focus();
+                return
+            }
+
+            if (!utm_content) {
+                alert("Please enter a utm_content.");
+                window.document.getElementById("utm_content").focus();
+                return
+            }
+
+            if (!utm_term) {
+                alert("Please enter a utm_term.");
+                window.document.getElementById("utm_term").focus();
                 return
             }
 
@@ -55,22 +90,24 @@
             var ios = window.document.getElementById('$ios_url').value;
             var android = window.document.getElementById('$android_url').value;
 
+
+
+            console.log(desktop);
+            if (desktop){
+                if (desktop.indexOf("?")>0){queryLogic = '&';};
+                    desktop = desktop + queryLogic;
+                    console.log(desktop);
+                }
+
             if (utm_medium){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
                 if (desktop) {
-                    if (desktop.indexOf("?")>0){queryLogic = '&';};
-                    desktop = desktop + queryLogic + "utm_medium=" + utm_medium;
-                }
-            } else {
-                utm_medium = "Email Braze";
-                if (original_url.indexOf("?")>0){queryLogic = '&';};
-                original_url = original_url + queryLogic + "utm_medium=" + utm_medium;
-                if (desktop) {
-                    if (desktop.indexOf("?")>0){queryLogic = '&';};
-                    desktop = desktop + queryLogic + "utm_medium=" + utm_medium;
+                    desktop = desktop + "utm_medium=" + utm_medium;
+                    console.log(desktop);
                 }
             }
+            
             if (utm_campaign){
                 if (original_url.indexOf("?")>0){queryLogic = '&';};
                 original_url = original_url + queryLogic + "utm_campaign=" + utm_campaign;
@@ -206,27 +243,27 @@
             <tr id="analytic-1">
                 <td><label style="margin-right: 10px">utm_medium</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_medium" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="utm_medium" type="text" placeholder="i.e., email_owned"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_medium" type="text" placeholder="email_owned or"/></td>
             </tr>
             <tr id="analytic-2">
                 <td><label style="margin-right: 10px">utm_source</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;"type="text" value="utm_source" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="utm_source" type="text" placeholder="i.e., appboy"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_source" type="text" placeholder="braze"/></td>
             </tr>
             <tr id="analytic-3">
                 <td><label style="margin-right: 10px">utm_campaign</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_campaign" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="utm_campaign" type="text" placeholder="i.e., 2018_promo"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_campaign" type="text" placeholder="audience_type_campaignname"/></td>
             </tr>
             <tr id="analytic-4">
                 <td><label style="margin-right: 10px">utm_content</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" type="text" value="utm_content" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="utm_content" type="text" placeholder="i.e., link_01"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_content" type="text" placeholder="link location"/></td>
             </tr>
             <tr id="analytic-5">
                 <td><label style="margin-right: 10px">utm_term</label></td>
                 <td><input class="form-control" style="width:0px; visibility: hidden;" id="analytic-key-5" type="text" value="utm_term" disabled="true"/></td>
-                <td><input class="form-control" style="width:600px" id="utm_term" type="text" placeholder="i.e., food"/></td>
+                <td><input class="form-control" style="width:600px" id="utm_term" type="text" placeholder="date or v#_variant_variantdetails"/></td>
             </tr>
         </table>
 
