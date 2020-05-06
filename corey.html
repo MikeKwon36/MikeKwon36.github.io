@@ -309,7 +309,12 @@
         branch.setBranchViewData(linkData);
         
         //launch journey with flags to disable banner animations
-        branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
+        branch.track('pageview',{
+            'targeting':'metadata'
+        },{
+            'disable_entry_animation':true,
+            'disable_exit_animation':true
+        });
     }
 
     // manually launch journey & change banner redirect
@@ -332,7 +337,12 @@
         branch.setBranchViewData(linkData);
         
         //launch journey with flags to disable banner animations
-        branch.track('pageview',{},{'disable_entry_animation':true,'disable_exit_animation':true});
+        branch.track('pageview',{
+            'targeting':'metadata'
+        },{
+            'disable_entry_animation':true,
+            'disable_exit_animation':true
+        });
     }
 
     //function to check if a banner is displaying
