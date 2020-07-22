@@ -392,6 +392,9 @@
     // manually launch floating overlay journey set via targeting metadata
     function launchFloatingOverlay(){
         console.log("FloatingOverlay called");
+	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
         
         //launch journey with flags to disable banner animations
         branch.track('pageview',{
