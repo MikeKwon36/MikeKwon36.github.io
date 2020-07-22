@@ -312,6 +312,9 @@
             }
         };
         branch.setBranchViewData(linkData);
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
         
         //launch journey with flags to disable banner animations
         branch.track('pageview',{
@@ -340,6 +343,9 @@
             }
         };
         branch.setBranchViewData(linkData);
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
         
         //launch journey with flags to disable banner animations
         branch.track('pageview',{
@@ -353,6 +359,9 @@
     // manually launch top banner journey set via targeting metadata
     function launchTopBanner(){
         console.log("launchTopBanner called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
         
         //launch journey with flags to disable banner animations
         branch.track('pageview',{
@@ -366,6 +375,9 @@
     // manually launch bottom half page journey set via targeting metadata
     function launchBottomHalfPage(){
         console.log("launchBottomHalfPage called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
         
         //launch journey with flags to disable banner animations
         branch.track('pageview',{
@@ -379,6 +391,9 @@
     // manually launch pill journey set via targeting metadata
     function launchPill(){
         console.log("launchPill called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
         
         //launch journey with flags to disable banner animations
         branch.track('pageview',{
@@ -408,6 +423,9 @@
     // manually launch full page journey set via targeting metadata
     function launchFullPage(){
         console.log("FullPage called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
         
         //launch journey with flags to disable banner animations
         branch.track('pageview',{
