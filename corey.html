@@ -177,7 +177,9 @@
                         <button onclick="launchESPNFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">ESPN - Full Page</button>
                         <button onclick="launchRadioFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Radio.com - Full Page</button>			    
                         <button onclick="launchNBCFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">NBC - Full Page</button>
+                        <button onclick="launchFoodNetworkTopHalf()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Food Network - Top Half</button>
                         <button onclick="launchFreshlyBottomHalfPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Freshly - Bottom Half Page</button>
+                        <button onclick="launchTradesyBottomBanner()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Tradesy - Bottom Banner</button>
                         <button onclick="launchNHLBottomBanner()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">NHL - Bottom Banner</button>
 			    
                         <p></p>
@@ -633,6 +635,23 @@
         });
     }
 	    
+    // manually launch Food Network top half journey set via targeting metadata
+    function launchFoodNetworkTopHalf(){
+        console.log("Food Network TopHalf called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
+        
+        //launch journey with flags to disable banner animations
+        branch.track('pageview',{
+            'JourneyType':'FoodNetworkTopHalf'
+        },{
+            'disable_entry_animation':true,
+            'disable_exit_animation':true
+        });
+    }
+
+	    
     // manually launch Freshly bottom half page journey set via targeting metadata
     function launchFreshlyBottomHalfPage(){
         console.log("Freshly BottomHalfPage called");
@@ -643,6 +662,22 @@
         //launch journey with flags to disable banner animations
         branch.track('pageview',{
             'JourneyType':'FreshlyBottomHalfPage'
+        },{
+            'disable_entry_animation':true,
+            'disable_exit_animation':true
+        });
+    }
+	    
+    // manually launch Tradesy bottom banner page journey set via targeting metadata
+    function launchTradesyBottomBanner(){
+        console.log("Tradesy BottomBanner called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
+        
+        //launch journey with flags to disable banner animations
+        branch.track('pageview',{
+            'JourneyType':'TradesyBottomBanner'
         },{
             'disable_entry_animation':true,
             'disable_exit_animation':true
