@@ -175,6 +175,8 @@
                     <div class="intro-text">
 			    
                         <button onclick="launchESPNFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">ESPN - Full Page</button>
+                        <button onclick="launchRadioFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Radio.com - Full Page</button>			    
+                        <button onclick="launchNBCFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">NBC - Full Page</button>
 			    
                         <p></p>
                     </div>
@@ -591,6 +593,38 @@
         //launch journey with flags to disable banner animations
         branch.track('pageview',{
             'JourneyType':'ESPNFullPage'
+        },{
+            'disable_entry_animation':true,
+            'disable_exit_animation':true
+        });
+    }
+	    
+    // manually launch Radio.com full page journey set via targeting metadata
+    function launchRadioFullPage(){
+        console.log("Radio.com FullPage called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
+        
+        //launch journey with flags to disable banner animations
+        branch.track('pageview',{
+            'JourneyType':'RadioFullPage'
+        },{
+            'disable_entry_animation':true,
+            'disable_exit_animation':true
+        });
+    }
+	    
+    // manually launch NBC full page journey set via targeting metadata
+    function launchNBCFullPage(){
+        console.log("NBC FullPage called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
+        
+        //launch journey with flags to disable banner animations
+        branch.track('pageview',{
+            'JourneyType':'NBCFullPage'
         },{
             'disable_entry_animation':true,
             'disable_exit_animation':true
