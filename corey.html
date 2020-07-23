@@ -173,12 +173,15 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-			    
+
+                        <button onclick="launchBoohooFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Boohoo - Full Page GIF</button>
                         <button onclick="launchESPNFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">ESPN - Full Page</button>
                         <button onclick="launchRadioFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Radio.com - Full Page</button>			    
                         <button onclick="launchNBCFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">NBC - Full Page</button>
+                        <button onclick="launchWineFullPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Wine.com - Full Page</button>
                         <button onclick="launchFoodNetworkTopHalf()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Food Network - Top Half</button>
                         <button onclick="launchFreshlyBottomHalfPage()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Freshly - Bottom Half Page</button>
+                        <button onclick="launchGOATTopBanner()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">GOAT - Top Banner</button>
                         <button onclick="launchTradesyBottomBanner()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">Tradesy - Bottom Banner</button>
                         <button onclick="launchNHLBottomBanner()" onmouseover="" style="cursor: pointer; border-radius: 12px; background-color: #008CBA; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); width:100%; margin: 5px 0px 5px 0px;">NHL - Bottom Banner</button>
 			    
@@ -587,6 +590,22 @@
 
 // section for Customer Use Cases
 	    
+    // manually launch Boohoo full page GIF journey set via targeting metadata
+    function launchBoohooFullPage(){
+        console.log("Boohoo FullPage called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
+        
+        //launch journey with flags to disable banner animations
+        branch.track('pageview',{
+            'JourneyType':'BoohooFullPage'
+        },{
+            'disable_entry_animation':true,
+            'disable_exit_animation':true
+        });
+    }
+	    
     // manually launch ESPN full page journey set via targeting metadata
     function launchESPNFullPage(){
         console.log("ESPN FullPage called");
@@ -635,6 +654,22 @@
         });
     }
 	    
+    // manually launch Wine.com full page journey set via targeting metadata
+    function launchWineFullPage(){
+        console.log("Wine.com FullPage called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
+        
+        //launch journey with flags to disable banner animations
+        branch.track('pageview',{
+            'JourneyType':'WineFullPage'
+        },{
+            'disable_entry_animation':true,
+            'disable_exit_animation':true
+        });
+    }
+	    
     // manually launch Food Network top half journey set via targeting metadata
     function launchFoodNetworkTopHalf(){
         console.log("Food Network TopHalf called");
@@ -662,6 +697,22 @@
         //launch journey with flags to disable banner animations
         branch.track('pageview',{
             'JourneyType':'FreshlyBottomHalfPage'
+        },{
+            'disable_entry_animation':true,
+            'disable_exit_animation':true
+        });
+    }
+	    
+    // manually launch GOAT top banner journey set via targeting metadata
+    function launchGOATTopBanner(){
+        console.log("GOAT TopBanner called");
+        	
+	//close any Journeys, if they are currently open
+	closeBranchJourney();
+        
+        //launch journey with flags to disable banner animations
+        branch.track('pageview',{
+            'JourneyType':'GOATTopBanner'
         },{
             'disable_entry_animation':true,
             'disable_exit_animation':true
